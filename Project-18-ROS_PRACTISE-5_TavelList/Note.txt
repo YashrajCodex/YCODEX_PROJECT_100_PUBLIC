@@ -1,0 +1,21 @@
+1. what is the difference between State and Props?
+
+ans) State
+        I) Internal data, owned by component.
+        II) Component "memory"
+        III) Can be updated by the component itself
+        IV) Updating state causes component to re-render.
+        V) Used to make components interactivve.
+
+    Props
+        I) External data, owned by parent component
+        II) Similar to function parameters
+        III) Read-only
+        IV) Receiving new props causes component to re0render. usually when the parent's state has been updated.
+        V) Used by parent to configure child component("setting")
+
+2. There are how many types of state?
+
+ans) Mainly 2 type:
+        1. Local state
+        2. Global State

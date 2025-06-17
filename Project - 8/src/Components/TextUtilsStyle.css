@@ -1,0 +1,124 @@
+body{
+    background: url("/TextUtils2.jpeg");
+}
+
+.container_textUtils {
+    width: 90vw;
+    min-height: 80vh;
+    margin: 2vh 5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+.textUtils_input {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    padding: 1% 1%;
+    height: 50vh;
+    background-color: #e3dfdf77;
+    border: 2px solid #78716e;
+    border-radius: 10px;
+}
+.textUtils_input_area {
+    height: 100%;
+    width: 98%;
+    border: 2px solid transparent;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #f3f3f32a;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+.textUtils_input_area::placeholder {
+    letter-spacing: 8px;
+    color: #000;
+    /* color: #615b58; */
+    font-size: 12px;
+    font-weight: bolder;
+}
+.textUtils_input_area:hover,
+.textUtils_input_area:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+}
+.Cal_btnn {
+    background-color: transparent;
+    width: 100%;
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    /* background-color: red; */
+}
+.container_wordfnd,
+.textUtils_wordc {
+    width: 100%;
+    height: auto;
+    padding: 3vh 2%;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    flex-wrap: wrap;
+    border: 2px solid #78716e;
+    border-radius: 10px;
+    background-color: #F3F3F377;
+}
+.textUtils_wordc:hover {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+}
+.utilsBtn {
+    font-family: monospace;
+    background-color: #000000;
+    color: #3b82f6;
+    border: none;
+    border-radius: 8px;
+    width: 200px;
+    height: 45px;
+    transition: .3s;
+    cursor: pointer;
+}
+.utilsBtn:hover {
+    background-color: #3b82f6;
+    box-shadow: 0 0 0 5px #3b83f65f;
+    color: #fff;
+}
+.textUtils_wordfnd {
+    position: relative;
+    width: 200px;
+}
+/* styling of Input */
+.input_wUtils {
+    color: #fff;
+    /* background-color: #1b1bba; */
+    font-size: 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: 1.5px solid #312e81;
+    border-radius: 10px;
+}
+/* styling of animated border */
+.input_wUtils-border {
+    position: absolute;
+    background: linear-gradient(90deg, #FF6464 0%, #FFBF59 50%, #47C9FF 100%);
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s;
+}
+/* here is code of animated border */
+.input_wUtils:focus,
+.input_wUtils:hover {
+    border: 1.5px solid #1b9bee;
+}
+.input_wUtils:focus~.input_wUtils-border {
+    width: 100%;
+}

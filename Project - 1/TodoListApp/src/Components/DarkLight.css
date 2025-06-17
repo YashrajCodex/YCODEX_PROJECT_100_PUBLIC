@@ -1,0 +1,54 @@
+.todo-add-drop-light{
+    background-color: #fff;
+    color: #04dd04;
+    border: 0.5px solid #bdbdbd;
+}
+.todo-add-drop-dark{
+    background-color: #111111;
+    color: #04dd04;
+    border: 0.5px solid #000000;
+}
+.todo-list-light{
+    background: #e8e8e8;
+    box-shadow: 1px 1px 5px #c5c5c5, -1px -1px 5px #ffffff;
+    color: #000;
+}
+.todo_light{
+    background-color: #ffffff41;
+    color: #242424;
+}
+.todo_dark{
+    background-color: #00000041;
+    color: #fff;
+}
+.todo-add-drop-light{
+    background-color: #fff;
+    color: #04dd04;
+    border: 0.5px solid #bdbdbd;
+    
+}
+.todo-add-drop-dark{
+    background-color: #111111;
+    color: #04dd04;
+    border: 0.5px solid #000000;
+}
+.todo-list-light{
+    background: #e8e8e8;
+    box-shadow: 1px 1px 5px #c5c5c5, -1px -1px 5px #ffffff;
+    color: #000;
+}
+.todo-list-dark{
+    background: #111111;
+    box-shadow: 1px 1px 5px #424242, -1px -1px 5px #000000;
+    color: #fff;
+}
+.todo-edit-del-light{
+    background-color: #fff;
+    border: 0.5px solid #cbcaca;
+    color: #000;
+}
+.todo-edit-del-dark{
+    background-color: #111111;
+    border: 0.5px solid #000000;
+    color: #18cece;
+}

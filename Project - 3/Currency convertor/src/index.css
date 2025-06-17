@@ -1,0 +1,9 @@
+body {
+  font-family: sans-serif;
+}
+.bg-image{
+  background-image: url('/currency\ 2.jpeg'); 
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

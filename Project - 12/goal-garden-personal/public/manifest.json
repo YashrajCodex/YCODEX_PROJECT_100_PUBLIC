@@ -1,0 +1,119 @@
+{
+  "name": "Goal Tracker - Improve your skills by conquring goals.",
+  "short_name": "Goal Tracker",
+  "description": "A simple goal-tracking progressing web app built with React using lovable AI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "icons": [
+    {
+      "src": "icons/maskable-icon-1.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "icons/maskable-icon-1.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots":[
+    {
+        "src": "screenshots/HomePageScreenshot.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "form_factor": "narrow",
+        "label": "Home"
+    },
+    {
+        "src": "screenshots/BreathingScreenshot.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "form_factor": "narrow",
+        "label": "Breathing Time"
+    },
+    {
+        "src": "screenshots/TimerScreenshot.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "form_factor": "narrow",
+        "label": "Pomodaro"
+    },
+    {
+        "src": "screenshots/HomePageScreenshot.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "form_factor": "wide",
+        "label": "Home"
+    },
+    {
+        "src": "screenshots/BreathingScreenshot.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "form_factor": "wide",
+        "label": "Breathing Time"
+    },
+    {
+        "src": "screenshots/TimerScreenshot.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "form_factor": "wide",
+        "label": "Pomodaro"
+    }
+  ],
+  "shortcuts" : [
+    {
+        "name": "Add Goal",
+        "short_name": "New Goal",
+        "description": "Quickly add a new goal to track",
+        "url": "/#goal",
+        "icons": [
+            {
+                "src": "shortcutIcon/addGoal.png",
+                "sizes": "96x96"
+            }
+        ]
+    },
+    {
+        "name": "Timer",
+        "short_name": "Start Pomodaro",
+        "description": "Start the pomodaro timer",
+        "url": "/#timer",
+        "icons": [
+            {
+                "src": "shortcutIcon/timer",
+                "sizes": "96x96"
+            }
+        ]
+    },
+    {
+        "name": "Breathing",
+        "short_name": "Breath",
+        "description": "Start breathing session",
+        "url": "/#breathing",
+        "icons": [
+            {
+                "src": "shortcutIcon/breathing.png",
+                "sizes": "96x96"
+            }
+        ]
+    }
+  ],
+  "widgets":[
+    {
+      "name": "Start Timer",
+      "description": "Start the pomodaro timer",
+      "tag": "start-pomodaro-timer",
+      "src": "/widgets/timer-widget.js",
+      "type": "module",
+      "template": "/widgets/timerWidget.html",
+      "sizes":[
+        {
+          "name": "small", "width": 150, "height": 150
+        }
+      ]
+    }
+  ]
+}

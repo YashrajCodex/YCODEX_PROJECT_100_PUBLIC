@@ -1,0 +1,52 @@
+{
+  "cities": [
+    {
+      "cityName": "Madrid",
+      "country": "Spain",
+      "emoji": "",
+      "date": "2027-07-15T08:22:53.976Z",
+      "notes": "🔶",
+      "position": {
+        "lat": 40.466345601755316,
+        "lng": -3.7133789062500004
+      },
+      "id": "17806723"
+    },
+    {
+      "cityName": "Mexico",
+      "country": "Mexico",
+      "emoji": "",
+      "date": "2027-07-15T08:22:53.976Z",
+      "notes": "🔶",
+      "position": {
+        "lat": 40.46635908095316,
+        "lng": -3.7133789062500004
+      },
+      "id": "17806752"
+    },
+    {
+      "cityName": "Los Anglels",
+      "country": "u.S.A",
+      "emoji": "",
+      "date": "2027-07-15T08:22:53.976Z",
+      "notes": "🔶",
+      "position": {
+        "lat": 40.46612301755316,
+        "lng": -3.7133789062500004
+      },
+      "id": "17806753"
+    },
+    {
+      "cityName": "Shimla",
+      "country": "India",
+      "emoji": "",
+      "date": "2027-07-15T08:22:53.976Z",
+      "notes": "🔶",
+      "position": {
+        "lat": 40.466387501755316,
+        "lng": -3.7133789062500004
+      },
+      "id": "17806754"
+    }
+  ]
+}

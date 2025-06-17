@@ -1,0 +1,134 @@
+/* Basic Reset */
+body {
+  font-family: system-ui, sans-serif;
+  background: #f9fafb;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container */
+.timer-container {
+  max-width: 28rem;
+  margin: 2rem auto;
+  text-align: center;
+  background: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+.timer-container h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+.timer-container p {
+  font-size: 1.125rem;
+  color: #4b5563;
+}
+
+/* Progress circle */
+.progress-ring {
+  position: relative;
+  width: 16rem;
+  height: 16rem;
+  margin: 2rem auto;
+}
+.progress-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.progress-ring circle {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+.progress-ring .bg {
+  stroke: #e5e7eb;
+}
+.progress-ring .fg-work {
+  stroke: #3b82f6;
+}
+.progress-ring .fg-break {
+  stroke: #10b981;
+}
+.timer-time {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-family: monospace;
+  font-weight: bold;
+  color: #111827;
+}
+
+/* Control buttons */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.controls button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-green { background: #10b981; }
+.btn-green:hover { background: #059669; }
+.btn-yellow { background: #f59e0b; }
+.btn-yellow:hover { background: #d97706; }
+.btn-gray { background: #6b7280; }
+.btn-gray:hover { background: #4b5563; }
+.btn-red { background: #ef4444; }
+.btn-red:hover { background: #dc2626; }
+
+/* Settings */
+.settings-panel {
+  margin-top: 1rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.settings-panel h3 {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+.settings-panel label {
+  color: #374151;
+  font-size: 0.875rem;
+}
+.settings-panel input {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  width: 5rem;
+  text-align: center;
+}
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.settings-toggle {
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background: #fff;
+  color: #111827;
+}
+.settings-toggle:hover {
+  background: #f3f4f6;
+}
