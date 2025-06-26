@@ -1,0 +1,90 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    
+    /* Light mode colors */
+    --bg-primary: #FDF6EC;      /* Smoked Ivory */
+    --bg-surface: #F3E8D5;      /* Almond Cream */
+    --accent: #FF5E13;          /* Fury Orange */
+    --text-primary: #2E2C2F;
+    --text-secondary: #6B676F;
+    --hover-glow: #FFB347;
+    --border: #E5E1DA;          /* Light border color */
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --bg-primary: #1E1B26;      /* Deep Obsidian */
+    --bg-surface: #2A2438;      /* Ash Violet */
+    --accent: #F76707;          /* Molten Orange */
+    --text-primary: #EDEDED;
+    --text-secondary: #B0AEB8;
+    --hover-glow: #FF922B;
+    --border: #3A3547;          /* Dark border color */
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    background-color: rgba(243, 232, 213, 0.8);
+    border: 1px solid rgba(243, 232, 213, 0.2);
+  }
+  
+  .dark .glass-effect {
+    background-color: rgba(42, 36, 56, 0.8);
+    border: 1px solid rgba(42, 36, 56, 0.2);
+  }
+  
+  .glow-hover {
+    transition: all 0.3s ease;
+  }
+  
+  .glow-hover:hover {
+    box-shadow: 0 10px 25px rgba(255, 179, 71, 0.2);
+  }
+  
+  .dark .glow-hover:hover {
+    box-shadow: 0 10px 25px rgba(255, 146, 43, 0.2);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
