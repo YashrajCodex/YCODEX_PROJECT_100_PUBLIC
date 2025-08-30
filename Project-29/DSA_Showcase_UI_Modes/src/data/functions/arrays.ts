@@ -1,0 +1,435 @@
+import { mergeSort } from "./sorting";
+
+export function findTwoNumIndex(arr: number[], target: number) {
+  if (arr.length === 0) return;
+  const value: number[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] === target) {
+        value.push(arr[i], arr[j]);
+        return value.join(", ");
+      }
+    }
+  }
+}
+
+export function findUniqueNum(numList: number[]): string {
+  if (numList.length === 0 || typeof numList[0] === "string") return;
+  const result_array = [];
+  const seen_num = new Set<number>();
+
+  for (let i: number = 0; i < numList.length; i++) {
+    const last_Num = numList[i];
+    if (seen_num.has(last_Num)) {
+      result_array.push("_");
+    } else {
+      seen_num.add(last_Num);
+      result_array.push(last_Num);
+    }
+  }
+  return result_array.join(", ");
+}
+
+export function removeKElement(arr: number[], value: number) {
+  const nums: number[] = [...arr];
+  const val = value;
+  let k = 0;
+
+  console.log(arr, value);
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== val) {
+      nums[k] = nums[i];
+      k++;
+    }
+  }
+  return `${k}, ${nums}`;
+}
+
+export function getLongestCommonPrefix(arr: string[]) {
+  const strArr = [...arr];
+
+  if (!strArr.length) return "";
+
+  let prefix = strArr[0];
+  for (let i = 1; i <= strArr.length; i++) {
+    while (strArr[i].indexOf(prefix) !== 0) {
+      prefix = prefix.slice(0, -1);
+      if (!prefix) return "";
+    }
+  }
+  return prefix;
+}
+
+export function findMissingNumInArr1toN(arr: number[], n:number) {
+  //brute
+  // for (let i = 0; i < arr.length; i++){
+  //   let flag = 0;
+  //   for (let j = 0; j < arr.length - 1; j++){
+  //     if (arr[j] == i) {
+  //       flag = 1;
+  //       break;
+  //     }
+  //     if (flag == 0) return i;
+  //   }
+  // }
+
+  //better
+  // const hash = new Array(n + 1).fill(0);
+  // for (let i = 0; i <= arr.length; i++){
+  //   hash[arr[i]]++;
+  // }
+
+  // for (let j = 1; j <= arr.length + 1; j++){
+  //   if (hash[j] === 0) {
+  //     return `Missing num is ${j}`
+  //   }
+  // }
+
+  //optimal
+  //  method-1 (sum of n natural numbers: (n*(n+1))/2)
+  let sum = 0;
+  for (let i = 0; i <= arr.length; i++){
+    sum += arr[i];
+  }
+  return `${sum - Math.floor((n + 1 * (n + 1 + 1)) / 2)}`;
+
+  //  method-2 (using XOR)
+}
+
+export function maxConsecutive1(nums: number[]) {
+  let max = 0;
+  let count = 0;
+  for (let i = 0; i < nums.length; i++){
+    if (nums[i] === 1) {
+      count++;
+      max = max > count ? max : count;
+    } else {
+      count = 0;
+    }
+  }
+  return `${max}`
+}
+
+export function NumAppearsOnce(nums: number[]) {
+  //  provide an array in which all the number appears twice but a single number appears once
+  //  better
+  // let max = nums[0];
+  // //  checking for the max element in the array to create hash-map
+  // for (let i = 1; i < nums.length; i++){
+  //   if (max > nums[i]) {
+  //     max = nums[i];
+  //   }
+  // }
+  
+  // const hash = new Array(max + 1).fill(0);
+  // //  to store the entry of the number appearance
+  // for (let i = 1; i <= nums.length; i++){
+  //   hash[nums[i]]++;
+  // }
+  // for (let i = 1; i <= nums.length; i++){
+  //   if (hash[i] === 1) {
+  //     return i;
+  //   }
+  // }
+
+  //  optimal
+
+  let xor = 0;
+  for (let i = 0; i < nums.length; i++){
+    xor = xor ^ nums[i];
+  }
+  return `${xor}`
+}
+
+export function PlusOne(digits: number[]) {
+  for (let i = digits.length - 1; i <= 0; i++){
+    if (digits[i] < 9) {
+      digits[i]++;
+      return digits.join(', ');
+    } else {
+      digits[i] = 0;
+    }
+  }
+  const newDigits = new Array(digits.length).fill(0);
+  newDigits[0] = 1;
+  return newDigits.join(', ');
+}
+
+export function MajorityElement(nums: number[]) {
+  //  number that appears n/2 times
+
+  //    brute
+  //   for (let i = 0; i < nums.length; i++){
+  //     let count = 0;
+  //     for (let j = 0; j < nums.length; j++){
+  //       if (nums[i] == nums[j]) {
+  //         count ++
+  //       }
+  //     }
+  //     if (count > Math.floor(nums.length / 2)) return nums[i];
+  //   }
+  //   return -1;  
+  //      time-complexity: O(n*n);
+
+  //      better
+  // const hashMap = new Array(nums.length + 1).fill(0);
+  // for (let i = 0; i < nums.length; i++){
+  //   hashMap[nums[i]]++;
+  // }
+  // for (let i = 1; i < nums.length; i++){
+  //   if (hashMap[i] > Math.floor(nums.length / 2)) {
+  //     return i;
+  //   }
+  // }
+  //      time-complexity: O(nlogn + n);
+  //      space-complexity: O(n);
+  
+  //      optimal
+  let cnt = 0;
+  let el:number;
+
+  for (let i = 0; i < nums.length; i++){
+    if (cnt === 0) {
+      cnt = 1;
+      el = nums[i];
+    } else if (nums[i] === el) {
+      cnt++
+    } else {
+      cnt--
+    }
+  }
+  //    time-complexity: O(n)
+  //  if the array might not have a majority
+  let cntL = 0;
+  for (let i = 0; i < nums.length; i++){
+    if (nums[i] === el) {
+      cntL++;
+    }
+  }
+  if (cntL > Math.floor(nums.length / 2)) {
+    return el;
+  } else {
+    return -1
+  }
+
+  //  time-complexity: O(n+n)
+}
+
+export function checkIfSorted(arr: number[]) {
+  for (let i = 0; i < arr.length - 1; i++){
+    if (arr[i] > arr[i + 1]) {
+      return `${false}`;
+    }
+  }
+  return `${true}`;
+}
+
+export function theSecondLargest(nums: number[]) {
+  let largest = nums[0];
+  let secondL = -1;
+
+  for (let i = 0; i < nums.length; i++){
+    if (nums[i] > largest) {
+      largest = nums[i];
+    } else if (nums[i] > secondL && nums[i] !== largest) {
+      secondL = nums[i]
+    }
+  }
+  return `Largest is: ${largest} & Second-largest is: ${secondL}`
+} 
+
+export function mergeTwoSortedArray(arr1: number[], arr2: number[], n: number, m: number) {
+  if(arr1.length !== n || arr2.length == m) return 'n and m are the corresponding size of arr1 and arr2. the size does n"t matched the given array'
+  //    Brute
+  // const arr3 = new Array(n + m).fill(0);
+  // let left = 0;
+  // let right = 0;
+  // let index = 0;
+
+  // while (left < n && right < m) {
+  //   if (arr1[left] <= arr2[right]) {
+  //     arr3[index] = arr1[left];
+  //     index++;
+  //     left++;
+  //   }else{
+  //     arr3[index] = arr2[right];
+  //     index++;
+  //     right++;
+  //   }
+  // }
+  // while (left < n) {
+  //   arr3[index++] = arr1[left];
+  // }
+  // while (right < m) {
+  //   arr3[index++] = arr1[right];
+  // }
+  // for (let i = 0; i < n + m; i++){
+  //   if (i < n) arr1[i] = arr3[i];
+  //   else arr2[i - n] = arr3[i];
+  // }
+
+  //T.C: O(n+m) + O(n+m)
+  //T.C: O(n+m)
+
+  //optimal
+  let left = 0;
+  let right = n - 1;
+  while (left >= 0 && right < m) {
+    if (arr1[left] > arr2[right]) {
+      const temp = arr1[left];
+      arr1[right] = arr2[left];
+      arr2[right] = temp;
+      left--;
+      right++;
+    } else {
+      break;
+    }
+  }
+  mergeSort(arr1) //just the sorting function to sort the array 
+  mergeSort(arr2)
+  //T.C: O(min(n, m)) + O(nLogn) + O(mlogm)
+  //S.C: O(1)
+  return `First array ${arr1} and second array ${arr2}`
+}
+
+export function leftRotate(a: number[], d: number) {
+  const temp = [...a];
+  const n = a.length;
+  const dPlaces = d % n;
+
+  for (let i = dPlaces; i < n; i++){
+    a[i - dPlaces] = a[i];
+  }
+  for (let i = n - dPlaces; i < n; i++){
+    a[i] = temp[i - (n - dPlaces)];
+  }
+
+  // optimal
+  
+  return 
+}
+
+export function rearrangeArrayElements(nums: number[]) {
+  const n = nums.length;
+  const ans = new Array(n).fill(0);
+  let posIndex = 0;
+  let negIndex = 1;
+
+  for (let i = 0; i < n; i++){
+    if (nums[i] < 0) {
+      ans[negIndex] = nums[i];
+      negIndex += 2;
+    } else {
+      ans[posIndex] = nums[i];
+      posIndex += 2;
+    }
+  }
+  return ans.join(", ")
+}
+export const findTwoNumIndexCPP = `
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void findTwoNumsIndex(vector<int> arr, int target){
+    for (int i = 0; i < arr.size(); i++){
+        for (int j = i + 1; j < arr.size(); j++){
+            if(arr[i] + arr[j] == target){
+                cout << i << " " << j << endl;
+                return;
+            }
+        }
+    }
+}
+`;
+export const findUniqueNumCPP = `
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+using namespace std;
+
+string findUniqueNum(vector<int> numList) {
+    if (numList.empty()) return "";
+
+    vector<string> result_array;
+    set<int> seen_num;
+
+    for (int num : numList) {
+        if (seen_num.count(num)) {
+            result_array.push_back("_");
+        } else {
+            seen_num.insert(num);
+            result_array.push_back(to_string(num));
+        }
+    }
+
+    string result = "";
+    for (int i = 0; i < result_array.size(); i++) {
+        result += result_array[i];
+        if (i != result_array.size() - 1) result += ", ";
+    }
+    return result;
+}
+`;
+export const removeKElementCPP = `
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int removeKElement(vector<int>& arr, int value) {
+    int k = 0;
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] != value) {
+            arr[k] = arr[i];
+            k++;
+        }
+    }
+    return k;
+}
+`;
+export const getLongestCommonPrefixCPP = `
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+string getLongestCommonPrefix(vector<string>& arr) {
+    if (arr.empty()) return "";
+
+    string prefix = arr[0];
+
+    for (int i = 1; i < arr.size(); i++) {
+        while (arr[i].find(prefix) != 0) {
+            prefix = prefix.substr(0, prefix.length() - 1);
+            if (prefix.empty()) return "";
+        }
+    }
+
+    return prefix;
+}
+`;
+export const MajorityElementCpp = `
+#include <bits/stdc++.h>
+using namespace std;
+
+int majorityElement(vector<int> v){
+#include <bits/stdc++.h>
+using namespace std;
+
+int majorityElement(vector<int> v){
+  int cnt = 0;
+  int else;
+    for (int i = 0; i < v.size(); i++) {
+      if (cnt == 0) {
+        cnt = 1;
+        el = v[i];
+      } elseif(v[i] == el){
+        cnt ++;
+      }else {
+        cnt--;
+      }
+    }
+}
+}
+`
