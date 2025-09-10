@@ -1,3 +1,4 @@
+import { ReverseArray } from "./recursion";
 import { mergeSort } from "./sorting";
 
 export function findTwoNumIndex(arr: number[], target: number) {
@@ -60,7 +61,7 @@ export function getLongestCommonPrefix(arr: string[]) {
   return prefix;
 }
 
-export function findMissingNumInArr1toN(arr: number[], n:number) {
+export function findMissingNumInArr1toN(arr: number[], n: number) {
   //brute
   // for (let i = 0; i < arr.length; i++){
   //   let flag = 0;
@@ -88,7 +89,7 @@ export function findMissingNumInArr1toN(arr: number[], n:number) {
   //optimal
   //  method-1 (sum of n natural numbers: (n*(n+1))/2)
   let sum = 0;
-  for (let i = 0; i <= arr.length; i++){
+  for (let i = 0; i <= arr.length; i++) {
     sum += arr[i];
   }
   return `${sum - Math.floor((n + 1 * (n + 1 + 1)) / 2)}`;
@@ -99,7 +100,7 @@ export function findMissingNumInArr1toN(arr: number[], n:number) {
 export function maxConsecutive1(nums: number[]) {
   let max = 0;
   let count = 0;
-  for (let i = 0; i < nums.length; i++){
+  for (let i = 0; i < nums.length; i++) {
     if (nums[i] === 1) {
       count++;
       max = max > count ? max : count;
@@ -107,7 +108,7 @@ export function maxConsecutive1(nums: number[]) {
       count = 0;
     }
   }
-  return `${max}`
+  return `${max}`;
 }
 
 export function NumAppearsOnce(nums: number[]) {
@@ -120,7 +121,7 @@ export function NumAppearsOnce(nums: number[]) {
   //     max = nums[i];
   //   }
   // }
-  
+
   // const hash = new Array(max + 1).fill(0);
   // //  to store the entry of the number appearance
   // for (let i = 1; i <= nums.length; i++){
@@ -135,24 +136,24 @@ export function NumAppearsOnce(nums: number[]) {
   //  optimal
 
   let xor = 0;
-  for (let i = 0; i < nums.length; i++){
+  for (let i = 0; i < nums.length; i++) {
     xor = xor ^ nums[i];
   }
-  return `${xor}`
+  return `${xor}`;
 }
 
 export function PlusOne(digits: number[]) {
-  for (let i = digits.length - 1; i <= 0; i++){
+  for (let i = digits.length - 1; i <= 0; i++) {
     if (digits[i] < 9) {
       digits[i]++;
-      return digits.join(', ');
+      return digits.join(", ");
     } else {
       digits[i] = 0;
     }
   }
   const newDigits = new Array(digits.length).fill(0);
   newDigits[0] = 1;
-  return newDigits.join(', ');
+  return newDigits.join(", ");
 }
 
 export function MajorityElement(nums: number[]) {
@@ -168,7 +169,7 @@ export function MajorityElement(nums: number[]) {
   //     }
   //     if (count > Math.floor(nums.length / 2)) return nums[i];
   //   }
-  //   return -1;  
+  //   return -1;
   //      time-complexity: O(n*n);
 
   //      better
@@ -183,25 +184,25 @@ export function MajorityElement(nums: number[]) {
   // }
   //      time-complexity: O(nlogn + n);
   //      space-complexity: O(n);
-  
+
   //      optimal
   let cnt = 0;
-  let el:number;
+  let el: number;
 
-  for (let i = 0; i < nums.length; i++){
+  for (let i = 0; i < nums.length; i++) {
     if (cnt === 0) {
       cnt = 1;
       el = nums[i];
     } else if (nums[i] === el) {
-      cnt++
+      cnt++;
     } else {
-      cnt--
+      cnt--;
     }
   }
   //    time-complexity: O(n)
   //  if the array might not have a majority
   let cntL = 0;
-  for (let i = 0; i < nums.length; i++){
+  for (let i = 0; i < nums.length; i++) {
     if (nums[i] === el) {
       cntL++;
     }
@@ -209,14 +210,14 @@ export function MajorityElement(nums: number[]) {
   if (cntL > Math.floor(nums.length / 2)) {
     return el;
   } else {
-    return -1
+    return -1;
   }
 
   //  time-complexity: O(n+n)
 }
 
 export function checkIfSorted(arr: number[]) {
-  for (let i = 0; i < arr.length - 1; i++){
+  for (let i = 0; i < arr.length - 1; i++) {
     if (arr[i] > arr[i + 1]) {
       return `${false}`;
     }
@@ -228,18 +229,24 @@ export function theSecondLargest(nums: number[]) {
   let largest = nums[0];
   let secondL = -1;
 
-  for (let i = 0; i < nums.length; i++){
+  for (let i = 0; i < nums.length; i++) {
     if (nums[i] > largest) {
       largest = nums[i];
     } else if (nums[i] > secondL && nums[i] !== largest) {
-      secondL = nums[i]
+      secondL = nums[i];
     }
   }
-  return `Largest is: ${largest} & Second-largest is: ${secondL}`
-} 
+  return `Largest is: ${largest} & Second-largest is: ${secondL}`;
+}
 
-export function mergeTwoSortedArray(arr1: number[], arr2: number[], n: number, m: number) {
-  if(arr1.length !== n || arr2.length == m) return 'n and m are the corresponding size of arr1 and arr2. the size does n"t matched the given array'
+export function mergeTwoSortedArray(
+  arr1: number[],
+  arr2: number[],
+  n: number,
+  m: number
+) {
+  if (arr1.length !== n || arr2.length == m)
+    return 'n and m are the corresponding size of arr1 and arr2. the size does n"t matched the given array';
   //    Brute
   // const arr3 = new Array(n + m).fill(0);
   // let left = 0;
@@ -285,11 +292,11 @@ export function mergeTwoSortedArray(arr1: number[], arr2: number[], n: number, m
       break;
     }
   }
-  mergeSort(arr1) //just the sorting function to sort the array 
-  mergeSort(arr2)
+  mergeSort(arr1); //just the sorting function to sort the array
+  mergeSort(arr2);
   //T.C: O(min(n, m)) + O(nLogn) + O(mlogm)
   //S.C: O(1)
-  return `First array ${arr1} and second array ${arr2}`
+  return `First array ${arr1} and second array ${arr2}`;
 }
 
 export function leftRotate(a: number[], d: number) {
@@ -297,16 +304,16 @@ export function leftRotate(a: number[], d: number) {
   const n = a.length;
   const dPlaces = d % n;
 
-  for (let i = dPlaces; i < n; i++){
+  for (let i = dPlaces; i < n; i++) {
     a[i - dPlaces] = a[i];
   }
-  for (let i = n - dPlaces; i < n; i++){
+  for (let i = n - dPlaces; i < n; i++) {
     a[i] = temp[i - (n - dPlaces)];
   }
 
   // optimal
-  
-  return 
+
+  return;
 }
 
 export function rearrangeArrayElements(nums: number[]) {
@@ -315,7 +322,7 @@ export function rearrangeArrayElements(nums: number[]) {
   let posIndex = 0;
   let negIndex = 1;
 
-  for (let i = 0; i < n; i++){
+  for (let i = 0; i < n; i++) {
     if (nums[i] < 0) {
       ans[negIndex] = nums[i];
       negIndex += 2;
@@ -324,7 +331,122 @@ export function rearrangeArrayElements(nums: number[]) {
       posIndex += 2;
     }
   }
-  return ans.join(", ")
+  return ans.join(", ");
+}
+
+export function longestConsecutiveSequence(a: number[]) {
+  const n = a.length;
+
+  if (n === 0) return `no sequence found is 0`;
+  const arr = Number(mergeSort(a));
+  // let lastSmaller = Number.MIN_SAFE_INTEGER;
+  let longest = 1;
+  // let countCurr = 0;
+  // Better
+  // for (let i = 0; i < n; i++){
+  //   if (arr[i] - 1 == lastSmaller) {
+  //     countCurr++;
+  //     lastSmaller = arr[i];
+  //   } else if (arr[i] !== lastSmaller) {
+  //     countCurr = 1;
+  //     lastSmaller = arr[i];
+  //   }
+  //   longest = Math.max(longest, countCurr);
+  // }
+  // return `longest sequence found is ${longest}`
+
+  //optimal
+
+  const st = new Set();
+  for (let i = 0; i < n; i++) {
+    st.add(arr[i]);
+  }
+  for (const it of st) {
+    if (!st.has((it as number) - 1)) {
+      let countCurr = 1;
+      let x = it as number;
+
+      while (st.has(x + 1)) {
+        x = x + 1;
+        countCurr = countCurr + 1;
+      }
+
+      longest = Math.max(longest, countCurr);
+    }
+  }
+  return `longest sequence found is ${longest}`;
+}
+
+export function NextPermutation(A: number[]) {
+  let ind = -1;
+  const n = A.length;
+
+  for (let i = n - 2; i >= 0; i--) {
+    if (A[i] < A[i + 1]) {
+      ind = i;
+      break;
+    }
+  }
+  if (ind === -1) {
+    ReverseArray(A);
+    return A;
+  }
+  for (let i = n - 1; i > ind; i--) {
+    if (A[i] > A[ind]) {
+      const temp = A[i];
+      A[i] = A[ind];
+      A[ind] = temp;
+    }
+  }
+  ReverseArray(A, ind + 1, A.length - 1);
+  return `returned ${A.join(", ")}`;
+}
+
+export function MajorityElementNbyThreetimes(A: number[]) {
+  // brute is linear searching
+  // better sol is hashing
+
+  let cnt1 = 0,
+    cnt2 = 0;
+  let el1 = Number.MIN_SAFE_INTEGER;
+  let el2 = Number.MIN_SAFE_INTEGER;
+  const n = A.length;
+
+  for (let i = 0; i < n; i++) {
+    if (cnt1 == 0 && el2 != A[i]) {
+      cnt1 = 1;
+      el1 = A[i];
+    } else if (cnt2 == 0 && el1 != A[i]) {
+      cnt2 = 1;
+      el2 = A[i];
+    } else if (A[i] == el1) cnt1++;
+    else if (A[i] == el2) cnt1--;
+    else {
+      cnt1--;
+      cnt2--;
+    }
+  }
+  const ls = [];
+  cnt1 = 0;
+  cnt2 = 0;
+  for (let i = 0; i < n; i++) {
+    if (el1 == A[i]) cnt1++;
+    if (el2 == A[i]) cnt2++;
+  }
+
+  const mini = Math.floor(n / 3) + 1;
+
+  if (cnt1 >= mini) ls.push(el1);
+  if (cnt2 >= mini) ls.push(el2);
+
+  //for sorting
+  if (ls[0] > ls[1]) {
+    const temp = ls[0];
+    ls[0] = ls[1];
+    ls[1] = temp;
+  }
+
+  return ls;
 }
 export const findTwoNumIndexCPP = `
 #include <iostream>
@@ -414,10 +536,6 @@ export const MajorityElementCpp = `
 using namespace std;
 
 int majorityElement(vector<int> v){
-#include <bits/stdc++.h>
-using namespace std;
-
-int majorityElement(vector<int> v){
   int cnt = 0;
   int else;
     for (int i = 0; i < v.size(); i++) {
@@ -432,4 +550,77 @@ int majorityElement(vector<int> v){
     }
 }
 }
-`
+`;
+export const NextPermutationCpp = `
+#include <bits/stdc++.h>
+using namespace std;
+
+vector <int> nextGreaterPermutation(vector <int> &A){
+  int ind = -1;
+  int n = A.size();
+  for(int i = n - 2; i >= 0; i--){
+    if(A[i] < A[i + 1]){
+      ind = i;
+      break;
+    }
+  }
+  
+  if(ind == -1){
+    reverse(A.begin(), A.end());
+    return A;
+  }
+  
+  for(int i = n-1; i > ind; i--){
+    if(A[i] > A[ind]){
+      swap(A[i], A[ind]);
+    }
+  }
+
+  reverse(A.begin() + ind + 1, A.end());
+  return A;
+}
+`;
+export const MajorityElementN3timesCpp = `
+
+  tc O(2n), sc O(1)
+  #include <bits/stdc++.h>
+  vector<int> majorityElementNbyfour(vector<int> v){
+    int cnt1 = 0, cnt2 = 0;
+    int el1 = INT_MIN;
+    int el2 = INT_MIN;
+
+    for(int i = 0; i < v.size(); i++){
+      if(cnt1 == 0 && el2 != v[i]){
+        cnt1 = 1;
+        el1 = v[i];
+      }else if(cnt2 == 0 && el1 != v[i]){
+        cnt2 = 1;
+        el2 = v[i];
+      }else if(v[i] == el1) cnt1++;
+      else if(v[i] == el2) cnt1--;
+      else {
+        cnt1--, cnt2--;
+      }
+    }
+      vector<int> ls;
+      cnt1 = 0, cnt2 = 0;
+      for(int i = 0; i < v.size(); i++){
+        if(el1 == v[i]) cnt1++;
+        if(el2 == v[i]) cnt2++;
+      }
+      
+      int mini = (int) (n/3) + 1;
+
+      if(cnt1 >=mini) ls.push_back(el1);
+      if(cnt2 >=mini) ls.push_back(el2);
+
+      //for sorting
+      if(ls[0] > ls[1]){
+        int temp = ls[0];
+        ls[0] = ls[1];
+        ls[1] = temp;
+      }
+
+    return ls;
+  }
+`;

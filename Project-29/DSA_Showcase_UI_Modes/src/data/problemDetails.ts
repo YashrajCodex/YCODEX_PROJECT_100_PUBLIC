@@ -22,10 +22,15 @@ import {
   getLongestCommonPrefix,
   getLongestCommonPrefixCPP,
   leftRotate,
+  longestConsecutiveSequence,
   MajorityElement,
   MajorityElementCpp,
+  MajorityElementN3timesCpp,
+  MajorityElementNbyThreetimes,
   maxConsecutive1,
   mergeTwoSortedArray,
+  NextPermutation,
+  NextPermutationCpp,
   NumAppearsOnce,
   PlusOne,
   removeKElement,
@@ -43,6 +48,7 @@ import {
   isPalindromeCPP,
 } from "./functions/math";
 import { checkCharacter, checkCharacterCPP } from "./functions/hash";
+import { balancedParanthesis } from "./functions/balancedParanthesis";
 export const categoryFromProblemDetails = [
   "All",
   "Array",
@@ -50,6 +56,7 @@ export const categoryFromProblemDetails = [
   "Hash",
   "Recursion",
   "Sorting",
+  "String"
 ];
 type ProblemSolutinFunction<TArgs extends any[], TReturn> = (
   ...args: TArgs
@@ -71,7 +78,7 @@ export interface problemDetailsType<
   description: string;
   timeComplexity: string;
   spaceComplexity: string;
-  tags: ('math'|'number'|'string'|'array'|'recursion'|'hash-table'|'sorting')[];
+  tags: ('math'|'number'|'string'|'array'|'recursion'|'hash-table'|'sorting'|'stack'|'queue')[];
   inputs: {
     type: "text" | "number";
     label: string;
@@ -86,7 +93,7 @@ const problemDetails: problemDetailsType[] = [
     title: "Reverse an array using Recursion",
     difficulty: "Medium",
     category: "Recursion",
-    functions: (arr: string) => ReverseArray(arr),
+    functions: (arr: string) => ReverseArray(textToArray(arr, "number") as number[]),
     type: "return",
     sourceCode: {
       cpp: ReverseArrayCPP,
@@ -789,9 +796,9 @@ const problemDetails: problemDetailsType[] = [
     inputs: [
       {
         type: "text",
-        label: "Enter arr1:",
+        label: "Enter arr:",
         name: "LRA",
-        placeholder: "Enter the first-array(comma-separated)",
+        placeholder: "Enter the array(comma-separated)",
       },
       {
         type: "number",
@@ -799,6 +806,114 @@ const problemDetails: problemDetailsType[] = [
         name: "LRA_D",
         placeholder: "Enter d",
       },
+    ],
+  },
+  {
+    id: 27,
+    title: "Longest consecutive sequence in a array ",
+    difficulty: "Medium",
+    category: "Array",
+    functions: (arr1: string) =>
+      longestConsecutiveSequence(textToArray(arr1, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: 'not-yet-parsed',
+      js: longestConsecutiveSequence.toString(),
+    },
+    description:
+      "Rotates an array by d places",
+    timeComplexity: "O(3n)",
+    spaceComplexity: "O(n)",
+    tags: ['array', 'number'],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter array:",
+        name: "LCSA",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      
+    ],
+  },
+  {
+    id: 28,
+    title: "Next Permutation",
+    difficulty: "Medium",
+    category: "Array",
+    functions: (arr1: string) =>
+      NextPermutation(textToArray(arr1, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: NextPermutationCpp,
+      js: NextPermutation.toString(),
+    },
+    description:
+      "Returns the next greatest permutation of the given array or returns the lowest.",
+    timeComplexity: "O(3n)",
+    spaceComplexity: "O(n) or O(1)",
+    tags: ['array', 'number'],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter array:",
+        name: "NPA",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      
+    ],
+  },
+  {
+    id: 29,
+    title: "Majority element N/3 times",
+    difficulty: "Medium",
+    category: "Array",
+    functions: (arr1: string) =>
+      MajorityElementNbyThreetimes(textToArray(arr1, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: MajorityElementN3timesCpp,
+      js: MajorityElementNbyThreetimes.toString(),
+    },
+    description:
+      "Returns the numbers which appears more than one-third time in the array",
+    timeComplexity: "O(2n)",
+    spaceComplexity: "O(1)",
+    tags: ['array', 'number'],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter array:",
+        name: "MENT",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      
+    ],
+  },
+  {
+    id: 30,
+    title: "Balanced Parentheses",
+    difficulty: "Easy",
+    category: "String",
+    functions: (string: string) =>
+      balancedParanthesis(string),
+    type: "return",
+    sourceCode: {
+      cpp: 'not-yet-parsed',
+      js: balancedParanthesis.toString(),
+    },
+    description:
+      "Returns boolean if a string contains balanced parentheses",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(n)",
+    tags: ['string', 'stack'],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter string:",
+        name: "BP",
+        placeholder: "Enter string containg only brackets",
+      },
+      
     ],
   },
   

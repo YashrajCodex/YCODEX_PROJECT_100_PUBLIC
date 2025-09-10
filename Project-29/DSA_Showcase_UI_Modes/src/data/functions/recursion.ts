@@ -1,11 +1,9 @@
-import { textToArray } from "@/lib/helperFunctions";
-
-export function ReverseArray(arrRev: string, n?: number) {
-        const arr = textToArray(arrRev, 'number'); //custom helper Function to convert text to array
+export function ReverseArray(arr: number[], begin?:number, end?:number) {
     //returning if array is empty
     if (arr.length === 0) return "no values";
 
     //Method 1
+    // const n = arrRev.length();
     // const revArr1 = new Array(n);
     // for (let i: number = n - 1; i > 0; i--){
     //     revArr1[n - i - 1] = arr[i];
@@ -14,15 +12,14 @@ export function ReverseArray(arrRev: string, n?: number) {
 
     //Method 2
     const revArr = arr;
-    let P1 = 0;
-    let P2 = arr.length;
+    let P1 = begin ? begin : 0;
+    let P2 = end ? end : arr.length;
     while (P1 > P2) {
         const temp = arr[P1];
         revArr[P1] = revArr[P2];
         revArr[P2] = temp;
-
         P1++;
-        P2++;
+        P2--;
     }
     return revArr.join(", ");
 }
