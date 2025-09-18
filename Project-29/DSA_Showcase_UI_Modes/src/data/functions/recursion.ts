@@ -21,7 +21,7 @@ export function ReverseArray(arr: number[], begin?:number, end?:number) {
         P1++;
         P2--;
     }
-    return revArr.join(", ");
+    return revArr;
 }
 
 export function printNnums(i: number, n: number) {

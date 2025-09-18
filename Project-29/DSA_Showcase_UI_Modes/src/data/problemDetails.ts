@@ -48,7 +48,7 @@ import {
   isPalindromeCPP,
 } from "./functions/math";
 import { checkCharacter, checkCharacterCPP } from "./functions/hash";
-import { balancedParanthesis } from "./functions/balancedParanthesis";
+import { balancedParanthesis, FirstOccurrenceString, longestSubstringWithoutRepeatingChar, PrefixInfixPostfix } from "./functions/string";
 export const categoryFromProblemDetails = [
   "All",
   "Array",
@@ -85,7 +85,15 @@ export interface problemDetailsType<
     name: string;
     placeholder?: string;
     value?: [];
-  }[];
+  }[]
+  select?: {
+    label: string;
+    options: {
+      key: string | number;
+      value: string;
+      name: string;
+    }[];
+  };
 }
 const problemDetails: problemDetailsType[] = [
   {
@@ -916,6 +924,101 @@ const problemDetails: problemDetailsType[] = [
       
     ],
   },
-  
+  {
+    id: 31,
+    title: "Longest non-repeating sub-string",
+    difficulty: "Easy",
+    category: "String",
+    functions: (string: string) =>
+      longestSubstringWithoutRepeatingChar(string),
+    type: "return",
+    sourceCode: {
+      cpp: 'not-yet-parsed',
+      js: longestSubstringWithoutRepeatingChar.toString(),
+    },
+    description:
+      "Returns boolean if a string contains balanced parentheses",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(256)",
+    tags: ['string', 'hash-table'],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter string:",
+        name: "LNCSS",
+        placeholder: "Enter string....",
+      },
+      
+    ],
+  },
+  {
+    id: 32,
+    title: "IndexOf the First Occurrence in a String",
+    difficulty: "Easy",
+    category: "String",
+    functions: (needle: string, haystack: string) =>
+      FirstOccurrenceString(needle, haystack),
+    type: "return",
+    sourceCode: {
+      cpp: 'not-yet-parsed',
+      js: FirstOccurrenceString.toString(),
+    },
+    description:
+      "Returns the indexOf the first occurrence in a String",
+    timeComplexity: "O(n*m)",
+    spaceComplexity: "O(1)",
+    tags: ['string'],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter needle:",
+        name: "FOS_N",
+        placeholder: "Enter word to search....",
+      },
+      {
+        type: "text",
+        label: "Enter haystack:",
+        name: "FOS_H",
+        placeholder: "Enter text....",
+      },
+      
+    ],
+  }, 
+  {
+    id: 33,
+    title: "Prefix / Infix / Postfix",
+    difficulty: "Easy",
+    category: "String",
+    functions: (string: string, option: string) =>
+      PrefixInfixPostfix(string, option),
+    type: "return",
+    sourceCode: {
+      cpp: 'not-yet-parsed',
+      js: PrefixInfixPostfix.toString(),
+    },
+    description:
+      "Returns the converted value. ",
+    timeComplexity: "O()",
+    spaceComplexity: "O()",
+    tags: ['string'],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter string:",
+        name: "PIP_S",
+        placeholder: "Enter string....",
+      },     
+    ],
+    select: {
+      label: 'Conversion type',
+      options: [
+        {
+          name: "Infix to Postfix",
+          key: "InTOPf",
+          value: 'InfixToPostfix'
+      }
+    ]
+    }
+  }, 
 ];
 export default problemDetails;

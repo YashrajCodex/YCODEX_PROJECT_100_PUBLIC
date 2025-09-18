@@ -15,7 +15,7 @@ export function SelectionSort(array: number[]) {
     arr[i] = arr[mini];
     arr[mini] = temp;
   }
-  return arr.join(", ");
+  return arr;
 }
 
 export function insertionSort(array: number[]) {
