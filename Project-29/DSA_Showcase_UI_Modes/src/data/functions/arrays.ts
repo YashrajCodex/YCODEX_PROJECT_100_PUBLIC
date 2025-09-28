@@ -448,6 +448,48 @@ export function MajorityElementNbyThreetimes(A: number[]) {
 
   return ls;
 }
+
+export function MaxSubArrSum(a: number[]) {
+  const n = a.length;
+  let max = Number.MAX_SAFE_INTEGER;
+  let sum = 0;
+  let SubStart = -1; let SubEnd = -1;
+  let start = 0;
+  // Kadan's Algorithm
+
+  for (let i = 0; i < n; i++){
+    if (sum == 0) {
+      start = i;
+    }
+    sum += a[i];
+    
+    if (sum > max) {
+      SubStart = start;
+      SubEnd = i;
+      max = sum;
+    }
+
+    if (sum < 0) {
+      sum = 0;
+    }
+
+  }
+  return max;
+}
+
+export function SearchInsertPosition(a:number[], target: number) {
+  const n = a.length;
+
+  for (let i = 0; i < n; i++){
+    if (a[i] === target) {
+      return i + 1;
+    } else if (a[i] > target){
+      return i - 1;
+    } else {
+      return n + 1;
+    }
+  }
+}
 export const findTwoNumIndexCPP = `
 #include <iostream>
 #include <vector>

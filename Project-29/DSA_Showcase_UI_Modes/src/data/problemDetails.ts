@@ -11,7 +11,12 @@ import {
   SelectionSort,
   selectionSortCPP,
 } from "./functions/sorting";
-import { printNnums, printNnumsCPP, ReverseArray, ReverseArrayCPP } from "./functions/recursion";
+import {
+  printNnums,
+  printNnumsCPP,
+  ReverseArray,
+  ReverseArrayCPP,
+} from "./functions/recursion";
 import {
   checkIfSorted,
   findMissingNumInArr1toN,
@@ -28,6 +33,7 @@ import {
   MajorityElementN3timesCpp,
   MajorityElementNbyThreetimes,
   maxConsecutive1,
+  MaxSubArrSum,
   mergeTwoSortedArray,
   NextPermutation,
   NextPermutationCpp,
@@ -35,6 +41,7 @@ import {
   PlusOne,
   removeKElement,
   removeKElementCPP,
+  SearchInsertPosition,
   theSecondLargest,
 } from "./functions/arrays";
 import {
@@ -48,7 +55,13 @@ import {
   isPalindromeCPP,
 } from "./functions/math";
 import { checkCharacter, checkCharacterCPP } from "./functions/hash";
-import { balancedParanthesis, FirstOccurrenceString, longestSubstringWithoutRepeatingChar, PrefixInfixPostfix } from "./functions/string";
+import {
+  balancedParanthesis,
+  FirstOccurrenceString,
+  longestSubstringWithoutRepeatingChar,
+  PrefixInfixPostfix,
+} from "./functions/string";
+import { FirstBadVersion, FirstBadVersionCpp } from "./functions/binarySearch";
 export const categoryFromProblemDetails = [
   "All",
   "Array",
@@ -56,7 +69,9 @@ export const categoryFromProblemDetails = [
   "Hash",
   "Recursion",
   "Sorting",
-  "String"
+  "String",
+  "Binary Search",
+  "",
 ];
 type ProblemSolutinFunction<TArgs extends any[], TReturn> = (
   ...args: TArgs
@@ -78,14 +93,25 @@ export interface problemDetailsType<
   description: string;
   timeComplexity: string;
   spaceComplexity: string;
-  tags: ('math'|'number'|'string'|'array'|'recursion'|'hash-table'|'sorting'|'stack'|'queue')[];
+  tags: (
+    | "math"
+    | "number"
+    | "string"
+    | "array"
+    | "recursion"
+    | "hash-table"
+    | "sorting"
+    | "stack"
+    | "queue"
+    | "binary-search"
+  )[];
   inputs: {
     type: "text" | "number";
     label: string;
     name: string;
     placeholder?: string;
     value?: [];
-  }[]
+  }[];
   select?: {
     label: string;
     options: {
@@ -101,7 +127,8 @@ const problemDetails: problemDetailsType[] = [
     title: "Reverse an array using Recursion",
     difficulty: "Medium",
     category: "Recursion",
-    functions: (arr: string) => ReverseArray(textToArray(arr, "number") as number[]),
+    functions: (arr: string) =>
+      ReverseArray(textToArray(arr, "number") as number[]),
     type: "return",
     sourceCode: {
       cpp: ReverseArrayCPP,
@@ -111,7 +138,7 @@ const problemDetails: problemDetailsType[] = [
       "Reverses the given array using recursion by swapping from both ends.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n) (due to recursion stack)",
-    tags: ['array', 'recursion'],
+    tags: ["array", "recursion"],
     inputs: [
       {
         type: "text",
@@ -136,7 +163,7 @@ const problemDetails: problemDetailsType[] = [
     description:
       "Finds indices of the two numbers that add up to the target value.",
     timeComplexity: "O(n)",
-    tags: ['array', 'string'],
+    tags: ["array", "string"],
     spaceComplexity: "O(n)",
     inputs: [
       {
@@ -169,7 +196,7 @@ const problemDetails: problemDetailsType[] = [
       "Finds the unique number in an array where every other element appears twice.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -193,7 +220,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Prints numbers from i to n using recursion.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n)",
-    tags: ['number', 'recursion'],
+    tags: ["number", "recursion"],
     inputs: [
       {
         type: "number",
@@ -223,7 +250,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Returns all the factors of a number.",
     timeComplexity: "O(sqrt(n))",
     spaceComplexity: "O(1)",
-    tags: ['math'],
+    tags: ["math"],
     inputs: [
       {
         type: "number",
@@ -247,7 +274,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Checks whether a given number is prime.",
     timeComplexity: "O(sqrt(n))",
     spaceComplexity: "O(1)",
-    tags: ['number', 'math'],
+    tags: ["number", "math"],
     inputs: [
       {
         type: "number",
@@ -271,7 +298,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Generates the Fibonacci sequence up to the nth number.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n)",
-    tags: ['math', 'number'],
+    tags: ["math", "number"],
     inputs: [
       {
         type: "number",
@@ -296,7 +323,7 @@ const problemDetails: problemDetailsType[] = [
       "Checks if the given string reads the same forwards and backwards.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
-    tags: ['math', 'string'],
+    tags: ["math", "string"],
     inputs: [
       {
         type: "text",
@@ -320,7 +347,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Checks if a given character is present in the string.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
-    tags: ['array', 'hash-table'],
+    tags: ["array", "hash-table"],
     inputs: [
       {
         type: "text",
@@ -351,7 +378,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Sorts an array using the selection sort algorithm.",
     timeComplexity: "O(n^2)",
     spaceComplexity: "O(1)",
-    tags: ['array', 'sorting'],
+    tags: ["array", "sorting"],
     inputs: [
       {
         type: "text",
@@ -376,7 +403,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Sorts an array using the bubble sort algorithm.",
     timeComplexity: "O(n^2)",
     spaceComplexity: "O(1)",
-    tags: ['array', 'sorting'],
+    tags: ["array", "sorting"],
     inputs: [
       {
         type: "text",
@@ -401,7 +428,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Sorts an array using the insertion sort algorithm.",
     timeComplexity: "O(n^2)",
     spaceComplexity: "O(1)",
-    tags: ['array', 'sorting'],
+    tags: ["array", "sorting"],
     inputs: [
       {
         type: "text",
@@ -427,7 +454,7 @@ const problemDetails: problemDetailsType[] = [
       "Sorts an array using the merge sort algorithm (divide and conquer).",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(n)",
-    tags: ['array', 'sorting'],
+    tags: ["array", "sorting"],
     inputs: [
       {
         type: "text",
@@ -452,7 +479,7 @@ const problemDetails: problemDetailsType[] = [
     description: "Removes all occurrences of a given number k from the array.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n)",
-    tags: ['array'],
+    tags: ["array"],
     inputs: [
       {
         type: "text",
@@ -484,7 +511,7 @@ const problemDetails: problemDetailsType[] = [
       "Finds the longest common prefix among all strings in the array.",
     timeComplexity: "O(n * m)",
     spaceComplexity: "O(1)",
-    tags: ['string'],
+    tags: ["string"],
     inputs: [
       {
         type: "text",
@@ -510,7 +537,7 @@ const problemDetails: problemDetailsType[] = [
       "Sorts an array using the quick sort algorithm (divide and conquer).",
     timeComplexity: "O(n log n) on average, O(n^2) worst case",
     spaceComplexity: "O(log n)",
-    tags: ['array', 'sorting'],
+    tags: ["array", "sorting"],
     inputs: [
       {
         type: "text",
@@ -525,18 +552,19 @@ const problemDetails: problemDetailsType[] = [
     title: "Find the missing number in array 1 to N",
     difficulty: "Easy",
     category: "Array",
-    functions: (nums: string, n:number) =>
+    functions: (nums: string, n: number) =>
       findMissingNumInArr1toN(textToArray(nums, "number") as number[], n),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: findMissingNumInArr1toN.toString(),
     },
     description:
       "finds a missing number in an array from 1 to n. Brute, better and optimal approches.",
     timeComplexity: "O(n) on optimal, O(2n) on average, O(n^2) worst case",
-    spaceComplexity: "O() or O(1) on optimal, O(n) on average, O(1) on worst-case",
-    tags: ['array', 'number'],
+    spaceComplexity:
+      "O() or O(1) on optimal, O(n) on average, O(1) on worst-case",
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -561,14 +589,14 @@ const problemDetails: problemDetailsType[] = [
       maxConsecutive1(textToArray(nums, "number") as number[]),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: maxConsecutive1.toString(),
     },
     description:
       "finds max number of times one appears in an array. returns 0 if there is no 1 in the array.",
     timeComplexity: "O(n) on optimal",
     spaceComplexity: "O(2) on optimal",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -587,14 +615,14 @@ const problemDetails: problemDetailsType[] = [
       NumAppearsOnce(textToArray(nums, "number") as number[]),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: NumAppearsOnce.toString(),
     },
     description:
       "returns which number has appeared once in an array where all the numbers appears twice",
     timeComplexity: "O(n) on optimal",
     spaceComplexity: "O() on optimal",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -613,14 +641,13 @@ const problemDetails: problemDetailsType[] = [
       PlusOne(textToArray(nums, "number") as number[]),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: PlusOne.toString(),
     },
-    description:
-      "increments the array of digits by one and returns the array",
+    description: "increments the array of digits by one and returns the array",
     timeComplexity: "O(n) on optimal",
     spaceComplexity: "O(n) on worst-case",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -642,11 +669,10 @@ const problemDetails: problemDetailsType[] = [
       cpp: MajorityElementCpp,
       js: MajorityElement.toString(),
     },
-    description:
-      "finds the major (most appeared) number in the array",
+    description: "finds the major (most appeared) number in the array",
     timeComplexity: "O(n) or O(2n) on optimal",
     spaceComplexity: "O(n) on better",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -665,14 +691,14 @@ const problemDetails: problemDetailsType[] = [
       checkIfSorted(textToArray(nums, "number") as number[]),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: checkIfSorted.toString(),
     },
     description:
       "checks if array is sorted in ascending order and returns false if not.",
     timeComplexity: "O(n)",
     spaceComplexity: "negative",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -691,14 +717,14 @@ const problemDetails: problemDetailsType[] = [
       theSecondLargest(textToArray(nums, "number") as number[]),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: theSecondLargest.toString(),
     },
     description:
       "Returns the second-largest number in the array. Returns -1 if there is no second-largest.",
     timeComplexity: "O(n)",
     spaceComplexity: "negative",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -714,17 +740,21 @@ const problemDetails: problemDetailsType[] = [
     difficulty: "Medium",
     category: "Array",
     functions: (arr1: string, arr2: string, n: number, m: number) =>
-      mergeTwoSortedArray(textToArray(arr1, "number") as number[], textToArray(arr2, 'number') as number[], Number(n), Number(m)),
+      mergeTwoSortedArray(
+        textToArray(arr1, "number") as number[],
+        textToArray(arr2, "number") as number[],
+        Number(n),
+        Number(m)
+      ),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: mergeTwoSortedArray.toString(),
     },
-    description:
-      "Merges two sorted arrays without using a third array",
+    description: "Merges two sorted arrays without using a third array",
     timeComplexity: "O(min(n, m)) + O(nLogn) + O(mlogm)",
     spaceComplexity: "negative",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -761,14 +791,13 @@ const problemDetails: problemDetailsType[] = [
       leftRotate(textToArray(arr1, "number") as number[], d),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: leftRotate.toString(),
     },
-    description:
-      "Rotates an array by d places",
+    description: "Rotates an array by d places",
     timeComplexity: "O(d) + O(n-d) + O(d) = O(n+d)",
     spaceComplexity: "O(d)",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -793,14 +822,13 @@ const problemDetails: problemDetailsType[] = [
       leftRotate(textToArray(arr1, "number") as number[], d),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: leftRotate.toString(),
     },
-    description:
-      "Rotates an array by d places",
+    description: "Rotates an array by d places",
     timeComplexity: "O(d) + O(n-d) + O(d) = O(n+d)",
     spaceComplexity: "O(d)",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -825,14 +853,13 @@ const problemDetails: problemDetailsType[] = [
       longestConsecutiveSequence(textToArray(arr1, "number") as number[]),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: longestConsecutiveSequence.toString(),
     },
-    description:
-      "Rotates an array by d places",
+    description: "Rotates an array by d places",
     timeComplexity: "O(3n)",
     spaceComplexity: "O(n)",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -840,7 +867,6 @@ const problemDetails: problemDetailsType[] = [
         name: "LCSA",
         placeholder: "Enter the array(comma-separated)",
       },
-      
     ],
   },
   {
@@ -859,7 +885,7 @@ const problemDetails: problemDetailsType[] = [
       "Returns the next greatest permutation of the given array or returns the lowest.",
     timeComplexity: "O(3n)",
     spaceComplexity: "O(n) or O(1)",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -867,7 +893,6 @@ const problemDetails: problemDetailsType[] = [
         name: "NPA",
         placeholder: "Enter the array(comma-separated)",
       },
-      
     ],
   },
   {
@@ -886,7 +911,7 @@ const problemDetails: problemDetailsType[] = [
       "Returns the numbers which appears more than one-third time in the array",
     timeComplexity: "O(2n)",
     spaceComplexity: "O(1)",
-    tags: ['array', 'number'],
+    tags: ["array", "number"],
     inputs: [
       {
         type: "text",
@@ -894,7 +919,6 @@ const problemDetails: problemDetailsType[] = [
         name: "MENT",
         placeholder: "Enter the array(comma-separated)",
       },
-      
     ],
   },
   {
@@ -902,18 +926,16 @@ const problemDetails: problemDetailsType[] = [
     title: "Balanced Parentheses",
     difficulty: "Easy",
     category: "String",
-    functions: (string: string) =>
-      balancedParanthesis(string),
+    functions: (string: string) => balancedParanthesis(string),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: balancedParanthesis.toString(),
     },
-    description:
-      "Returns boolean if a string contains balanced parentheses",
+    description: "Returns boolean if a string contains balanced parentheses",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n)",
-    tags: ['string', 'stack'],
+    tags: ["string", "stack"],
     inputs: [
       {
         type: "text",
@@ -921,7 +943,6 @@ const problemDetails: problemDetailsType[] = [
         name: "BP",
         placeholder: "Enter string containg only brackets",
       },
-      
     ],
   },
   {
@@ -929,18 +950,16 @@ const problemDetails: problemDetailsType[] = [
     title: "Longest non-repeating sub-string",
     difficulty: "Easy",
     category: "String",
-    functions: (string: string) =>
-      longestSubstringWithoutRepeatingChar(string),
+    functions: (string: string) => longestSubstringWithoutRepeatingChar(string),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: longestSubstringWithoutRepeatingChar.toString(),
     },
-    description:
-      "Returns boolean if a string contains balanced parentheses",
+    description: "Returns boolean if a string contains balanced parentheses",
     timeComplexity: "O(n)",
     spaceComplexity: "O(256)",
-    tags: ['string', 'hash-table'],
+    tags: ["string", "hash-table"],
     inputs: [
       {
         type: "text",
@@ -948,7 +967,6 @@ const problemDetails: problemDetailsType[] = [
         name: "LNCSS",
         placeholder: "Enter string....",
       },
-      
     ],
   },
   {
@@ -960,14 +978,13 @@ const problemDetails: problemDetailsType[] = [
       FirstOccurrenceString(needle, haystack),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: FirstOccurrenceString.toString(),
     },
-    description:
-      "Returns the indexOf the first occurrence in a String",
+    description: "Returns the indexOf the first occurrence in a String",
     timeComplexity: "O(n*m)",
     spaceComplexity: "O(1)",
-    tags: ['string'],
+    tags: ["string"],
     inputs: [
       {
         type: "text",
@@ -981,9 +998,8 @@ const problemDetails: problemDetailsType[] = [
         name: "FOS_H",
         placeholder: "Enter text....",
       },
-      
     ],
-  }, 
+  },
   {
     id: 33,
     title: "Prefix / Infix / Postfix",
@@ -993,32 +1009,120 @@ const problemDetails: problemDetailsType[] = [
       PrefixInfixPostfix(string, option),
     type: "return",
     sourceCode: {
-      cpp: 'not-yet-parsed',
+      cpp: "not-yet-parsed",
       js: PrefixInfixPostfix.toString(),
     },
-    description:
-      "Returns the converted value. ",
+    description: "Returns the converted value using stack and queue",
     timeComplexity: "O()",
     spaceComplexity: "O()",
-    tags: ['string'],
+    tags: ["string"],
     inputs: [
       {
         type: "text",
         label: "Enter string:",
         name: "PIP_S",
         placeholder: "Enter string....",
-      },     
+      },
     ],
     select: {
-      label: 'Conversion type',
+      label: "Conversion type",
       options: [
         {
           name: "Infix to Postfix",
           key: "InTOPf",
-          value: 'InfixToPostfix'
-      }
-    ]
-    }
-  }, 
+          value: "InfixToPostfix",
+        },
+      ],
+    },
+  },
+  {
+    id: 34,
+    title: "MaxSubArrSum",
+    difficulty: "Hard",
+    category: "String",
+    functions: (arr: string) =>
+      MaxSubArrSum(textToArray(arr, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: MaxSubArrSum.toString(),
+    },
+    description:
+      "Returns the max value that can be obtained through a sub-string in the given array using Kadan's Algorithm.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter array:",
+        name: "MSAS",
+        placeholder: "Enter the array(comma-separated)..",
+      },
+    ],
+  },
+  {
+    id: 35,
+    title: "Search Insert Position",
+    difficulty: "Easy",
+    category: "Array",
+    functions: (arr: string, target: number) =>
+      SearchInsertPosition(textToArray(arr, "number") as number[], target),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: SearchInsertPosition.toString(),
+    },
+    description:
+      "Returns the location of the target where it is stored or where it can be stored",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(n)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter array:",
+        name: "SIP_A",
+        placeholder: "Enter the array(comma-separated)..",
+      },
+      {
+        type: "number",
+        label: "Enter target:",
+        name: "SIP_T",
+        placeholder: "Enter the target",
+      },
+    ],
+  },
+  {
+    id: 36,
+    title: "First Bad Version",
+    difficulty: "Easy",
+    category: "Binary Search",
+    functions: (n: number, badVersion: number) =>
+      FirstBadVersion(n, badVersion),
+    type: "return",
+    sourceCode: {
+      cpp: FirstBadVersionCpp,
+      js: FirstBadVersion.toString(),
+    },
+    description: "Returns the left most bad version found using binary search",
+    timeComplexity: "O(n/2)",
+    spaceComplexity: "O(1)",
+    tags: ["binary-search"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter number of versions:",
+        name: "FBV-VN",
+        placeholder: "Enter version......",
+      },
+      {
+        type: "number",
+        label: "Enter estimated bad-version:",
+        name: "FBV-VB",
+        placeholder: "Enter the target bad-version.....",
+      },
+    ],
+  },
 ];
 export default problemDetails;
