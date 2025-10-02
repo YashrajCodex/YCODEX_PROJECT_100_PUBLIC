@@ -53,6 +53,8 @@ import {
   findPrimeNumCPP,
   isPalindrome,
   isPalindromeCPP,
+  Sqrtx,
+  sqrtxCPP,
 } from "./functions/math";
 import { checkCharacter, checkCharacterCPP } from "./functions/hash";
 import {
@@ -1121,6 +1123,31 @@ const problemDetails: problemDetailsType[] = [
         label: "Enter estimated bad-version:",
         name: "FBV-VB",
         placeholder: "Enter the target bad-version.....",
+      },
+    ],
+  },
+  {
+    id: 37,
+    title: "Square root using binary search",
+    difficulty: "Easy",
+    category: "Binary Search",
+    functions: (n: number) =>
+      Sqrtx(n),
+    type: "return",
+    sourceCode: {
+      cpp: sqrtxCPP,
+      js: Sqrtx.toString(),
+    },
+    description: "Returns the square exact or nearest root of the given number.",
+    timeComplexity: "O(log n)",
+    spaceComplexity: "O(1)",
+    tags: ["binary-search"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter number:",
+        name: "SQR_X",
+        placeholder: "Enter number after 1......",
       },
     ],
   },
