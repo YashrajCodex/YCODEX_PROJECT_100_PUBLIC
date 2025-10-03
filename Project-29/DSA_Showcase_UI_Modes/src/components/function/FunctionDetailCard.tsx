@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, Clock, Database, Tag, Target } from "lucide-react";
+import {
+  Bookmark,
+  BookmarkIcon,
+  Clock,
+  Database,
+  Tag,
+  Target,
+} from "lucide-react";
 import { problemDetailsType } from "../../data/problemDetails";
 import { useUILevel } from "../../contexts/UILevelContext";
 import { FunctionInput } from "./FunctionInput";
+import { useAuth } from "@/contexts/AuthContext";
+import { useBookmark } from "@/contexts/BookmarkContext";
 
 interface FunctionDetailCardProps {
   problem: problemDetailsType;
@@ -13,6 +22,8 @@ export const FunctionDetailCard: React.FC<FunctionDetailCardProps> = ({
   problem,
 }) => {
   const { uiLevel } = useUILevel();
+  const { user, isAuthenticated } = useAuth();
+  const { addBookmark, removeBookmark, bookmarks } = useBookmark();
   const [values, setValues] = useState<Record<string, string | number>>({});
   const [result, setResult] = useState("");
 
@@ -77,6 +88,43 @@ export const FunctionDetailCard: React.FC<FunctionDetailCardProps> = ({
         return "text-gray-900 dark:text-white";
     }
   };
+  const getBookmarkStyles = (isBookmarked: boolean, type: string) => {
+    if (isBookmarked) {
+      switch (type) {
+        case "fill":
+          switch (uiLevel) {
+            case "skeleton":
+              return "black";
+            default:
+              return "#4ADE80";
+          }
+        case "color":
+          switch (uiLevel) {
+            case "skeleton":
+              return "white";
+            default:
+              return "#4ADE80";
+          }
+      }
+    } else {
+      switch (type) {
+        case "fill":
+          switch (uiLevel) {
+            case "skeleton":
+              return "white";
+            default:
+              return "#9ca3af";
+          }
+        case "color":
+          switch (uiLevel) {
+            case "skeleton":
+              return "black";
+            default:
+              return "#9ca3af";
+          }
+      }
+    }
+  };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (Object.values(values).length === 0 || values === null) return;
@@ -89,6 +137,28 @@ export const FunctionDetailCard: React.FC<FunctionDetailCardProps> = ({
     }
   };
 
+  const SaveAlgo = () => {
+    if (isAuthenticated) {
+      if (user.email && !isSavedAlgo()) {
+        addBookmark(user.email, problem);
+      } else {
+        removeBookmark(user.email, problem.id.toLocaleString());
+      }
+    } else {
+      alert("Please sign in first");
+    }
+  };
+  const isSavedAlgo = () => {
+    const gotAlgo = bookmarks?.filter(
+      (algo) => algo.userEmail === user?.email
+    && algo.id === problem.id
+    );
+    if (bookmarks?.length === 0 || gotAlgo?.length === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -98,13 +168,26 @@ export const FunctionDetailCard: React.FC<FunctionDetailCardProps> = ({
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
         <div className="flex-1">
           {/* title */}
-          <h1
-            className={`text-3xl font-bold mb-4 ${
-              uiLevel !== "skeleton" ? getTitleStyles() : ""
-            }`}
-          >
-            {problem?.title}
-          </h1>
+          <div className="flex items-center">
+            <h1
+              className={`text-3xl font-bold mb-4 ${
+                uiLevel !== "skeleton" ? getTitleStyles() : ""
+              }`}
+            >
+              {problem?.title}
+            </h1>
+            {/* Bookmark */}
+            <div className="mb-4">
+              <i>
+                <BookmarkIcon
+                  fill={`${getBookmarkStyles(isSavedAlgo(), "fill")}`}
+                  color={`${getBookmarkStyles(isSavedAlgo(), "color")}`}
+                  onClick={() => SaveAlgo()}
+                />
+              </i>
+            </div>
+          </div>
+
           <div className="flex items-center space-x-4 mb-4 select-none">
             {/* difficulty */}
             <span
@@ -246,13 +329,16 @@ export const FunctionDetailCard: React.FC<FunctionDetailCardProps> = ({
 
       {/* inputs */}
       <FunctionInput
+        select={problem.select}
         inputs={problem.inputs}
         key={problem.id}
         onExecute={(values) => problem.functions(...Object.values(values))}
       />
       {/* tags */}
       <div>
-        <h3 className={`select-none text-lg font-semibold mb-3 ${getTitleStyles()}`}>
+        <h3
+          className={`select-none text-lg font-semibold mb-3 ${getTitleStyles()}`}
+        >
           Tags
         </h3>
         <div className="flex flex-wrap gap-2">

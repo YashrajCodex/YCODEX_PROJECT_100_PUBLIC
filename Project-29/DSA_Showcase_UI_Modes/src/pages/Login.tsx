@@ -24,7 +24,7 @@ export const Login: React.FC = () => {
       animate={uiLevel !== 'skeleton' && { opacity: 1 }}
       className={getContainerStyles()}
     >
-      <div className="w-full max-w-md">
+      <div className="w-full">
         {isAuthenticated ? <LogoutCard /> : <LoginForm />}
       </div>
     </motion.div>

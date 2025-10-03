@@ -34,13 +34,6 @@ export const Navbar: React.FC = () => {
       "flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all";
 
     switch (uiLevel) {
-      case "skeleton":
-        return `${baseStyles} ${
-          ""
-          // isActive
-          //   ? "bg-gray-200 dark:bg-gray-700"
-          //   : "hover:bg-gray-100 dark:hover:bg-gray-800"
-        }`;
       case "basic":
         return `${baseStyles} ${
           isActive
@@ -94,11 +87,18 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <div className={`text-${uiLevel === 'futuristic' ? 'green-400':'black'} dark:text-${uiLevel === 'futuristic' ? 'green-400':'white'}`}>
-              <button onClick={()=> setShow((show)=> !show)}>UI Level</button>
-              <UIModeSwitcher isOpen={show} onClose={()=> setShow((show)=> !show)}/>
+            <div
+              className={`text-${
+                uiLevel === "futuristic" ? "green-400" : "black"
+              } dark:text-${uiLevel === "futuristic" ? "green-400" : "white"}`}
+            >
+              <button onClick={() => setShow((show) => !show)}>UI Level</button>
+              <UIModeSwitcher
+                isOpen={show}
+                onClose={() => setShow((show) => !show)}
+              />
             </div>
-            {uiLevel !== 'futuristic' && <ThemeToggle />}
+            {uiLevel !== "futuristic" && <ThemeToggle />}
 
             {isAuthenticated ? (
               <div
@@ -110,8 +110,10 @@ export const Navbar: React.FC = () => {
                     : ""
                 }`}
               >
-                <User size={16} />
-                <span className="text-sm">{user?.username}</span>
+                <Link to="/login" className="flex">
+                  <User size={16} />
+                  <span className="text-sm">{user?.username}</span>
+                </Link>
               </div>
             ) : (
               <Link
@@ -129,7 +131,9 @@ export const Navbar: React.FC = () => {
         <motion.div
           id="scroll-indicator"
           style={{ scaleX: scrollYProgress }}
-          className={`right-0 left-0 h-1 ${uiLevel === 'futuristic' ? `bg-green-400` : 'bg-gray-300'} fixed`}
+          className={`right-0 left-0 h-1 ${
+            uiLevel === "futuristic" ? `bg-green-400` : "bg-gray-300"
+          } fixed`}
         ></motion.div>
       )}
     </motion.nav>
