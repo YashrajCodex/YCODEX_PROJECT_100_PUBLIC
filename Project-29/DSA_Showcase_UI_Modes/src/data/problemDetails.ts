@@ -42,6 +42,8 @@ import {
   removeKElement,
   removeKElementCPP,
   SearchInsertPosition,
+  SummaryRanges,
+  SummaryRangesCpp,
   theSecondLargest,
 } from "./functions/arrays";
 import {
@@ -1148,6 +1150,31 @@ const problemDetails: problemDetailsType[] = [
         label: "Enter number:",
         name: "SQR_X",
         placeholder: "Enter number after 1......",
+      },
+    ],
+  },
+  {
+    id: 38,
+    title: "Summary Ranges",
+    difficulty: "Easy",
+    category: "Array",
+    functions: (n: number[]) =>
+      SummaryRanges(n),
+    type: "return",
+    sourceCode: {
+      cpp: SummaryRangesCpp,
+      js: SummaryRanges.toString(),
+    },
+    description: "Returns the consecutive sequences into ranges.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter array of number:",
+        name: "SR_Nums",
+        placeholder: "Enter the array(comma-separated)",
       },
     ],
   },

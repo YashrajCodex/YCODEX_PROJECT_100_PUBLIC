@@ -490,6 +490,24 @@ export function SearchInsertPosition(a:number[], target: number) {
     }
   }
 }
+
+export function SummaryRanges(nums: number[]) {
+  const result = [];
+  if (nums.length === 0) return result;
+
+  let start = nums[0];
+  for (let i = 1; i <= nums.length; i++){
+    if (i === nums.length || nums[i] !== nums[i - 1] + 1) {
+      if (start === nums[i - 1]) {
+        result.push(start.toString());
+      } else {
+        result.push(start + "->" + nums[i - 1]);
+      }
+      if (i < nums.length) start = nums[i];
+    }
+  }
+  return result;
+};
 export const findTwoNumIndexCPP = `
 #include <iostream>
 #include <vector>
@@ -666,3 +684,27 @@ export const MajorityElementN3timesCpp = `
     return ls;
   }
 `;
+export const SummaryRangesCpp = `
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution{
+public:
+  vector<string> summaryRanges(vector<int> & nums){
+    vector<string> result;
+    if(nums.empty()) return result;
+    int start = nums[0];
+    for(int i = 1; i <= nums.size(); i++){
+      if(i == nums.size() || nums[i] != nums[i-1] + 1){
+        if(start == nums[i - 1]){
+          result.push_back(to_string(start));
+        }else{
+          result.push_back(to_string(start) + "->" + to_string(nums[i - 1]));  
+        }
+        if(i < nums.size()) start = nums[i];
+      }
+    }
+      return result;
+  }
+};
+`
