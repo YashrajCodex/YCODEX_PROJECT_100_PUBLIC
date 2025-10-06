@@ -66,6 +66,7 @@ import {
   PrefixInfixPostfix,
 } from "./functions/string";
 import { FirstBadVersion, FirstBadVersionCpp } from "./functions/binarySearch";
+import { wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
 export const categoryFromProblemDetails = [
   "All",
   "Array",
@@ -75,7 +76,7 @@ export const categoryFromProblemDetails = [
   "Sorting",
   "String",
   "Binary Search",
-  "",
+  "Dynamic Programming",
 ];
 type ProblemSolutinFunction<TArgs extends any[], TReturn> = (
   ...args: TArgs
@@ -87,7 +88,7 @@ export interface problemDetailsType<
   id: number;
   title: string;
   difficulty: "Easy" | "Medium" | "Hard";
-  category: string;
+  category: "All" | "Array" | "Math" | "Hash" | "Recursion" | "Sorting" | "String" | "Binary Search" | "Dynamic Programming";
   functions: ProblemSolutinFunction<TArgs, TReturn>;
   type: "return" | "void";
   sourceCode: {
@@ -97,6 +98,7 @@ export interface problemDetailsType<
   description: string;
   timeComplexity: string;
   spaceComplexity: string;
+  links?: string;
   tags: (
     | "math"
     | "number"
@@ -108,6 +110,7 @@ export interface problemDetailsType<
     | "stack"
     | "queue"
     | "binary-search"
+    | "dynamic-programming"
   )[];
   inputs: {
     type: "text" | "number";
@@ -1178,5 +1181,37 @@ const problemDetails: problemDetailsType[] = [
       },
     ],
   },
-];
+  {
+    id: 39,
+    title: "Word Break",
+    difficulty: "Medium",
+    links: "https://leetcode.com/problems/word-break/?envType=problem-list-v2&envld=array",
+    category: "Dynamic Programming",
+    functions: (s: string, wordDict: string) =>
+      wordBreak(s, textToArray(wordDict, "string") as string[]),
+    type: "return",
+    sourceCode: {
+      cpp: wordBreakCPP,
+      js: wordBreak.toString(),
+    },
+    description: "Returns boolean if a string contains the given words in the dictonary can be cut as a substring or not",
+    timeComplexity: "O(n*n)",
+    spaceComplexity: "O(n)",
+    tags: ["array", "dynamic-programming"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter string:",
+        name: "WB_STR",
+        placeholder: "Enter string",
+      },
+      {
+        type: "text",
+        label: "Enter array of string:",
+        name: "WB_DICT",
+        placeholder: "Enter the array(comma-separated)",
+      },
+    ],
+  },
+];                                  
 export default problemDetails;
