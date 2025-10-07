@@ -11,6 +11,20 @@ export function wordBreak(s: string, wordDict: string[]) {
     }
     return dp[s.length];
 }
+export function DPFibonacci(n: number, memo = {}) {
+    // 1. base cases (exit conditons)
+    if (n > 1000 * 1000) return;
+    if (n <= 1) {
+        return n;
+    }
+    // 2. Check Memo (Dynamic Programming Step)
+    if (n in memo) {
+        return memo[n];
+    }
+    // 3. recursive step 4. storing the result in cache (DP Memory - Memoization)
+    
+    return memo[n] = DPFibonacci(n - 1, memo) + DPFibonacci(n - 2, memo);
+}
 
 export const wordBreakCPP = `
 #include <bits/stdc++.h>

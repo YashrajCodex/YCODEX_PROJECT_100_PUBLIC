@@ -66,7 +66,7 @@ import {
   PrefixInfixPostfix,
 } from "./functions/string";
 import { FirstBadVersion, FirstBadVersionCpp } from "./functions/binarySearch";
-import { wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
+import { DPFibonacci, wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
 export const categoryFromProblemDetails = [
   "All",
   "Array",
@@ -1213,5 +1213,33 @@ const problemDetails: problemDetailsType[] = [
       },
     ],
   },
+  {
+    id: 40,
+    title: "Dynamic Programming - Fibonnaci numbers",
+    difficulty: "Easy",
+    links: "https://leetcode.com/problems/word-break/?envType=problem-list-v2&envld=array",
+    category: "Dynamic Programming",
+    functions: (s: number) =>
+      DPFibonacci(s),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: DPFibonacci.toString(),
+    },
+    description: "Returns the nth fibonacci number ",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(n)",
+    tags: ["recursion", "dynamic-programming"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter n:",
+        name: "DP_Fibonacci_n",
+        placeholder: "Enter from 1 to 1 000 000",
+      },
+    ],
+  },
 ];                                  
 export default problemDetails;
+// not-yet-parsed
+// Enter the array(comma-separated)
