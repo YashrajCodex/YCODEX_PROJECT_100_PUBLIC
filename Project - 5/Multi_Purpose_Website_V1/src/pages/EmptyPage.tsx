@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Plus, Wrench } from 'lucide-react';
-import Navbar from '../components/Individual_Components/Navbar';
-import Footer from '../components/Individual_Components/Footer';
+import Navbar from '../components/multiutils/reusable/Navbar';
+import Footer from '../components/multiutils/reusable/Footer';
 
 const EmptyPage: React.FC = () => {
   return (

@@ -6,8 +6,6 @@ import PasswordGenerator from "./pages/PasswordGenerator";
 import Popcorn from "./pages/Popcorn";
 import EmptyPage from "./pages/EmptyPage";
 import NotFound from "./pages/NotFound";
-import ImageVoiceText from "./pages/ImageVoiceText";
-import { ImageToText } from "./components/UI/ImageToText";
 
 const App = () => (
   <ThemeProvider>
@@ -17,9 +15,6 @@ const App = () => (
         <Route path="/text_utils" element={<TextUtils />} />
         <Route path="/password_generator" element={<PasswordGenerator />} />
         <Route path="/popcorn" element={<Popcorn />} />
-        <Route path="/IVT" element={<ImageVoiceText />}>
-          <Route path="/IVT/imageText" element={<ImageToText />} />
-        </Route>
         <Route path="/empty_page" element={<EmptyPage />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

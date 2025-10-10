@@ -1,8 +1,8 @@
 
 import React, { useReducer } from 'react';
 import { Copy, RefreshCw } from 'lucide-react';
-import Navbar from '../components/Individual_Components/Navbar';
-import Footer from '../components/Individual_Components/Footer';
+import Navbar from '../components/multiutils/reusable/Navbar';
+import Footer from '../components/multiutils/reusable/Footer';
 
 // useReducer for managing password generator states
 interface PasswordState {

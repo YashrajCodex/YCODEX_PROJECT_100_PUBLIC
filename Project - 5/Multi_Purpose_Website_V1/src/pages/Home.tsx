@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Key, ArrowRight, SpeakerIcon, ImageIcon, ArrowBigRightDash} from 'lucide-react';
-import Navbar from '../components/Individual_Components/Navbar';
-import Footer from '../components/Individual_Components/Footer';
+import { FileText, Key, Popcorn, ArrowRight } from 'lucide-react';
+import Navbar from '../components/multiutils/reusable/Navbar';
+import Footer from '../components/multiutils/reusable/Footer';
 
 const Home: React.FC = () => {
   const utilities = [
@@ -22,12 +22,12 @@ const Home: React.FC = () => {
       color: 'bg-green-500'
     },
     {
-      title: `Image-Text`,
-      description: 'Convert Image into Text in just one click.',
-      icon: ImageIcon,
-      path: '/IVT/imageText',
-      color: 'bg-indigo-500'
-    },
+      title: 'Popcorn',
+      description: 'Discover and explore movies and web series with detailed information and ratings.',
+      icon: Popcorn,
+      path: '/popcorn',
+      color: 'bg-red-500'
+    }
   ];
 
   return (

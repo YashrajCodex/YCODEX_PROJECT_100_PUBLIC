@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, FileText, Key, SpeakerIcon, Plus, Moon, Sun } from "lucide-react";
+import { Home, FileText, Key, Popcorn, Plus, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 
 interface NavbarProps {
@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ title }) => {
     { path: "/", icon: Home, label: "Home" },
     { path: "/text_utils", icon: FileText, label: "Text Utils" },
     { path: "/password_generator", icon: Key, label: "Password Generator" },
-    { path: "/IVT/imageText", icon: SpeakerIcon, label: "Image>Txt" },
+    { path: "/popcorn", icon: Popcorn, label: "Popcorn" },
     { path: "/empty_page", icon: Plus, label: "More" },
   ];
 
@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ title }) => {
           </div>
 
           {/* Navigation Links - Hidden on mobile */}
-          <div className="hidden md:flex items-center space-x-8 overflow-auto">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map(({ path, icon: Icon, label }) => (
               <Link
                 key={path}
