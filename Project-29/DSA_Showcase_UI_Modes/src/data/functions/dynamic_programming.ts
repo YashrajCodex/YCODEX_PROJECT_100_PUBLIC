@@ -25,7 +25,17 @@ export function DPFibonacci(n: number, memo = {}) {
     
     return memo[n] = DPFibonacci(n - 1, memo) + DPFibonacci(n - 2, memo);
 }
+export function DPStockBuy(a: number[]) {
+    let mini = a[0];
+    let profit = 0;
 
+    for (let i = 1; i < a.length; i++){
+        const cost = a[i] - mini;
+        profit = Math.max(profit, cost);
+        mini = Math.min(mini, a[i]);;
+    }
+    return profit;
+}
 export const wordBreakCPP = `
 #include <bits/stdc++.h>
 using nampespace std;

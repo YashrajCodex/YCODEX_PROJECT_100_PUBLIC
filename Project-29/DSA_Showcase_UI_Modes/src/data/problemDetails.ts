@@ -18,6 +18,7 @@ import {
   ReverseArrayCPP,
 } from "./functions/recursion";
 import {
+  ArrayLeaders,
   checkIfSorted,
   findMissingNumInArr1toN,
   findTwoNumIndex,
@@ -45,6 +46,8 @@ import {
   SummaryRanges,
   SummaryRangesCpp,
   theSecondLargest,
+  ThreeSum,
+  ThreeSumCPP,
 } from "./functions/arrays";
 import {
   fibonacciSeries,
@@ -65,8 +68,8 @@ import {
   longestSubstringWithoutRepeatingChar,
   PrefixInfixPostfix,
 } from "./functions/string";
-import { FirstBadVersion, FirstBadVersionCpp } from "./functions/binarySearch";
-import { DPFibonacci, wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
+import { FirstBadVersion, FirstBadVersionCpp, TimesArrayRotated } from "./functions/binarySearch";
+import { DPFibonacci, DPStockBuy, wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
 export const categoryFromProblemDetails = [
   "All",
   "Array",
@@ -112,6 +115,7 @@ export interface problemDetailsType<
     | "binary-search"
     | "dynamic-programming"
   )[];
+  // testCode?: {};
   inputs: {
     type: "text" | "number";
     label: string;
@@ -1217,7 +1221,6 @@ const problemDetails: problemDetailsType[] = [
     id: 40,
     title: "Dynamic Programming - Fibonnaci numbers",
     difficulty: "Easy",
-    links: "https://leetcode.com/problems/word-break/?envType=problem-list-v2&envld=array",
     category: "Dynamic Programming",
     functions: (s: number) =>
       DPFibonacci(s),
@@ -1238,6 +1241,110 @@ const problemDetails: problemDetailsType[] = [
         placeholder: "Enter from 1 to 1 000 000",
       },
     ],
+  },
+  {
+    id: 41,
+    title: "Best Time to Buy and Sell stocks",
+    difficulty: "Medium",
+    category: "Dynamic Programming",
+    links: "https://takeuforward.org/data-structure/stock-buy-and-sell/",
+    functions: (n: string) =>
+      DPStockBuy(textToArray(n, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: DPStockBuy.toString(),
+    },
+    description: "Returns the max-profit we will get from the given prices",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "dynamic-programming"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter n:",
+        name: "DP_Stock_Price",
+        placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 42,
+    title: "How many times an array is rotated.",
+    difficulty: "Easy",
+    category: "Binary Search",
+    links: "takeyouforward",
+    functions: (n: string) =>
+      TimesArrayRotated(textToArray(n, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: TimesArrayRotated.toString(),
+    },
+    description: "Returns how many times the array is rotated",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter n:",
+        name: "TAR_N",
+        placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 43,
+    title: "Leaders in an array.",
+    difficulty: "Medium",
+    category: "Array",
+    links: "takeyouforward",
+    functions: (nums: string) =>
+      ArrayLeaders(textToArray(nums, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: ArrayLeaders.toString(),
+    },
+    description: "Returns an array of leaders in an array(numbers whose right are always than the number in the array.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(n) _ worst-case",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "AL_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 44,
+    title: "Three sum",
+    difficulty: "Hard",
+    category: "Array",
+    links: "takeyouforward",
+    functions: (nums: string) =>
+      ThreeSum(textToArray(nums, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: ThreeSumCPP,
+      js: ThreeSum.toString(),
+    },
+    description: "Returns an array of all the unique triplets that on additon returns 0.",
+    timeComplexity: "O(n log n) + O(n + n)",
+    spaceComplexity: "O(number of triplets)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "TS_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+  ]
   },
 ];                                  
 export default problemDetails;

@@ -1,3 +1,4 @@
+import { sortArray } from "@/lib/helperFunctions";
 import { ReverseArray } from "./recursion";
 import { mergeSort } from "./sorting";
 
@@ -508,6 +509,51 @@ export function SummaryRanges(nums: number[]) {
   }
   return result;
 };
+
+export function ArrayLeaders(nums: number[]) {
+  //Brute force: TC: O(n*n), SC: O(n)
+
+  //Optimal
+  const n = nums.length;
+  let max = Number.MIN_SAFE_INTEGER;
+  const leaders: number[] = [];
+
+  for (let i = n - 1; i >= 0; i--){
+    if (nums[i] > max) {
+      max = nums[i];
+      leaders.push(nums[i]);
+    }
+  }
+  return leaders;
+}
+export function ThreeSum(nums: number[]) {
+  const A: number[] = nums.sort();
+  console.log(A)
+  const ans: number[][] = [];
+
+  for(let i = 0; i < A.length; i++){
+    if(i > 0 && A[i] == A[i - 1]) continue;
+    let j = i + 1;
+    let k = A.length - 1;
+
+    while(j < k){
+      const sum = A[i] + A[j] + A[k];
+      if(sum < 0){
+        j++;
+      }else if(sum > 0){
+        k--;
+      }else{
+        const temp = [A[i], A[j], A[k]];
+        ans.push(temp);
+        j++;
+        k--;
+        while(j < k && A[j] == A[j - 1]) j++;
+        while(j < k && A[k] == A[k + 1]) k--;
+      }
+    }
+  }
+  return ans;
+}
 export const findTwoNumIndexCPP = `
 #include <iostream>
 #include <vector>
@@ -707,4 +753,54 @@ public:
       return result;
   }
 };
+`
+export const ThreeSumCPP = `
+#include <bits/stdc++.h>
+vector<vector<int>> triplet (int n, vector<int> &num){
+
+  // better: TC:- O(n*n + log m), SC:- O(n + (no. of triplet))
+
+  set<vector <int>> st;
+  for(int i = 0; i < n; i++){
+    set<int> hashSet;
+    for(int j = i + 1; j < n; j++){
+      int third = -(num[i] + num[j]);
+      if(hashSet.find(third) != hashSet.end()){
+        vector<int> temp = {num[i], num[j], third};
+        sort(temp.begin(), temp(end));
+      }
+      hashSet.insert(num[j]);
+    }
+  }
+  vector <vector<int>> ans{st.begin(), st.end()};
+  return ans;
+
+  //optimal
+
+  vector< vector<int>> ans;
+  sort(num.begin(), num.end());
+
+  for(int i = 0; i < n; i++){
+    if(i > 0 && num[i] == num[i - 1]) continue;
+    int j = i + 1;
+    int k = n - 1;
+
+    while(j < k){
+      int sum = num[i] + num[j] + num[k];
+      if(sum < 0){
+        j++;
+      }else if(sum > 0){
+        k--;
+      }else{
+        vector <int> temp = {num[i], num[j], num[k]};
+        ans.push_back(temp);
+        j++;
+        k--;
+        while(j < k && num[j] == num[j - 1]) j++;
+        while(j < k && num[k] == num[k + 1]) k--;
+      }
+    }
+  }
+    return ans;
+}
 `
