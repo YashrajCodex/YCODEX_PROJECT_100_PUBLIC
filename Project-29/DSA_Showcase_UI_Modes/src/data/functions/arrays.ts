@@ -454,16 +454,17 @@ export function MaxSubArrSum(a: number[]) {
   const n = a.length;
   let max = Number.MAX_SAFE_INTEGER;
   let sum = 0;
-  let SubStart = -1; let SubEnd = -1;
+  let SubStart = -1;
+  let SubEnd = -1;
   let start = 0;
   // Kadan's Algorithm
 
-  for (let i = 0; i < n; i++){
+  for (let i = 0; i < n; i++) {
     if (sum == 0) {
       start = i;
     }
     sum += a[i];
-    
+
     if (sum > max) {
       SubStart = start;
       SubEnd = i;
@@ -473,18 +474,17 @@ export function MaxSubArrSum(a: number[]) {
     if (sum < 0) {
       sum = 0;
     }
-
   }
   return max;
 }
 
-export function SearchInsertPosition(a:number[], target: number) {
+export function SearchInsertPosition(a: number[], target: number) {
   const n = a.length;
 
-  for (let i = 0; i < n; i++){
+  for (let i = 0; i < n; i++) {
     if (a[i] === target) {
       return i + 1;
-    } else if (a[i] > target){
+    } else if (a[i] > target) {
       return i - 1;
     } else {
       return n + 1;
@@ -497,7 +497,7 @@ export function SummaryRanges(nums: number[]) {
   if (nums.length === 0) return result;
 
   let start = nums[0];
-  for (let i = 1; i <= nums.length; i++){
+  for (let i = 1; i <= nums.length; i++) {
     if (i === nums.length || nums[i] !== nums[i - 1] + 1) {
       if (start === nums[i - 1]) {
         result.push(start.toString());
@@ -508,7 +508,7 @@ export function SummaryRanges(nums: number[]) {
     }
   }
   return result;
-};
+}
 
 export function ArrayLeaders(nums: number[]) {
   //Brute force: TC: O(n*n), SC: O(n)
@@ -518,7 +518,7 @@ export function ArrayLeaders(nums: number[]) {
   let max = Number.MIN_SAFE_INTEGER;
   const leaders: number[] = [];
 
-  for (let i = n - 1; i >= 0; i--){
+  for (let i = n - 1; i >= 0; i--) {
     if (nums[i] > max) {
       max = nums[i];
       leaders.push(nums[i]);
@@ -526,29 +526,63 @@ export function ArrayLeaders(nums: number[]) {
   }
   return leaders;
 }
+
 export function ThreeSum(nums: number[]) {
   const A: number[] = nums.sort();
-  console.log(A)
+  console.log(A);
   const ans: number[][] = [];
 
-  for(let i = 0; i < A.length; i++){
-    if(i > 0 && A[i] == A[i - 1]) continue;
+  for (let i = 0; i < A.length; i++) {
+    if (i > 0 && A[i] == A[i - 1]) continue;
     let j = i + 1;
     let k = A.length - 1;
 
-    while(j < k){
+    while (j < k) {
       const sum = A[i] + A[j] + A[k];
-      if(sum < 0){
+      if (sum < 0) {
         j++;
-      }else if(sum > 0){
+      } else if (sum > 0) {
         k--;
-      }else{
+      } else {
         const temp = [A[i], A[j], A[k]];
         ans.push(temp);
         j++;
         k--;
-        while(j < k && A[j] == A[j - 1]) j++;
-        while(j < k && A[k] == A[k + 1]) k--;
+        while (j < k && A[j] == A[j - 1]) j++;
+        while (j < k && A[k] == A[k + 1]) k--;
+      }
+    }
+  }
+  return ans;
+}
+
+export function FourSum(nums: number[], target: number) {
+  const n = nums.length;
+  const ans = [];
+  nums.sort();
+  for (let i = 0; i < n; i++) {
+    if (i > 0 && nums[i] == nums[i - 1]) continue;
+    for (let j = i + 1; j < n; j++) {
+      if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+      let k = j + 1;
+      let l = n - 1;
+      while (k < 1) {
+        let sum = nums[i];
+        sum += nums[j];
+        sum += nums[k];
+        sum += nums[l];
+        if (sum == target) {
+          const temp = [nums[i], nums[j], nums[k], nums[l]];
+          ans.push(temp);
+          k++;
+          l--;
+          while (k < l && nums[k] == nums[k - 1]) k++;
+          while (k < l && nums[l] == nums[l + 1]) l--;
+        } else if (sum < target) {
+          k++;
+        } else {
+          l--;
+        }
       }
     }
   }
@@ -753,7 +787,7 @@ public:
       return result;
   }
 };
-`
+`;
 export const ThreeSumCPP = `
 #include <bits/stdc++.h>
 vector<vector<int>> triplet (int n, vector<int> &num){
@@ -803,4 +837,38 @@ vector<vector<int>> triplet (int n, vector<int> &num){
   }
     return ans;
 }
-`
+`;
+export const FourSumCpp = `
+#include <bits/stdc++.h>
+vector<vector<int>> fourSum(vector<int>& nums, int target){
+  int n = nums.size();
+  vector<vector<int>> ans;
+  sort(nums.begin(), nums.end());
+  for(int i = 0; i < n; i++){
+    if(i > 0 && nums[i] == nums[i - 1]) continue;
+    for(int j = i + 1; j < n; j++){
+      if(j > i + 1 && nums[j] == nums[j - 1]) continue;
+      int k = j + 1;
+      int l = n - 1;
+      while(k < 1){
+        long long sum = nums[i];
+        sum += nums[j];
+        sum += nums[k];
+        sum += nums[l];
+        if(sum == target){
+          vector<int> temp = {nums[i], nums[j], nums[k], nums[l]};
+          ans.push(temp);
+          k++; l--;
+          while(k < l && nums[k] == nums[k - 1]) k++;
+          while(k < l && nums[l] == nums[l + 1]) l--;
+        }else if(sum < target){
+          k++;  
+        }else{
+          l--;
+        }
+      }
+    } 
+  }
+  return ans;
+}
+`;

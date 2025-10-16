@@ -25,6 +25,8 @@ import {
   findTwoNumIndexCPP,
   findUniqueNum,
   findUniqueNumCPP,
+  FourSum,
+  FourSumCpp,
   getLongestCommonPrefix,
   getLongestCommonPrefixCPP,
   leftRotate,
@@ -1343,6 +1345,38 @@ const problemDetails: problemDetailsType[] = [
         label: "Enter nums:",
         name: "TS_NUMS",
         placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 45,
+    title: "Four sum",
+    difficulty: "Hard",
+    category: "Array",
+    links: "takeyouforward",
+    functions: (nums: string, target: number) =>
+      FourSum(textToArray(nums, "number") as number[], target),
+    type: "return",
+    sourceCode: {
+      cpp: FourSumCpp,
+      js: FourSum.toString(),
+    },
+    description: "Returns an array of all the unique Quads that on additon returns target.",
+    timeComplexity: "O(n * n * n)",
+    spaceComplexity: "O(number of quads)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "FS_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      {
+        type: "number",
+        label: "Enter target:",
+        name: "FS_TARGET",
+        placeholder: "target",
       },
   ]
   },
