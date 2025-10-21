@@ -588,6 +588,53 @@ export function FourSum(nums: number[], target: number) {
   }
   return ans;
 }
+
+export function CountInversionArr(nums: number[]) {
+  function mergeSortCountInversion(a: number[], low, high) {
+    let inversionCount = 0;
+    if (low >= high) {
+      return 0;
+    }
+    const mid = Math.floor((low + high) / 2);
+    inversionCount += mergeSortCountInversion(a, low, mid);
+    inversionCount += mergeSortCountInversion(a, mid + 1, high);
+
+    inversionCount += merge(a, low, mid, high);
+    return inversionCount;
+  }
+  function merge(a: number[], low: number, mid: number, high: number) {
+    const temp = [];
+    let left = low;
+    let right = mid + 1;
+    let inversions = 0;
+
+    while (left <= mid && right <= high) {
+      if (a[left] <= a[right]) {
+        temp.push(a[left]);
+        left++;
+      } else {
+        inversions += (mid - left + 1);
+        temp.push(a[right]);
+        right++;
+      }
+    }
+
+    while (left <= mid) {
+      temp.push(a[left]);
+      left++;
+    }
+    while (right <= high) {
+      temp.push(a[right]);
+      right++;
+    }
+    for (let i = low; i <= high; i++){
+      a[i] = temp[i - low];
+    }
+    return inversions;
+  }
+
+  return mergeSortCountInversion(nums, 0, nums.length - 1);
+}
 export const findTwoNumIndexCPP = `
 #include <iostream>
 #include <vector>
@@ -872,3 +919,7 @@ vector<vector<int>> fourSum(vector<int>& nums, int target){
   return ans;
 }
 `;
+export const CountInversionsArrCpp = `
+#include <bits/stdc++.h>
+
+`

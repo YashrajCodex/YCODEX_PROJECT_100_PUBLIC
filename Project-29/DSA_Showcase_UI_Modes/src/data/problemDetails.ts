@@ -20,6 +20,7 @@ import {
 import {
   ArrayLeaders,
   checkIfSorted,
+  CountInversionArr,
   findMissingNumInArr1toN,
   findTwoNumIndex,
   findTwoNumIndexCPP,
@@ -1377,6 +1378,32 @@ const problemDetails: problemDetailsType[] = [
         label: "Enter target:",
         name: "FS_TARGET",
         placeholder: "target",
+      },
+  ]
+  },
+  {
+    id: 46,
+    title: "Count Inversions",
+    difficulty: "Hard",
+    category: "Array",
+    links: "takeyouforward",
+    functions: (nums: string) =>
+      CountInversionArr(textToArray(nums, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: CountInversionArr.toString(),
+    },
+    description: "Returns the number of pairs the array of number can form where the left number is greater than the right",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(n)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "CI_NUMS",
+        placeholder: "Enter the array(comma-separated)",
       },
   ]
   },
