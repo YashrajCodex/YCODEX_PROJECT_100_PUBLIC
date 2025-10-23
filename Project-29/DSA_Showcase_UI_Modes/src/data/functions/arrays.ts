@@ -613,7 +613,7 @@ export function CountInversionArr(nums: number[]) {
         temp.push(a[left]);
         left++;
       } else {
-        inversions += (mid - left + 1);
+        inversions += mid - left + 1;
         temp.push(a[right]);
         right++;
       }
@@ -627,13 +627,61 @@ export function CountInversionArr(nums: number[]) {
       temp.push(a[right]);
       right++;
     }
-    for (let i = low; i <= high; i++){
+    for (let i = low; i <= high; i++) {
       a[i] = temp[i - low];
     }
     return inversions;
   }
 
   return mergeSortCountInversion(nums, 0, nums.length - 1);
+}
+
+export function ReversePairs(nums: number[]) {
+  if (nums.length === 0) return;
+  const n = nums.length;
+  function CountPairs(arr: number[], low: number, mid: number, high: number) {
+    let right = mid + 1;
+    let count = 0;
+    for (let i = low; i <= mid; i++) {
+      while (right <= high && arr[i] > 2 * arr[right]) right++;
+      count += right - (mid + 1);
+    }
+    return count;
+  }
+  function mergeSortRecursion(arr: number[], low: number, high: number) {
+    let count = 0;
+    if (low >= high) return count;
+    const mid = Math.floor((low + high) / 2);
+    count += mergeSortRecursion(arr, low, mid);
+    count += mergeSortRecursion(arr, mid + 1, high);
+
+    count += CountPairs(arr, low, mid, high);
+    const temp = [];
+    let left = low;
+    let right = mid + 1;
+    while (left <= mid && right <= high) {
+      if (arr[left] <= arr[right]) {
+        temp.push(arr[left]);
+        left++;
+      } else {
+        temp.push(arr[right]);
+        right++;
+      }
+    }
+    while (left <= mid) {
+      temp.push(arr[left]);
+      left++;
+    }
+    while (right <= high) {
+      temp.push(arr[right]);
+      right++;
+    }
+    for (let i = low; i <= high; i++) {
+      arr[i] = temp[i];
+    }
+    return count;
+  }
+  return mergeSortRecursion(nums, 0, n);
 }
 export const findTwoNumIndexCPP = `
 #include <iostream>
@@ -922,4 +970,4 @@ vector<vector<int>> fourSum(vector<int>& nums, int target){
 export const CountInversionsArrCpp = `
 #include <bits/stdc++.h>
 
-`
+`;

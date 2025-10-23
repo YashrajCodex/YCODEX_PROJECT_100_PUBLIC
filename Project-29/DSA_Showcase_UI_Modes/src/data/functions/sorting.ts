@@ -87,7 +87,7 @@ export function mergeSort(array: number[]) {
     }
   }
   mergeSortRecursion(sortArray, 0, n);
-  return sortArray.join(", ");
+  return sortArray;
 }
 
 export function quickSort(array: number[]) {

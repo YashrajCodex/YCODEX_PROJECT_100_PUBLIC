@@ -45,6 +45,7 @@ import {
   PlusOne,
   removeKElement,
   removeKElementCPP,
+  ReversePairs,
   SearchInsertPosition,
   SummaryRanges,
   SummaryRangesCpp,
@@ -1403,6 +1404,32 @@ const problemDetails: problemDetailsType[] = [
         type: "text",
         label: "Enter nums:",
         name: "CI_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 47,
+    title: "Reverse Pairs",
+    difficulty: "Hard",
+    category: "Array",
+    links: "takeyouforward",
+    functions: (nums: string) =>
+      ReversePairs(textToArray(nums, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: ReversePairs.toString(),
+    },
+    description: "Returns the number of pairs the array of number can form where the left number is greater than the twice of right",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(n)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "RP_NUMS",
         placeholder: "Enter the array(comma-separated)",
       },
   ]
