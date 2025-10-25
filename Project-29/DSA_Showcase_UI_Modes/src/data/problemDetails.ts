@@ -47,6 +47,7 @@ import {
   removeKElementCPP,
   ReversePairs,
   SearchInsertPosition,
+  SortArray012,
   SummaryRanges,
   SummaryRangesCpp,
   theSecondLargest,
@@ -139,9 +140,9 @@ export interface problemDetailsType<
 const problemDetails: problemDetailsType[] = [
   {
     id: 1,
-    title: "Reverse an array using Recursion",
-    difficulty: "Medium",
-    category: "Recursion",
+    title: "Reverse an array using two pointer approach",
+    difficulty: "Easy",
+    category: "Array",
     functions: (arr: string) =>
       ReverseArray(textToArray(arr, "number") as number[]),
     type: "return",
@@ -150,10 +151,10 @@ const problemDetails: problemDetailsType[] = [
       js: ReverseArray.toString(),
     },
     description:
-      "Reverses the given array using recursion by swapping from both ends.",
+      "Reverses the given array using two pointer approach by swapping from both ends.",
     timeComplexity: "O(n)",
-    spaceComplexity: "O(n) (due to recursion stack)",
-    tags: ["array", "recursion"],
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
     inputs: [
       {
         type: "text",
@@ -178,7 +179,7 @@ const problemDetails: problemDetailsType[] = [
     description:
       "Finds indices of the two numbers that add up to the target value.",
     timeComplexity: "O(n)",
-    tags: ["array", "string"],
+    tags: ["array", "hash-table"],
     spaceComplexity: "O(n)",
     inputs: [
       {
@@ -211,7 +212,7 @@ const problemDetails: problemDetailsType[] = [
       "Finds the unique number in an array where every other element appears twice.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
-    tags: ["array", "number"],
+    tags: ["array", "hash-table"],
     inputs: [
       {
         type: "text",
@@ -237,18 +238,18 @@ const problemDetails: problemDetailsType[] = [
     spaceComplexity: "O(n)",
     tags: ["number", "recursion"],
     inputs: [
-      {
-        type: "number",
-        label: "Num-I:",
-        name: "numI",
-        placeholder: "enter a number",
-      },
-      {
-        type: "number",
-        label: "Num-N:",
-        name: "numN",
-        placeholder: "enter a number",
-      },
+      // {
+      //   type: "number",
+      //   label: "Num-I:",
+      //   name: "numI",
+      //   placeholder: "enter a number",
+      // },
+      // {
+      //   type: "number",
+      //   label: "Num-N:",
+      //   name: "numN",
+      //   placeholder: "enter a number",
+      // },
     ],
   },
   {
@@ -270,7 +271,7 @@ const problemDetails: problemDetailsType[] = [
       {
         type: "number",
         label: "Number:",
-        name: "number",
+        name: "FND_NUM",
         placeholder: "enter a number",
       },
     ],
@@ -1430,6 +1431,32 @@ const problemDetails: problemDetailsType[] = [
         type: "text",
         label: "Enter nums:",
         name: "RP_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 48,
+    title: "Sort an array of 0s, 1s and 2s",
+    difficulty: "Medium",
+    category: "Array",
+    links: "takeyouforward",
+    functions: (nums: string) =>
+      SortArray012(textToArray(nums, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: SortArray012.toString(),
+    },
+    description: "Returns the sorted array using 'Dutch National Flag' algorithim",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "SZOT_NUMS",
         placeholder: "Enter the array(comma-separated)",
       },
   ]

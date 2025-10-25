@@ -1,4 +1,4 @@
-export function ReverseArray(arr: number[], begin?:number, end?:number) {
+export function ReverseArray(arr: number[]) {
     //returning if array is empty
     if (arr.length === 0) return "no values";
 
@@ -11,11 +11,11 @@ export function ReverseArray(arr: number[], begin?:number, end?:number) {
     //you may display the values using console.log(revArr1.join(", "))
 
     //Method 2
-    const revArr = arr;
-    let P1 = begin ? begin : 0;
-    let P2 = end ? end : arr.length;
-    while (P1 > P2) {
-        const temp = arr[P1];
+    const revArr = [...arr];
+    let P1 = 0;
+    let P2 = arr.length - 1;
+    while (P1 < P2) {
+        const temp = revArr[P1];
         revArr[P1] = revArr[P2];
         revArr[P2] = temp;
         P1++;
@@ -27,14 +27,18 @@ export function ReverseArray(arr: number[], begin?:number, end?:number) {
 export function printNnums(i: number, n: number) {
     if (i === 0 || n === 0) return;
     if (n > 100) {
-        alert("Number of times to print should be less than 100.");
-        return;
+        return null;
     }
-    //Printing number using recurrsion
-    if (i > n) return;
-    console.log(i); //see the result in console
-    printNnums(i + 1, n);
+
+    function PN() {
+        //Printing number using recurrsion
+        if (i > n) return;
+        console.log(i); //see the result in console
+        printNnums(i + 1, n);
+    }
+    //PN(); //not executing due to undetectable call stack limit error
 }
+
 export function printNumsAlternate(i: number, n: number) {
     //Alternate view of printing via recurrsion
     if (i === 0 || n === 0) return;

@@ -1,21 +1,23 @@
-import { sortArray } from "@/lib/helperFunctions";
 import { ReverseArray } from "./recursion";
 import { mergeSort } from "./sorting";
 
 export function findTwoNumIndex(arr: number[], target: number) {
-  if (arr.length === 0) return;
-  const value: number[] = [];
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[i] + arr[j] === target) {
-        value.push(arr[i], arr[j]);
-        return value.join(", ");
-      }
+  if (arr.length === 0) return [];
+  const n = arr.length;
+  const hashMap = new Map<number, number>();
+  for (let i = 0; i < n; i++){
+    const complement = target - arr[i];
+    if (hashMap.has(complement)) {
+      return [hashMap.get(complement)!, i]
+    } else {
+      hashMap.set(arr[i], i);
     }
   }
+  
+  return [-1,-1];
 }
 
-export function findUniqueNum(numList: number[]): string {
+export function findUniqueNum(numList: number[]): number[] {
   if (numList.length === 0 || typeof numList[0] === "string") return;
   const result_array = [];
   const seen_num = new Set<number>();
@@ -29,22 +31,23 @@ export function findUniqueNum(numList: number[]): string {
       result_array.push(last_Num);
     }
   }
-  return result_array.join(", ");
+  return result_array
 }
 
 export function removeKElement(arr: number[], value: number) {
+  if (arr.length == 0) return 0;
+
   const nums: number[] = [...arr];
   const val = value;
   let k = 0;
 
-  console.log(arr, value);
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] !== val) {
       nums[k] = nums[i];
       k++;
     }
   }
-  return `${k}, ${nums}`;
+  return k;
 }
 
 export function getLongestCommonPrefix(arr: string[]) {
@@ -63,6 +66,8 @@ export function getLongestCommonPrefix(arr: string[]) {
 }
 
 export function findMissingNumInArr1toN(arr: number[], n: number) {
+  if (arr.length == 0) return 0;
+
   //brute
   // for (let i = 0; i < arr.length; i++){
   //   let flag = 0;
@@ -99,6 +104,8 @@ export function findMissingNumInArr1toN(arr: number[], n: number) {
 }
 
 export function maxConsecutive1(nums: number[]) {
+  if (nums.length == 0) return 0;
+
   let max = 0;
   let count = 0;
   for (let i = 0; i < nums.length; i++) {
@@ -113,6 +120,8 @@ export function maxConsecutive1(nums: number[]) {
 }
 
 export function NumAppearsOnce(nums: number[]) {
+  if (nums.length == 0) return 0;
+  
   //  provide an array in which all the number appears twice but a single number appears once
   //  better
   // let max = nums[0];
@@ -144,6 +153,8 @@ export function NumAppearsOnce(nums: number[]) {
 }
 
 export function PlusOne(digits: number[]) {
+  if (digits.length == 0) return 0;
+
   for (let i = digits.length - 1; i <= 0; i++) {
     if (digits[i] < 9) {
       digits[i]++;
@@ -158,6 +169,8 @@ export function PlusOne(digits: number[]) {
 }
 
 export function MajorityElement(nums: number[]) {
+  if (nums.length == 0) return 0;
+
   //  number that appears n/2 times
 
   //    brute
@@ -218,6 +231,8 @@ export function MajorityElement(nums: number[]) {
 }
 
 export function checkIfSorted(arr: number[]) {
+  if (arr.length == 0) return 0;
+
   for (let i = 0; i < arr.length - 1; i++) {
     if (arr[i] > arr[i + 1]) {
       return `${false}`;
@@ -227,6 +242,8 @@ export function checkIfSorted(arr: number[]) {
 }
 
 export function theSecondLargest(nums: number[]) {
+  if (nums.length == 0) return 0;
+
   let largest = nums[0];
   let secondL = -1;
 
@@ -246,6 +263,7 @@ export function mergeTwoSortedArray(
   n: number,
   m: number
 ) {
+  if (arr1.length == 0 || arr2.length == 0) return null;
   if (arr1.length !== n || arr2.length == m)
     return 'n and m are the corresponding size of arr1 and arr2. the size does n"t matched the given array';
   //    Brute
@@ -301,6 +319,8 @@ export function mergeTwoSortedArray(
 }
 
 export function leftRotate(a: number[], d: number) {
+  if (a.length == 0) return 0;
+
   const temp = [...a];
   const n = a.length;
   const dPlaces = d % n;
@@ -318,6 +338,8 @@ export function leftRotate(a: number[], d: number) {
 }
 
 export function rearrangeArrayElements(nums: number[]) {
+  if (nums.length == 0) return 0;
+
   const n = nums.length;
   const ans = new Array(n).fill(0);
   let posIndex = 0;
@@ -379,6 +401,8 @@ export function longestConsecutiveSequence(a: number[]) {
 }
 
 export function NextPermutation(A: number[]) {
+  if (A.length == 0) return 0;
+
   let ind = -1;
   const n = A.length;
 
@@ -406,6 +430,7 @@ export function NextPermutation(A: number[]) {
 export function MajorityElementNbyThreetimes(A: number[]) {
   // brute is linear searching
   // better sol is hashing
+  if (A.length == 0) return 0;
 
   let cnt1 = 0,
     cnt2 = 0;
@@ -452,6 +477,7 @@ export function MajorityElementNbyThreetimes(A: number[]) {
 
 export function MaxSubArrSum(a: number[]) {
   const n = a.length;
+  if (n == 0) return 0;
   let max = Number.MAX_SAFE_INTEGER;
   let sum = 0;
   let SubStart = -1;
@@ -479,6 +505,7 @@ export function MaxSubArrSum(a: number[]) {
 }
 
 export function SearchInsertPosition(a: number[], target: number) {
+  if (a.length == 0) return 0;
   const n = a.length;
 
   for (let i = 0; i < n; i++) {
@@ -511,6 +538,7 @@ export function SummaryRanges(nums: number[]) {
 }
 
 export function ArrayLeaders(nums: number[]) {
+  if (nums.length == 0) return 0;
   //Brute force: TC: O(n*n), SC: O(n)
 
   //Optimal
@@ -528,6 +556,7 @@ export function ArrayLeaders(nums: number[]) {
 }
 
 export function ThreeSum(nums: number[]) {
+  if(nums.length == 0) return null
   const A: number[] = nums.sort();
   console.log(A);
   const ans: number[][] = [];
@@ -558,6 +587,7 @@ export function ThreeSum(nums: number[]) {
 
 export function FourSum(nums: number[], target: number) {
   const n = nums.length;
+  if(n == 0) return null
   const ans = [];
   nums.sort();
   for (let i = 0; i < n; i++) {
@@ -590,6 +620,7 @@ export function FourSum(nums: number[], target: number) {
 }
 
 export function CountInversionArr(nums: number[]) {
+  if (nums.length == 0) return 0;
   function mergeSortCountInversion(a: number[], low, high) {
     let inversionCount = 0;
     if (low >= high) {
@@ -637,7 +668,7 @@ export function CountInversionArr(nums: number[]) {
 }
 
 export function ReversePairs(nums: number[]) {
-  if (nums.length === 0) return;
+  if (nums.length === 0) return 0;
   const n = nums.length;
   function CountPairs(arr: number[], low: number, mid: number, high: number) {
     let right = mid + 1;
@@ -683,6 +714,35 @@ export function ReversePairs(nums: number[]) {
   }
   return mergeSortRecursion(nums, 0, n);
 }
+
+export function SortArray012(nums: number[]) {
+  if (nums.length == 0) return 0;
+  const n = nums.length;  
+  let low = 0;
+  let mid = 0;
+  let high = n - 1;
+
+  while (mid <= high) {
+    if (nums[mid] == 0) {
+      const temp = nums[low];
+      nums[low] = nums[mid];
+      nums[mid] = temp;
+      low++;
+      mid++;
+    }else if (nums[mid] == 1) {
+      mid++;
+    }else if (nums[mid] == 2) {
+      const temp = nums[mid];
+      nums[mid] = nums[high];
+      nums[high] = temp;
+      high--;
+    } else {
+      return null;
+    }
+  }
+  return nums;
+}
+
 export const findTwoNumIndexCPP = `
 #include <iostream>
 #include <vector>

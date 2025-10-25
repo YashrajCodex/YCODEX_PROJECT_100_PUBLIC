@@ -1,100 +1,105 @@
 export function findNumDivisors(n: number) {
-    const divisors:number[] = [];
-    for (let i = 0; i <= n; i++){
-        if (n % i === 0) {
-            divisors.push(i);
-        }
+  const divisors: number[] = [];
+  if (divisors.length == 0) return 0;
+  for (let i = 0; i <= n; i++) {
+    if (n % i === 0) {
+      divisors.push(i);
     }
-    return divisors.join(", ");
+  }
+  return divisors;
 }
-export function findPrimeNum(n:number) {
-    let found: boolean = true;
-    for (let i = 2; i * i < n; i++){
-        if (n % i === 0) {
-            found = false;
-            // console.log("not a prime num");
-            break;
-        }
+export function findPrimeNum(n: number) {
+  let found: boolean = true;
+  for (let i = 2; i * i < n; i++) {
+    if (n % i === 0) {
+      found = false;
+      // console.log("not a prime num");
+      break;
     }
-    return `${found}`
+  }
+  return `${found}`;
 }
 export function fibonacciSeries(n: number) {
-    const toDisplayArray = [0, 1]
-    if (n == 0) {
-        //this a custom box to display output
-        return (`The fibonacci series upto ${n}th term is 0`)
-    } else {
-        let secondLast = 0;
-        let last = 1; 
-        // console.log(`The fibonacci series upto: ${n}th term is `)
-        // console.log(`${secondLast}`)
-        // console.log(`${last} `)
-        let curr:number;
-        for (let i = 0; i <= n; i++){
-            curr = last + secondLast;
-            secondLast = last;
-            last = curr;
-            // console.log(curr, " ")
-            toDisplayArray.push(curr)
-        }
-       return (`The fibonacci series upto ${n}th term is ${toDisplayArray.join(", ")}`)
+  const toDisplayArray = [0, 1];
+  if (n == 0) {
+    //this a custom box to display output
+    return `The fibonacci series upto ${n}th term is 0`;
+  } else {
+    let secondLast = 0;
+    let last = 1;
+    // console.log(`The fibonacci series upto: ${n}th term is `)
+    // console.log(`${secondLast}`)
+    // console.log(`${last} `)
+    let curr: number;
+    for (let i = 0; i <= n; i++) {
+      curr = last + secondLast;
+      secondLast = last;
+      last = curr;
+      // console.log(curr, " ")
+      toDisplayArray.push(curr);
     }
+    return toDisplayArray;
+  }
 }
 export function isPalindrome(text: string) {
-    //Removing space from the text 
+    //Removing space from the text
     const clrText = text.split(" ").join("");
     const firstIndex: number = 0;
-    const lastIndex: number = clrText.length
+    const lastIndex: number = clrText.length;
 
-    // Method 1
-    // let left = 0;
-    // let right = clrText.length;
+  // Method 1
+  // let left = 0;
+  // let right = clrText.length;
 
-    // while(left < right){
-    //     if (clrText[left] != clrText[right]) {
-    //         return false
-    //     }
-    //     left++;
-    //     right++;
-    // }
-    // return true;
+  // while(left < right){
+  //     if (clrText[left] != clrText[right]) {
+  //         return false
+  //     }
+  //     left++;
+  //     right++;
+  // }
+  // return true;
 
-    //Method 2 (using RECURSION)
-    function PalindromeRecursion(clrStr: string, firstIndex: number, lastIndex: number) {
-        if (firstIndex >= lastIndex) {
-            return true;
-        }    
-        if (clrStr[firstIndex] == clrStr[lastIndex]) {
-            PalindromeRecursion(clrStr, firstIndex + 1, lastIndex - 1);
-        } else {
-            return false
-        }
+  //Method 2 (using RECURSION)
+  function PalindromeRecursion(
+    text: string,
+    firstIndex: number,
+    lastIndex: number
+  ) {
+    console.log(text[firstIndex] == text[lastIndex]);
+    if (firstIndex >= lastIndex) {
+      return true;
+    } else if (text[firstIndex] == text[lastIndex]) {
+      return PalindromeRecursion(text, firstIndex + 1, lastIndex - 1);
+    } else {
+      return false;
     }
+  }
 
-    //calling the recurrsion function in the parent function
-    return `${PalindromeRecursion(clrText, firstIndex, lastIndex)}`;
+  //calling the recurrsion function in the parent function
+  return PalindromeRecursion(clrText, firstIndex, lastIndex);
 }
 export function Sqrtx(num: number) {
-    if (num < 2) {
-        return num;
-    }
-    let low = 1;
-    let high = num / 2;
-    let ans = 1;
+  if (num < 2) {
+    return num;
+  }
+  let low = 1;
+  let high = num / 2;
+  let ans = 1;
 
-    while (low <= high) {
-        const mid = low + (high - low) / 2;
-        const midSquared = mid * mid;
-        if (midSquared == num) {
-            return mid;
-        } else if (midSquared < num) {
-            ans = mid;
-            low = mid + 1;
-        } else {
-            high = mid - 1;
-        }
+  while (low <= high) {
+    const mid = low + (high - low) / 2;
+    const midSquared = mid * mid;
+    if (midSquared == num) {
+      return mid;
+    } else if (midSquared < num) {
+      ans = mid;
+      low = mid + 1;
+    } else {
+      high = mid - 1;
     }
-    return ans;
+  }
+  return ans;
 }
 export const findNumDivisorsCPP = `
 #include <iostream>
@@ -217,4 +222,4 @@ public:
             return (int)ans;
     }
 };
-`
+`;
