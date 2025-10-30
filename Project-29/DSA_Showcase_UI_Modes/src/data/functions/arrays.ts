@@ -5,16 +5,16 @@ export function findTwoNumIndex(arr: number[], target: number) {
   if (arr.length === 0) return [];
   const n = arr.length;
   const hashMap = new Map<number, number>();
-  for (let i = 0; i < n; i++){
+  for (let i = 0; i < n; i++) {
     const complement = target - arr[i];
     if (hashMap.has(complement)) {
-      return [hashMap.get(complement)!, i]
+      return [hashMap.get(complement)!, i];
     } else {
       hashMap.set(arr[i], i);
     }
   }
-  
-  return [-1,-1];
+
+  return [-1, -1];
 }
 
 export function findUniqueNum(numList: number[]): number[] {
@@ -31,18 +31,17 @@ export function findUniqueNum(numList: number[]): number[] {
       result_array.push(last_Num);
     }
   }
-  return result_array
+  return result_array;
 }
 
 export function removeKElement(arr: number[], value: number) {
   if (arr.length == 0) return 0;
 
   const nums: number[] = [...arr];
-  const val = value;
   let k = 0;
 
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] !== val) {
+    if (nums[i] != value) {
       nums[k] = nums[i];
       k++;
     }
@@ -56,7 +55,8 @@ export function getLongestCommonPrefix(arr: string[]) {
   if (!strArr.length) return "";
 
   let prefix = strArr[0];
-  for (let i = 1; i <= strArr.length; i++) {
+  console.log(prefix);
+  for (let i = 1; i < strArr.length; i++) {
     while (strArr[i].indexOf(prefix) !== 0) {
       prefix = prefix.slice(0, -1);
       if (!prefix) return "";
@@ -121,7 +121,7 @@ export function maxConsecutive1(nums: number[]) {
 
 export function NumAppearsOnce(nums: number[]) {
   if (nums.length == 0) return 0;
-  
+
   //  provide an array in which all the number appears twice but a single number appears once
   //  better
   // let max = nums[0];
@@ -311,11 +311,11 @@ export function mergeTwoSortedArray(
       break;
     }
   }
-  mergeSort(arr1); //just the sorting function to sort the array
-  mergeSort(arr2);
+  arr1.sort(); //just the sorting function to sort the array
+  arr2.sort();
   //T.C: O(min(n, m)) + O(nLogn) + O(mlogm)
   //S.C: O(1)
-  return `First array ${arr1} and second array ${arr2}`;
+  return { arr1, arr2 };
 }
 
 export function leftRotate(a: number[], d: number) {
@@ -506,17 +506,25 @@ export function MaxSubArrSum(a: number[]) {
 
 export function SearchInsertPosition(a: number[], target: number) {
   if (a.length == 0) return 0;
+  a.sort();
   const n = a.length;
 
-  for (let i = 0; i < n; i++) {
-    if (a[i] === target) {
-      return i + 1;
-    } else if (a[i] > target) {
-      return i - 1;
+  let low = 0;
+  let high = n - 1;
+  let ans = n;
+
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    if (a[mid] >= target) {
+      //maybe an answer
+      ans = mid;
+      //look for more smaller index on the left
+      high = mid - 1;
     } else {
-      return n + 1;
+      low = mid + 1;
     }
   }
+  return ans;
 }
 
 export function SummaryRanges(nums: number[]) {
@@ -556,7 +564,7 @@ export function ArrayLeaders(nums: number[]) {
 }
 
 export function ThreeSum(nums: number[]) {
-  if(nums.length == 0) return null
+  if (nums.length == 0) return null;
   const A: number[] = nums.sort();
   console.log(A);
   const ans: number[][] = [];
@@ -587,7 +595,7 @@ export function ThreeSum(nums: number[]) {
 
 export function FourSum(nums: number[], target: number) {
   const n = nums.length;
-  if(n == 0) return null
+  if (n == 0) return null;
   const ans = [];
   nums.sort();
   for (let i = 0; i < n; i++) {
@@ -717,7 +725,7 @@ export function ReversePairs(nums: number[]) {
 
 export function SortArray012(nums: number[]) {
   if (nums.length == 0) return 0;
-  const n = nums.length;  
+  const n = nums.length;
   let low = 0;
   let mid = 0;
   let high = n - 1;
@@ -729,9 +737,9 @@ export function SortArray012(nums: number[]) {
       nums[mid] = temp;
       low++;
       mid++;
-    }else if (nums[mid] == 1) {
+    } else if (nums[mid] == 1) {
       mid++;
-    }else if (nums[mid] == 2) {
+    } else if (nums[mid] == 2) {
       const temp = nums[mid];
       nums[mid] = nums[high];
       nums[high] = temp;
@@ -742,6 +750,104 @@ export function SortArray012(nums: number[]) {
   }
   return nums;
 }
+
+export function Lower_Upperbound(nums: number[], k: number) {
+  if (nums?.length == 0) return 0;
+  nums.sort();
+
+  const n = nums.length;
+  let low = 0;
+  let high = n - 1;
+  let ans = n;
+  // lower bound can actually be used for finding a ceil in an sorted array. Smallest number greater than k/target.
+  //while floor is Largest number smaller than k/target
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    if (nums[mid] >= k) {
+      //upperbound is nums[mid] >= k
+      ans = mid;
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+  return ans;
+}
+
+export function floorCeil(type: string, a: number[], k: number) {
+  if (a.length == 0) return -1;
+  a.sort();
+  const n = a.length;
+  let low = 0;
+  let high = n - 1;
+  let ans = -1;
+  // lower bound can actually be used for finding a ceil in an sorted array. Smallest number greater than k/target.
+  //while floor is Largest number smaller than k/target
+  switch (type) {
+    case "floor":
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        if (a[mid] >= k) {
+          ans = ans[mid];
+          high = mid - 1;
+        } else {
+          low = mid + 1;
+        }
+      }
+      break;
+
+    default:
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        if (a[mid] <= k) {
+          //upperbound is nums[mid] >= k
+          ans = ans[mid];
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+      break;
+  }
+  return ans;
+}
+
+export function occuranceFirstLastCount(nums: number[], target: number) {
+  if (nums.length == 0) return 0;
+  // Optimal
+  let firstOcc = -1;
+  let lastOcc = -1;
+  let count = 0;
+  const n = nums.length;
+
+  let low = 0;
+  let high = n - 1;
+  //to find the first occurance
+  //[1, 3, 4, 5, 6, 6, 6, 6, 7, 8, 11, 15]
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    if (nums[mid] >= target) {
+      high = mid - 1;
+      firstOcc = mid;
+    } else {
+      low = mid + 1;
+    }
+  }
+  //to find the last occurance
+  //[1, 3, 4, 5, 6, 6, 6, 6, 7, 8, 11, 15]
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    if (nums[mid] >= target) {
+      high = mid - 1;
+      firstOcc = mid;
+    } else {
+      low = mid + 1;
+    }
+  }
+  return [firstOcc, lastOcc, count];
+}
+
+export function LongestSubArrayWithSumK(a: number[], k: number) {}
 
 export const findTwoNumIndexCPP = `
 #include <iostream>

@@ -29,6 +29,7 @@ export function insertionSort(array: number[]) {
       j--;
     }
   }
+  return sortedArray;
 }
 
 export function bubbleSort(array: number[]) {
@@ -36,7 +37,7 @@ export function bubbleSort(array: number[]) {
   const n = sortarray.length;
   for (let i = n - 1; i >= 0; i--) {
     let alreadySorted = 0;
-    for (let j = 0; j < i - 1; j++) {
+    for (let j = 0; j < i; j++) {
       if (sortarray[j] > sortarray[j + 1]) {
         alreadySorted = 1;
         const temp = sortarray[j];
@@ -54,14 +55,10 @@ export function bubbleSort(array: number[]) {
 export function mergeSort(array: number[]) {
   if (array.length === 0) return;
   const sortArray = [...array];
-  const n = sortArray.length;
+  const n = sortArray.length - 1;
 
-  function mergeSortRecursion(arr: number[], low: number, high: number) {
-    if (low >= high) return;
-    const mid = Math.floor((low + high) / 2);
-    mergeSortRecursion(arr, low, mid);
-    mergeSortRecursion(arr, mid + 1, high);
-
+  // function for merging both the sorted arrays
+  function merge(arr: number[], low: number, mid: number, high: number) {
     const temp = [];
     let left = low;
     let right = mid + 1;
@@ -86,6 +83,16 @@ export function mergeSort(array: number[]) {
       arr[i] = temp[i];
     }
   }
+  //function for splitting the array using recursion and than using the merge functin to merge and sort at the same time;
+  function mergeSortRecursion(arr: number[], low: number, high: number) {
+    if (low >= high) return;
+    const mid = Math.floor((low + high) / 2);
+    console.log(mid);
+    mergeSortRecursion(arr, low, mid);
+    mergeSortRecursion(arr, mid + 1, high);
+    merge(arr, low, mid, high);    
+  }
+  //calling the merge sort recursion function here
   mergeSortRecursion(sortArray, 0, n);
   return sortArray;
 }

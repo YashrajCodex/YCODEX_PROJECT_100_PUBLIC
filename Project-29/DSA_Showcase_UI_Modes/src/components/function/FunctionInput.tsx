@@ -35,7 +35,9 @@ export const FunctionInput: React.FC<FunctionInputProps> = ({
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [isExecuting, setIsExecuting] = useState(false);
   const [localResult, setLocalResult] = useState<any>(result);
-  const [ifSelectValue, setIfSelectValue] = useState<string>(selectInput ? selectInput.options[0]?.value : "");
+  const [ifSelectValue, setIfSelectValue] = useState<string>(
+    selectInput ? selectInput.options[0]?.value : ""
+  );
 
   // Initialize form data with empty values
   useEffect(() => {
@@ -126,10 +128,10 @@ export const FunctionInput: React.FC<FunctionInputProps> = ({
     try {
       setIsExecuting(true);
 
-      console.log("Executing with processed data:", formData);
+      // console.log("Executing with processed data:", formData);
 
       // Execute the function and get result
-      console.log(ifSelectValue)
+      // console.log(ifSelectValue)
       const data = ifSelectValue
         ? { ...formData, ifSelectValue }
         : { ...formData };
@@ -141,7 +143,7 @@ export const FunctionInput: React.FC<FunctionInputProps> = ({
         onResultChange(executionResult);
       }
 
-      console.log("Execution result:", executionResult);
+      // console.log("Execution result:", executionResult);
 
       // Auto-clear after 5 seconds
       setTimeout(() => {
@@ -186,24 +188,28 @@ export const FunctionInput: React.FC<FunctionInputProps> = ({
 
       {/* Input Form */}
       <div className="space-y-4 mb-6">
-        {inputs.map((input) => (
-          <div key={input.name}>
-            <label
-              htmlFor={input.name}
-              className={`block text-sm font-medium mb-2 ${getLabelStyles()}`}
-            >
-              {input.label}
-            </label>
-            <input
-              id={input.name}
-              type={input.type}
-              value={formData[input.name] || ""}
-              onChange={(e) => handleInputChange(input.name, e.target.value)}
-              placeholder={input.placeholder}
-              className={`w-full px-3 py-2 rounded-md text-sm ${getInputStyles()}`}
-            />
-          </div>
-        ))}
+        {inputs.length === 0
+          ? "Empty input"
+          : inputs.map((input) => (
+              <div key={input.name}>
+                <label
+                  htmlFor={input.name}
+                  className={`block text-sm font-medium mb-2 ${getLabelStyles()}`}
+                >
+                  {input.label}
+                </label>
+                <input
+                  id={input.name}
+                  type={input.type}
+                  value={formData[input.name] || ""}
+                  onChange={(e) =>
+                    handleInputChange(input.name, e.target.value)
+                  }
+                  placeholder={input.placeholder}
+                  className={`w-full px-3 py-2 rounded-md text-sm ${getInputStyles()}`}
+                />
+              </div>
+            ))}
       </div>
       {selectInput && (
         <select
@@ -222,28 +228,32 @@ export const FunctionInput: React.FC<FunctionInputProps> = ({
       )}
       {/* Action Buttons */}
       <div className="flex gap-4 flex-wrap select-none">
-        <button
-          onClick={handleExecute}
-          disabled={isExecuting}
-          className={`flex items-center space-x-2 px-4 py-2 rounded-md font-medium transition-all ${getButtonStyles()} disabled:opacity-50 disabled:cursor-not-allowed`}
-        >
-          <Play size={16} />
-          <span>{isExecuting ? "Executing..." : "Execute"}</span>
-        </button>
+        {inputs.length !== 0 && (
+          <>
+            <button
+              onClick={handleExecute}
+              disabled={isExecuting}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-md font-medium transition-all ${getButtonStyles()} disabled:opacity-50 disabled:cursor-not-allowed`}
+            >
+              <Play size={16} />
+              <span>{isExecuting ? "Executing..." : "Execute"}</span>
+            </button>
 
-        <button
-          onClick={handleReset}
-          className={`flex items-center space-x-2 px-4 py-2 rounded-md font-medium transition-all border ${
-            uiLevel !== "skeleton"
-              ? uiLevel === "futuristic"
-                ? "border-green-700 text-green-400 hover:bg-green-900/30"
-                : "border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
-              : ""
-          }`}
-        >
-          <RotateCcw size={16} />
-          <span>Reset...</span>
-        </button>
+            <button
+              onClick={handleReset}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-md font-medium transition-all border ${
+                uiLevel !== "skeleton"
+                  ? uiLevel === "futuristic"
+                    ? "border-green-700 text-green-400 hover:bg-green-900/30"
+                    : "border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                  : ""
+              }`}
+            >
+              <RotateCcw size={16} />
+              <span>Reset...</span>
+            </button>
+          </>
+        )}
       </div>
 
       {/* Result Display */}

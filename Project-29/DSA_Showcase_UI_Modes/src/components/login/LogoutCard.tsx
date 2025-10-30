@@ -148,7 +148,7 @@ export const LogoutCard: React.FC = () => {
           <h1>You haven't bookmarked any problems yet</h1>
         ) : (
           bookmarkedProblems.map((algo, index) => (
-            <div className="py-5">
+            <div className="py-5" key={algo.id}>
               <FunctionCard problem={algo} index={index} />
             </div>
           ))

@@ -26,12 +26,14 @@ import {
   findTwoNumIndexCPP,
   findUniqueNum,
   findUniqueNumCPP,
+  floorCeil,
   FourSum,
   FourSumCpp,
   getLongestCommonPrefix,
   getLongestCommonPrefixCPP,
   leftRotate,
   longestConsecutiveSequence,
+  Lower_Upperbound,
   MajorityElement,
   MajorityElementCpp,
   MajorityElementN3timesCpp,
@@ -351,7 +353,7 @@ const problemDetails: problemDetailsType[] = [
   },
   {
     id: 9,
-    title: "Check if a character in a string",
+    title: "Check the occurance of character in a string",
     difficulty: "Medium",
     category: "Hash",
     functions: (text: string, char: string) => checkCharacter(text, char),
@@ -360,7 +362,7 @@ const problemDetails: problemDetailsType[] = [
       cpp: checkCharacterCPP,
       js: checkCharacter.toString(),
     },
-    description: "Checks if a given character is present in the string.",
+    description: "Returns the number of time the character occurs in a given string.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
     tags: ["array", "hash-table"],
@@ -492,9 +494,9 @@ const problemDetails: problemDetailsType[] = [
       cpp: removeKElementCPP,
       js: removeKElement.toString(),
     },
-    description: "Removes all occurrences of a given number k from the array.",
+    description: "Alters/replaces all occurrences of a given number k with other non-k elements in the array and returns the length of the new array starting from 0.",
     timeComplexity: "O(n)",
-    spaceComplexity: "O(n)",
+    spaceComplexity: "O(1)",
     tags: ["array"],
     inputs: [
       {
@@ -590,9 +592,9 @@ const problemDetails: problemDetailsType[] = [
       },
       {
         type: "number",
-        label: "Enter array(comma-separated):",
+        label: "Enter number:",
         name: "findMissingNumsN",
-        placeholder: "enter a array (comma-separated)...",
+        placeholder: "number",
       },
     ],
   },
@@ -1458,6 +1460,76 @@ const problemDetails: problemDetailsType[] = [
         label: "Enter nums:",
         name: "SZOT_NUMS",
         placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 49,
+    title: "Lower_Upper Bound",
+    difficulty: "Easy",
+    category: "Binary Search",
+    links: "takeyouforward",
+    functions: (nums: string, k: number) =>
+      Lower_Upperbound(textToArray(nums, "number") as number[], k),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: Lower_Upperbound.toString(),
+    },
+    description: "Returns lowerbound ans",
+    timeComplexity: "O(log base 2 n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "LUB_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      {
+        type: "number",
+        label: "Enter k:",
+        name: "LUB_K",
+        placeholder: "Enter the number",
+      },
+  ]
+  },
+  {
+    id: 50,
+    title: "Floor and Ceil",
+    difficulty: "Easy",
+    category: "Binary Search",
+    links: "takeyouforward",
+    functions: (type: string, nums: string, k: number) =>
+      floorCeil(type, textToArray(nums, "number") as number[], k),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: floorCeil.toString(),
+    },
+    description: "Returns the floor and ceil in an array of number for a given target",
+    timeComplexity: "O(log base 2 n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter type:",
+        name: "FLOORCEIL_TYPE",
+        placeholder: "Enter the type floor or ceil. Default is ceil",
+      },
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "FLOORCEIL_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      {
+        type: "number",
+        label: "Enter k:",
+        name: "FLOORCEIL_K",
+        placeholder: "Enter the number",
       },
   ]
   },
