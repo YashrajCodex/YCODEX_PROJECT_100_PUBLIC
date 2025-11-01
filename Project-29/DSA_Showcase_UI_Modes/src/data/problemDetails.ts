@@ -26,14 +26,12 @@ import {
   findTwoNumIndexCPP,
   findUniqueNum,
   findUniqueNumCPP,
-  floorCeil,
   FourSum,
   FourSumCpp,
   getLongestCommonPrefix,
   getLongestCommonPrefixCPP,
   leftRotate,
   longestConsecutiveSequence,
-  Lower_Upperbound,
   MajorityElement,
   MajorityElementCpp,
   MajorityElementN3timesCpp,
@@ -75,7 +73,7 @@ import {
   longestSubstringWithoutRepeatingChar,
   PrefixInfixPostfix,
 } from "./functions/string";
-import { FirstBadVersion, FirstBadVersionCpp, TimesArrayRotated } from "./functions/binarySearch";
+import { FirstBadVersion, FirstBadVersionCpp, floorCeil, Lower_Upperbound, minRotaSortArr, occuranceFirstLastCount, searchElementInRoatedSortedArr, TimesArrayRotated } from "./functions/binarySearch";
 import { DPFibonacci, DPStockBuy, wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
 export const categoryFromProblemDetails = [
   "All",
@@ -85,7 +83,7 @@ export const categoryFromProblemDetails = [
   "Recursion",
   "Sorting",
   "String",
-  "Binary Search",
+  "Binary_Search",
   "Dynamic Programming",
 ];
 type ProblemSolutinFunction<TArgs extends any[], TReturn> = (
@@ -98,7 +96,7 @@ export interface problemDetailsType<
   id: number;
   title: string;
   difficulty: "Easy" | "Medium" | "Hard";
-  category: "All" | "Array" | "Math" | "Hash" | "Recursion" | "Sorting" | "String" | "Binary Search" | "Dynamic Programming";
+  category: "All" | "Array" | "Math" | "Hash" | "Recursion" | "Sorting" | "String" | "Binary_Search" | "Dynamic Programming";
   functions: ProblemSolutinFunction<TArgs, TReturn>;
   type: "return" | "void";
   sourceCode: {
@@ -1279,7 +1277,7 @@ const problemDetails: problemDetailsType[] = [
     id: 42,
     title: "How many times an array is rotated.",
     difficulty: "Easy",
-    category: "Binary Search",
+    category: "Binary_Search",
     links: "takeyouforward",
     functions: (n: string) =>
       TimesArrayRotated(textToArray(n, "number") as number[]),
@@ -1467,7 +1465,7 @@ const problemDetails: problemDetailsType[] = [
     id: 49,
     title: "Lower_Upper Bound",
     difficulty: "Easy",
-    category: "Binary Search",
+    category: "Binary_Search",
     links: "takeyouforward",
     functions: (nums: string, k: number) =>
       Lower_Upperbound(textToArray(nums, "number") as number[], k),
@@ -1498,8 +1496,8 @@ const problemDetails: problemDetailsType[] = [
   {
     id: 50,
     title: "Floor and Ceil",
-    difficulty: "Easy",
-    category: "Binary Search",
+    difficulty: "Medium",
+    category: "Binary_Search",
     links: "takeyouforward",
     functions: (type: string, nums: string, k: number) =>
       floorCeil(type, textToArray(nums, "number") as number[], k),
@@ -1530,6 +1528,96 @@ const problemDetails: problemDetailsType[] = [
         label: "Enter k:",
         name: "FLOORCEIL_K",
         placeholder: "Enter the number",
+      },
+  ]
+  },
+  {
+    id: 51,
+    title: "Occurance first, last and count",
+    difficulty: "Easy",
+    category: "Binary_Search",
+    links: "takeyouforward",
+    functions: (nums: string, k: number) =>
+      occuranceFirstLastCount(textToArray(nums, "number") as number[], k),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: occuranceFirstLastCount.toString(),
+    },
+    description: "Returns an array of first occurance index, last occurance index and total number of count",
+    timeComplexity: "O(2 * log base 2 n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "OFLC_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      {
+        type: "number",
+        label: "Enter k:",
+        name: "OFLC_K",
+        placeholder: "Enter the number",
+      },
+  ]
+  },
+  {
+    id: 52,
+    title: "Search Element in rotated sorted array",
+    difficulty: "Medium",
+    category: "Binary_Search",
+    links: "takeyouforward",
+    functions: (nums: string, k: number) =>
+      searchElementInRoatedSortedArr(textToArray(nums, "number") as number[], k),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: searchElementInRoatedSortedArr.toString(),
+    },
+    description: "Returns an the index where the target is found else returns -1",
+    timeComplexity: "O(log base 2 n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "STRSA_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      {
+        type: "number",
+        label: "Enter k:",
+        name: "STRSA_K",
+        placeholder: "Enter the number",
+      },
+  ]
+  },
+  {
+    id: 53,
+    title: "Minimum in rotated sorted array",
+    difficulty: "Medium",
+    category: "Binary_Search",
+    links: "takeyouforward",
+    functions: (nums: string, k: number) =>
+      minRotaSortArr(textToArray(nums, "number") as number[], k),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: minRotaSortArr.toString(),
+    },
+    description: "Returns the minimum in rotated sorted array.",
+    timeComplexity: "O(log base 2 n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "MRSA_NUMS",
+        placeholder: "Enter the array(comma-separated)",
       },
   ]
   },
