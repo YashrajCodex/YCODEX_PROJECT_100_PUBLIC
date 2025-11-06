@@ -73,7 +73,7 @@ import {
   longestSubstringWithoutRepeatingChar,
   PrefixInfixPostfix,
 } from "./functions/string";
-import { FirstBadVersion, FirstBadVersionCpp, floorCeil, Lower_Upperbound, minRotaSortArr, occuranceFirstLastCount, searchElementInRoatedSortedArr, TimesArrayRotated } from "./functions/binarySearch";
+import { FirstBadVersion, FirstBadVersionCpp, floorCeil, Lower_Upperbound, minRotaSortArr, occuranceFirstLastCount, PeakElement, searchElementInRoatedSortedArr, singleElement, TimesArrayRotated } from "./functions/binarySearch";
 import { DPFibonacci, DPStockBuy, wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
 export const categoryFromProblemDetails = [
   "All",
@@ -1601,8 +1601,8 @@ const problemDetails: problemDetailsType[] = [
     difficulty: "Medium",
     category: "Binary_Search",
     links: "takeyouforward",
-    functions: (nums: string, k: number) =>
-      minRotaSortArr(textToArray(nums, "number") as number[], k),
+    functions: (nums: string) =>
+      minRotaSortArr(textToArray(nums, "number") as number[]),
     type: "return",
     sourceCode: {
       cpp: "not-yet-parsed",
@@ -1617,6 +1617,58 @@ const problemDetails: problemDetailsType[] = [
         type: "text",
         label: "Enter nums:",
         name: "MRSA_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 54,
+    title: "Single element in sorted array of doubles",
+    difficulty: "Easy",
+    category: "Binary_Search",
+    links: "takeyouforward",
+    functions: (nums: string) =>
+      singleElement(textToArray(nums, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: singleElement.toString(),
+    },
+    description: "Returns the single element in an sorted where every other element appears twice.",
+    timeComplexity: "O(log base 2 n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "SESA_NUMS",
+        placeholder: "Enter the array(comma-separated)",
+      },
+  ]
+  },
+  {
+    id: 55,
+    title: "Peak Element",
+    difficulty: "Hard",
+    category: "Binary_Search",
+    links: "https://takeuforward.org/data-structure/peak-element-in-array/",
+    functions: (nums: string) =>
+      PeakElement(textToArray(nums, "number") as number[]),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: PeakElement.toString(),
+    },
+    description: "Returns any peak element (a[mid-1] < a[mid] > a[mid+1]) found in the array.",
+    timeComplexity: "O(log base 2 n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter nums:",
+        name: "PE_NUMS",
         placeholder: "Enter the array(comma-separated)",
       },
   ]

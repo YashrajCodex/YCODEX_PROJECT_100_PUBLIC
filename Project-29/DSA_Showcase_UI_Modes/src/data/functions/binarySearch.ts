@@ -186,7 +186,8 @@ export function minRotaSortArr(a: number[]) {
   if (a.length == 0) return -1;
   const n = a.length;
 
-  let low = 0; let high = n - 1;
+  let low = 0;
+  let high = n - 1;
   let ans = Number.MAX_SAFE_INTEGER;
 
   while (low <= high) {
@@ -207,6 +208,69 @@ export function minRotaSortArr(a: number[]) {
   }
   return ans;
 }
+
+export function singleElement(a: number[]) {
+  a.sort();
+  //find the element that appears once in an sorted array where all the elements appears twice.
+
+  const n = a.length;
+
+  if (n == 1) return a[0];
+
+  if (a[0] != a[1]) return a[0];
+  if (a[n - 1] != a[n - 2]) return a[n - 1];
+
+  let low = 1;
+  let high = n - 2;
+
+  // if index is (even, odd) then it is the left half of the single element
+  // if index is (odd, even) then it is the right half of the single element
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+
+    //search for the single element
+    if (a[mid] != a[mid] + 1 && a[mid] != a[mid] - 1) return a[mid];
+    // the formula below checks for (even, odd) index = left half
+    if (
+      (mid % 2 == 1 && a[mid - 1] == a[mid]) ||
+      (mid % 2 == 0 && a[mid] == a[mid + 1])
+    ) {
+      low = mid + 1;
+      // the formula below checks for (even, odd) index = left half
+    } else {
+      high = mid - 1;
+    }
+  }
+  return -1; //dummy return in case no single element is not found
+}
+export function PeakElement(a: number[]) {
+  const n = a.length;
+  if (n == 0) return -1;
+  if (n == 1) return a[0]; // only element is always a peak element
+  
+  if (a[0] > a[1]) return a[0]; // if the first element is greater than the second element then it is also a peak element assuming -infinity out-off-bounds.
+  if (a[n - 1] > a[n - 2]) return a[n - 1]; // if the last element is greater than the second last then it is also a peak element assuming -infinity out-off-bounds.
+
+  let low = 1;
+  let high = n - 2;
+
+  while (low >= high) {
+    const mid = Math.floor((low + high) / 2);
+
+    // Returns if found the peak element preventing further checks
+    if (a[mid] > a[mid - 1] && a[mid] > a[mid + 1]) {
+      return a[mid];
+    }
+    //if the left element is smaller than the mid, then we will not find the peak element on the left side. Hence eliminate the left side. If the case reverts, the high side will be eliminated.
+    if (a[mid] > a[mid - 1]) {
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+  //dummy return if no peak element is found which will never be executed.
+  return -1;
+}
 export const FirstBadVersionCpp = `
 class Solution{
     public:
@@ -226,5 +290,4 @@ class Solution{
             }
             return firstBad;
         }    
-}
-`;
+}`;
