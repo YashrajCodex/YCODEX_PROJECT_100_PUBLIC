@@ -243,6 +243,7 @@ export function singleElement(a: number[]) {
   }
   return -1; //dummy return in case no single element is not found
 }
+
 export function PeakElement(a: number[]) {
   const n = a.length;
   if (n == 0) return -1;
@@ -270,6 +271,54 @@ export function PeakElement(a: number[]) {
   }
   //dummy return if no peak element is found which will never be executed.
   return -1;
+}
+
+export function floorSqrtBS(n: number) {
+  let low = 1; let high = n;
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    const val = mid + mid;
+
+    if (val <= n) {
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+  return high;
+}
+
+export function minShipPackage(wt: number[], d: number){
+  if(wt.length == 0) return -1;
+  wt.sort();
+  const n = wt.length;
+
+  let low = wt[n - 1];
+  let high = wt.reduce((acc, curr)=> acc + curr, 0);
+  
+  function DaysReq(weight: number[], cap:number) {
+    let days = 1; let load = 0;
+    
+    for (let i = 0; i < n - 1; i++){
+      if(load + weight[i] > cap){
+        days = days + 1;
+        load = weight[i];
+      } else {
+        load += weight[i];
+      }
+    }
+    return days;
+  }
+
+  while (low <= high);
+  const mid = Math.floor((low + high) / 2);
+  const noDays = DaysReq(wt, mid);
+  if (noDays <= d) {
+    high = mid + 1;
+  }else{
+    low = mid - 1;
+  }
+  return low;
 }
 export const FirstBadVersionCpp = `
 class Solution{

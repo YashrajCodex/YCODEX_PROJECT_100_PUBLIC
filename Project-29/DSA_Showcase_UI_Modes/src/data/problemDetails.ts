@@ -73,7 +73,7 @@ import {
   longestSubstringWithoutRepeatingChar,
   PrefixInfixPostfix,
 } from "./functions/string";
-import { FirstBadVersion, FirstBadVersionCpp, floorCeil, Lower_Upperbound, minRotaSortArr, occuranceFirstLastCount, PeakElement, searchElementInRoatedSortedArr, singleElement, TimesArrayRotated } from "./functions/binarySearch";
+import { FirstBadVersion, FirstBadVersionCpp, floorCeil, floorSqrtBS, Lower_Upperbound, minRotaSortArr, minShipPackage, occuranceFirstLastCount, PeakElement, searchElementInRoatedSortedArr, singleElement, TimesArrayRotated } from "./functions/binarySearch";
 import { DPFibonacci, DPStockBuy, wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
 export const categoryFromProblemDetails = [
   "All",
@@ -1673,7 +1673,66 @@ const problemDetails: problemDetailsType[] = [
       },
   ]
   },
+  {
+    id: 56,
+    title: "Peak Element",
+    difficulty: "Hard",
+    category: "Binary_Search",
+    links: "https://takeuforward.org/data-structure/peak-element-in-array/",
+    functions: (n: number) =>
+      floorSqrtBS(n),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: floorSqrtBS.toString(),
+    },
+    description: "Returns ????????????????????????",
+    timeComplexity: "O(log base 2 n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter n:",
+        name: "FSBS_N",
+        placeholder: "Enter n;",
+      },
+  ]
+  },
+  {
+    id: 57,
+    title: "Capacity to Ship Packages within D days.",
+    difficulty: "Hard",
+    category: "Binary_Search",
+    links: "https://takeuforward.org/arrays/capacity-to-ship-packages-within-d-days/",
+    functions: (wt: string, days: number) =>
+      minShipPackage(textToArray(wt, "number") as number[], days),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: minShipPackage.toString(),
+    },
+    description: "Returns min number of weight required to ship the package in the required days.",
+    timeComplexity: "O(log (sum + max + 1) * n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter weights:",
+        name: "MSPW_WT",
+        placeholder: "Enter weights in sorted order......",
+      },
+      {
+        type: "number",
+        label: "Enter Days:",
+        name: "MSPW_D",
+        placeholder: "Enter days;",
+      },
+  ]
+  },
 ];                                  
 export default problemDetails;
 // not-yet-parsed
 // Enter the array(comma-separated)
+//https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2
