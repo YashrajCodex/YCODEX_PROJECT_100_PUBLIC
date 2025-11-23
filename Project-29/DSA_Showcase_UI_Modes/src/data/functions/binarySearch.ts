@@ -1,3 +1,5 @@
+import { validators } from "tailwind-merge";
+
 export function FirstBadVersion(n: number, badVersion: number) {
   //here instead of dedicated function for bad version testing, the parameter just accepts a number that can be considered the expected bad version before hand. just a function to express the logic
   let left = 1;
@@ -248,7 +250,7 @@ export function PeakElement(a: number[]) {
   const n = a.length;
   if (n == 0) return -1;
   if (n == 1) return a[0]; // only element is always a peak element
-  
+
   if (a[0] > a[1]) return a[0]; // if the first element is greater than the second element then it is also a peak element assuming -infinity out-off-bounds.
   if (a[n - 1] > a[n - 2]) return a[n - 1]; // if the last element is greater than the second last then it is also a peak element assuming -infinity out-off-bounds.
 
@@ -274,7 +276,8 @@ export function PeakElement(a: number[]) {
 }
 
 export function floorSqrtBS(n: number) {
-  let low = 1; let high = n;
+  let low = 1;
+  let high = n;
   while (low <= high) {
     const mid = Math.floor((low + high) / 2);
     const val = mid + mid;
@@ -288,19 +291,20 @@ export function floorSqrtBS(n: number) {
   return high;
 }
 
-export function minShipPackage(wt: number[], d: number){
-  if(wt.length == 0) return -1;
+export function minShipPackage(wt: number[], d: number) {
+  if (wt.length == 0) return -1;
   wt.sort();
   const n = wt.length;
 
   let low = wt[n - 1];
-  let high = wt.reduce((acc, curr)=> acc + curr, 0);
-  
-  function DaysReq(weight: number[], cap:number) {
-    let days = 1; let load = 0;
-    
-    for (let i = 0; i < n - 1; i++){
-      if(load + weight[i] > cap){
+  let high = wt.reduce((acc, curr) => acc + curr, 0);
+
+  function DaysReq(weight: number[], cap: number) {
+    let days = 1;
+    let load = 0;
+
+    for (let i = 0; i < n - 1; i++) {
+      if (load + weight[i] > cap) {
         days = days + 1;
         load = weight[i];
       } else {
@@ -315,8 +319,133 @@ export function minShipPackage(wt: number[], d: number){
   const noDays = DaysReq(wt, mid);
   if (noDays <= d) {
     high = mid + 1;
-  }else{
+  } else {
     low = mid - 1;
+  }
+  return low;
+}
+
+export function SmallestDivisorThresold(a: number[], threshold: number) {
+  // a = [1, 2, 3, 5, 9, 11]
+  if (a.length == 0) return -1;
+  a.sort();
+  const n = a.length;
+  let low = 1;
+  let high = a[n - 1];
+
+  if (n > threshold) return -1;
+  while (low >= high) {
+    const mid = Math.floor((low + high) / 2);
+    let sum = 0;
+    for (let i = 0; i < n - 1; i++) {
+      sum += Math.floor(a[i] / mid);
+    }
+    if (sum <= threshold) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+  return low;
+}
+
+export function NRootInteger(num: number, root: number) {
+  if (!num || !root) return -1;
+  console.log("Executed");
+  const valCal = (number, n) => {
+    let val = 1;
+    for (let i = 0; i < n; i++) {
+      val = val * num;
+    }
+    console.log(val);
+    return val;
+  };
+
+  let low = 1;
+  let high = Math.floor(num / 2);
+
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    const val = valCal(mid, root);
+    console.log(mid);
+    if (val == num) return mid;
+
+    if (val < num) {
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+  return -1;
+}
+
+export function BananaPerHour(a: number[], limitHour: number) {
+  if (a.length == 0 || !limitHour) return -1;
+
+  a.sort();
+  const n = a.length;
+  let low = 1;
+  let high = a[n - 1];
+
+  function ReqHour(a: number[], hourly: number) {
+    let SummedHours = 0;
+    for (let i = 0; i < a.length; i++) {
+      SummedHours += Math.ceil(a[i] / hourly);
+    }
+    return SummedHours;
+  }
+
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+
+    const TotalHour = ReqHour(a, mid);
+
+    if (TotalHour >= limitHour) {
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+
+  return low;
+}
+
+export function MBouque(a: number[], m: number, k: number) {
+  // m: number of bouque k: number of flowers per bouque
+
+  const n = a.length;
+  if (n == 0 || !m || !k) return -1;
+
+  function CountBouque(a: number[], mid, k) {
+    let count = 0;
+    let cons = 0;
+
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] <= mid) {
+        cons++;
+        if (cons === k) {
+          count++;
+          cons = 0;
+        }
+      } else {
+        cons = 0;
+      }
+    }
+    return count;
+  }
+
+  let low = Math.min(...a);
+  let high = Math.max(...a);
+
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+
+    const cnt = CountBouque(a, mid, k);
+    if (cnt < m) {
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
   }
   return low;
 }

@@ -73,8 +73,9 @@ import {
   longestSubstringWithoutRepeatingChar,
   PrefixInfixPostfix,
 } from "./functions/string";
-import { FirstBadVersion, FirstBadVersionCpp, floorCeil, floorSqrtBS, Lower_Upperbound, minRotaSortArr, minShipPackage, occuranceFirstLastCount, PeakElement, searchElementInRoatedSortedArr, singleElement, TimesArrayRotated } from "./functions/binarySearch";
+import { BananaPerHour, FirstBadVersion, FirstBadVersionCpp, floorCeil, floorSqrtBS, Lower_Upperbound, MBouque, minRotaSortArr, minShipPackage, NRootInteger, occuranceFirstLastCount, PeakElement, searchElementInRoatedSortedArr, singleElement, SmallestDivisorThresold, TimesArrayRotated } from "./functions/binarySearch";
 import { DPFibonacci, DPStockBuy, wordBreak, wordBreakCPP } from "./functions/dynamic_programming";
+import { o } from "node_modules/framer-motion/dist/types.d-Bq-Qm38R";
 export const categoryFromProblemDetails = [
   "All",
   "Array",
@@ -1728,6 +1729,140 @@ const problemDetails: problemDetailsType[] = [
         label: "Enter Days:",
         name: "MSPW_D",
         placeholder: "Enter days;",
+      },
+  ]
+  },
+  {
+    id: 58,
+    title: "Find the Smallest Divisor Given a Threshold",
+    difficulty: "Easy",
+    category: "Binary_Search",
+    links: "https://takeuforward.org/arrays/find-the-smallest-divisor-given-a-threshold/",
+    functions: (a: string, threshold: number) =>
+      SmallestDivisorThresold(textToArray(a, "number") as number[], threshold),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: SmallestDivisorThresold.toString(),
+    },
+    description: "Returns min number in the array that can divide the entire array and return the ciel value lesser than equal to the threshold",
+    timeComplexity: "O((log base 2 m*m) * n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "text",
+        label: "Enter array:",
+        name: "SDT_A",
+        placeholder: "Enter the array(comma-separated)",
+      },
+      {
+        type: "number",
+        label: "Enter Threshold:",
+        name: "SDT_THREAHOLD",
+        placeholder: "Enter Threshold;",
+      },
+  ]
+  },
+  {
+    id: 59,
+    title: "Find the Nth Root of an Integer",
+    difficulty: "Easy",
+    category: "Binary_Search",
+    links: "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2",
+    functions: (int: number, root: number) =>
+      NRootInteger(int, root),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: NRootInteger.toString(),
+    },
+    description: "Returns the nth root of an integer and if not found returns -1",
+    timeComplexity: "O((log base 2 m*m) * n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter Integer:",
+        name: "NRI_INT",
+        placeholder: "_________________",
+      },
+      {
+        type: "number",
+        label: "Enter Root:",
+        name: "NRI_ROOT",
+        placeholder: "_________________",
+      },
+  ]
+  },
+  {
+    id: 60,
+    title: "Banana per Hour",
+    difficulty: "Easy",
+    category: "Binary_Search",
+    links: "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2",
+    functions: (a: number[], limit: number) =>
+      BananaPerHour(a, limit),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: BananaPerHour.toString(),
+    },
+    description: "Given an array of number that represents piles of stock that is to be completed within the limited hour. Calculates the minimum number of banana can be eaten per hour such that all the banana can be finished within the limited hour. ",
+    timeComplexity: "O((log base 2 max of array) * n)",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter Array:",
+        name: "BPH_ARR",
+        placeholder: "_________________",
+      },
+      {
+        type: "number",
+        label: "Enter Limit-Hour:",
+        name: "BPH_LH",
+        placeholder: "_________________",
+      },
+  ]
+  },
+  {
+    id: 61,
+    title: "M Bouque with k flowers",
+    difficulty: "Easy",
+    category: "Binary_Search",
+    links: "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2",
+    functions: (a: number[], m: number, k: number) =>
+      MBouque(a, m, k),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: MBouque.toString(),
+    },
+    description: "Given an array of flowers growing time, number of bouques needed and number of flowers per bouque it returns the minimum number it takes to make a bouque of flowers with given flowers per bouque.",
+    timeComplexity: "",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter Array:",
+        name: "MBK_A",
+        placeholder: "_________________",
+      },
+      {
+        type: "number",
+        label: "Enter No bouques:",
+        name: "MBK_MID",
+        placeholder: "_________________",
+      },
+      {
+        type: "number",
+        label: "Enter flowers per bouque:",
+        name: "MBK_K",
+        placeholder: "_________________",
       },
   ]
   },
