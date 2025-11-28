@@ -7,7 +7,7 @@ import { SourceCodeEditor } from "../components/function/SourceCodeEditor";
 import problemDetails from "../data/problemDetails";
 import { useUILevel } from "../contexts/UILevelContext";
 
-export const FunctionDetail: React.FC = () => {
+export default function FunctionDetail() {
   const { id } = useParams<{ id: string }>();
   const { uiLevel } = useUILevel();
   const problem = problemDetails.find((p) => p.id === Number(id));

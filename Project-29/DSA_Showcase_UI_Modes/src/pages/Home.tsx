@@ -1,23 +1,27 @@
 import React, { useState, useMemo } from "react";
 import { AnimatePresence, motion, Variants } from "motion/react";
+import { Link, useNavigation, useSearchParams } from "react-router-dom";
+import { ChevronDownSquare, ChevronUpSquare } from "lucide-react";
+
 import { FilterSearchSort } from "../components/home/FilterSearchSort";
 import { FunctionCard } from "../components/home/FunctionCard";
 import { Pagination } from "../components/home/Pagination";
 import { NoResult } from "../components/home/NoResult";
 import { useUILevel } from "../contexts/UILevelContext";
-import { Link, useSearchParams } from "react-router-dom";
-import problemDetails from "@/data/problemDetails";
 import ProgressCard from "@/components/UI/ProgressCard";
 import SubProgressCard from "@/components/home/SubProgressCard";
-import { ChevronDownSquare, ChevronUpSquare } from "lucide-react";
 import Header from "@/components/home/Header";
+
+import problemDetails from "@/data/problemDetails";
+import HomeLoader from "@/components/UI/loaders/HomeLoader";
 
 const ITEMS_PER_PAGE = 9;
 
-export const Home: React.FC = () => {
+export default function Home () {
   const { uiLevel } = useUILevel();
 
   const [params] = useSearchParams();
+  const Navigate = useNavigation()
   const [show, setShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -162,6 +166,7 @@ export const Home: React.FC = () => {
     },
   };
 
+  if(Navigate.state === "loading") return <HomeLoader/>
   return (
     <div className={`getContainerStyles()`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -175,9 +180,9 @@ export const Home: React.FC = () => {
             className="absolute right-0 m-4 cursor-pointer flex gap-2 select-none"
           >
             {show ? (
-              <ChevronDownSquare size={20} className="hover:scale-110" />
-            ) : (
               <ChevronUpSquare size={20} className="hover:scale-110" />
+            ) : (
+              <ChevronDownSquare size={20} className="hover:scale-110" />
             )}
           </span>
           <ProgressCard className={getProgressStyle()}>

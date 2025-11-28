@@ -20,8 +20,8 @@ export default function SubProgressCard({ className: getProgressStyle }) {
           (
             problemDetails.filter((item) => item.category === category).length /
             problemDetails.length
-          ).toFixed(2)
-        ) * 100,
+          ) * 100
+        ).toFixed(2),
       totalTask: problemDetails.length,
     };
     return data;

@@ -1,37 +1,54 @@
 import React from "react";
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
+
 import { UILevelProvider } from "./contexts/UILevelContext";
 import { AuthProvider } from "./contexts/AuthContext";
-import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
-import { Home } from "./pages/Home";
-import { FunctionDetail } from "./pages/FunctionDetail";
+
+import Home from "./pages/Home";
+import FunctionDetail from "./pages/FunctionDetail";
 import { Login } from "./pages/Login";
-import StarfieldCanvas from "./components/UI/StarfieldCanvas";
 import { BookmarkProvider } from "./contexts/BookmarkContext";
+import RootLayout from "./pages/RootLayout";
+import NotFound from "./pages/NotFound";
 
 function App() {
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: <RootLayout />,
+        errorElement: <NotFound />,
+        children: [
+          {
+            path: "/",
+            element: <Home />,
+            
+          },
+          {
+            path: "/function/:id",
+            element: <FunctionDetail />,
+          },
+          {
+            path: "/login",
+            element: <Login />,
+          },
+        ],
+      },
+    ],
+    {
+      future: {
+        v7_relativeSplatPath: true,
+      },
+    }
+  );
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <UILevelProvider>
         <AuthProvider>
           <BookmarkProvider>
-            <BrowserRouter>
-              <StarfieldCanvas />
-              <div className="min-h-screen flex flex-col">
-                <Navbar />
-                <main className="flex-1">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/function/:id" element={<FunctionDetail />} />
-                    <Route path="/login" element={<Login />} />
-                    {/* <Route path="/" element={<Navigate to="/" replace />} /> */}
-                  </Routes>
-                </main>
-                <Footer />
-              </div>
-            </BrowserRouter>
+            <RouterProvider router={router} />
           </BookmarkProvider>
         </AuthProvider>
       </UILevelProvider>

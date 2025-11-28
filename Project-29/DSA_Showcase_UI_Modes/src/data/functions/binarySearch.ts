@@ -449,6 +449,9 @@ export function MBouque(a: number[], m: number, k: number) {
   }
   return low;
 }
+
+
+
 export const FirstBadVersionCpp = `
 class Solution{
     public:
