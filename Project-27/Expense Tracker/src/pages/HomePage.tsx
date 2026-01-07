@@ -1,26 +1,31 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { useAuth } from '@/contexts/AuthContext';
-import { 
-  addTransaction, 
-  updateTransaction, 
-  deleteTransaction, 
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  addTransaction,
+  updateTransaction,
+  deleteTransaction,
   loadUserTransactions,
-  Transaction 
-} from '@/store/slices/transactionSlice';
-import { saveUserTransactions, loadUserTransactions as loadFromStorage } from '@/utils/localStorage';
-import { useKeyboardShortcuts } from '@/utils/keyboard';
-import BalanceDisplay from '@/components/home/BalanceDisplay';
-import TransactionHistory from '@/components/home/TransactionHistory';
-import AddTransactionForm from '@/components/home/AddTransactionForm';
-import { toast } from '@/hooks/use-toast';
+  Transaction,
+} from "@/store/slices/transactionSlice";
+import {
+  saveUserTransactions,
+  loadUserTransactions as loadFromStorage,
+} from "@/utils/localStorage";
+import { useKeyboardShortcuts } from "@/utils/keyboard";
+import BalanceDisplay from "@/components/features/home/BalanceDisplay";
+import TransactionHistory from "@/components/features/home/TransactionHistory";
+import AddTransactionForm from "@/components/features/home/AddTransactionForm";
+import { toast } from "@/hooks/use-toast";
+import LoginFirst from "@/components/features/home/LoginFirst";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const { state: authState } = useAuth();
-  const { transactions } = useAppSelector(state => state.transactions);
-  const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
+  const { transactions } = useAppSelector((state) => state.transactions);
+  const [editingTransaction, setEditingTransaction] =
+    useState<Transaction | null>(null);
 
   // Load user transactions on mount
   useEffect(() => {
@@ -39,28 +44,36 @@ const HomePage = () => {
 
   // Keyboard shortcuts
   useKeyboardShortcuts({
-    'delete': () => {
+    delete: () => {
       // Delete focused transaction - you could expand this with focus management
       toast({
         title: "Delete Transaction",
-        description: "Select a transaction and press Delete to remove it"
+        description: "Select a transaction and press Delete to remove it",
       });
-    }
+    },
   });
 
-  const handleAddTransaction = (transactionData: Omit<Transaction, 'id' | 'userId'>) => {
-    if (!authState.user) return toast({title: "Login to add transaction", description: "go to user page to add transaction."});
+  const handleAddTransaction = (
+    transactionData: Omit<Transaction, "id" | "userId">
+  ) => {
+    if (!authState.user)
+      return toast({
+        title: "Login to add transaction",
+        description: "go to user page to add transaction.",
+      });
 
     const newTransaction: Transaction = {
       ...transactionData,
       id: Date.now().toString(),
-      userId: authState.user.id
+      userId: authState.user.id,
     };
 
     dispatch(addTransaction(newTransaction));
     toast({
       title: "Transaction Added",
-      description: `${transactionData.type === 'income' ? 'Income' : 'Expense'} of $${transactionData.amount} added successfully`
+      description: `${
+        transactionData.type === "income" ? "Income" : "Expense"
+      } of $${transactionData.amount} added successfully`,
     });
   };
 
@@ -69,7 +82,7 @@ const HomePage = () => {
     setEditingTransaction(null);
     toast({
       title: "Transaction Updated",
-      description: "Transaction has been updated successfully"
+      description: "Transaction has been updated successfully",
     });
   };
 
@@ -77,7 +90,7 @@ const HomePage = () => {
     dispatch(deleteTransaction(id));
     toast({
       title: "Transaction Deleted",
-      description: "Transaction has been removed successfully"
+      description: "Transaction has been removed successfully",
     });
   };
 
@@ -85,7 +98,7 @@ const HomePage = () => {
     setEditingTransaction(transaction);
     // Scroll to form
     setTimeout(() => {
-      document.getElementById('transaction-description')?.focus();
+      document.getElementById("transaction-description")?.focus();
     }, 100);
   };
 
@@ -95,12 +108,14 @@ const HomePage = () => {
 
   // Calculate totals
   const totalIncome = transactions
-    .filter(t => t.type === 'income')
+    .filter((t) => t.type === "income")
     .reduce((sum, t) => sum + t.amount, 0);
 
   const totalExpense = transactions
-    .filter(t => t.type === 'expense')
+    .filter((t) => t.type === "expense")
     .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+
+  if (!authState.isAuthenticated) return <LoginFirst />;
 
   return (
     <motion.div
@@ -124,10 +139,7 @@ const HomePage = () => {
       </div>
 
       {/* Balance Overview */}
-      <BalanceDisplay 
-        totalIncome={totalIncome} 
-        totalExpense={totalExpense} 
-      />
+      <BalanceDisplay totalIncome={totalIncome} totalExpense={totalExpense} />
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -153,35 +165,43 @@ const HomePage = () => {
           whileHover={{ scale: 1.02 }}
           className="bg-card p-4 rounded-lg border"
         >
-          <h4 className="font-semibold text-muted-foreground">Total Transactions</h4>
+          <h4 className="font-semibold text-muted-foreground">
+            Total Transactions
+          </h4>
           <p className="text-2xl font-bold">{transactions.length}</p>
         </motion.div>
-        
+
         <motion.div
           whileHover={{ scale: 1.02 }}
           className="bg-card p-4 rounded-lg border"
         >
           <h4 className="font-semibold text-muted-foreground">This Month</h4>
           <p className="text-2xl font-bold">
-            {transactions.filter(t => {
-              const transactionDate = new Date(t.date);
-              const now = new Date();
-              return transactionDate.getMonth() === now.getMonth() &&
-                     transactionDate.getFullYear() === now.getFullYear();
-            }).length}
+            {
+              transactions.filter((t) => {
+                const transactionDate = new Date(t.date);
+                const now = new Date();
+                return (
+                  transactionDate.getMonth() === now.getMonth() &&
+                  transactionDate.getFullYear() === now.getFullYear()
+                );
+              }).length
+            }
           </p>
         </motion.div>
-        
+
         <motion.div
           whileHover={{ scale: 1.02 }}
           className="bg-card p-4 rounded-lg border"
         >
-          <h4 className="font-semibold text-muted-foreground">Average Transaction</h4>
+          <h4 className="font-semibold text-muted-foreground">
+            Average Transaction
+          </h4>
           <p className="text-2xl font-bold">
-            ${transactions.length > 0 
+            $
+            {transactions.length > 0
               ? ((totalIncome + totalExpense) / transactions.length).toFixed(2)
-              : '0.00'
-            }
+              : "0.00"}
           </p>
         </motion.div>
       </div>

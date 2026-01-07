@@ -71,7 +71,6 @@ const Navbar: React.FC<NavbarProps> = ({title}) => {
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
             <span>Toggle Theme</span>
-            <span className="text-xs opacity-60">Ctrl+T</span>
           </Button>
         </div>
       </div>

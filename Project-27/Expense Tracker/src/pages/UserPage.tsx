@@ -114,7 +114,7 @@ const LoginForm = () => {
   );
 };
 
-const UserProfile = () => {
+function UserProfile() {
   const { state, logout } = useAuth();
 
   useKeyboardShortcuts({
