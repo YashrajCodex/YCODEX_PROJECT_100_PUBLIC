@@ -8,6 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { User, LogOut, LogIn, Mail, UserCircle } from 'lucide-react';
 import { useKeyboardShortcuts } from '@/utils/keyboard';
 import { toast } from '@/hooks/use-toast';
+import CardContentItems from '@/components/features/UserPage/CardContentItems';
 
 const LoginForm = () => {
   const { login } = useAuth();
@@ -213,24 +214,7 @@ function UserProfile() {
           <h3 className="text-lg font-semibold">Account Statistics</h3>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-primary">15</p>
-              <p className="text-sm text-muted-foreground">Total Transactions</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-success">5</p>
-              <p className="text-sm text-muted-foreground">Reports Generated</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-warning">3</p>
-              <p className="text-sm text-muted-foreground">Receipts Created</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-muted-foreground">30</p>
-              <p className="text-sm text-muted-foreground">Days Active</p>
-            </div>
-          </div>
+          <CardContentItems/>
         </CardContent>
       </Card>
     </motion.div>

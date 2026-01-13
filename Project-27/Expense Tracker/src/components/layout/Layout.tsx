@@ -1,9 +1,7 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { useAuth } from "@/contexts/AuthContext";
 import { useGlobalKeyboardShortcuts } from "@/utils/keyboard";
 import Navbar from "../ui/Navbar";
-import LoginFirst from "../features/home/LoginFirst";
 
 interface LayoutProps {
   children: ReactNode;
