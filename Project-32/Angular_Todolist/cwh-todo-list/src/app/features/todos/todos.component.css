@@ -1,0 +1,40 @@
+.todo-item {
+  border-left: 4px solid #0d6efd;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.todo-item:hover {
+  background-color: rgba(13, 110, 253, 0.03);
+  transform: translateY(-1px);
+}
+
+.todo-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.todo-desc {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.todo-inactive {
+  opacity: 0.6;
+  border-left-color: #adb5bd;
+}
+
+.todo-actions button {
+  opacity: 0.7;
+}
+
+.todo-item:hover .todo-actions button {
+  opacity: 1;
+}
+.todo-list {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+.todo-list .list-group-item {
+  border-right: none;
+  border-left: none;
+}
