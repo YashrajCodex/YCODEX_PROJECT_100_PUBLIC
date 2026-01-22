@@ -1,37 +1,46 @@
 <div class="d-flex justify-content-between align-items-start gap-3">
-      <!-- Left: content -->
-      <div class="grow">
-        <div class="d-flex align-items-center gap-2 mb-1">
-          <span class="badge bg-secondary">#{{ todo.sno }}</span>
+  <!-- Left: content -->
+  <div class="grow">
+    <div class="d-flex align-items-center gap-2 mb-1">
+      <span class="badge bg-secondary">#{{ todo.sno }}</span>
 
-          <h6 class="mb-0 todo-title">
-            {{ todo.title }}
-          </h6>
-        </div>
-
-        <p class="mb-0 todo-desc">
-          {{ todo.desc }}
-        </p>
-      </div>
-
-      <!-- Right: actions -->
-      <div class="todo-actions d-flex gap-2">
-        <button
-          class="btn btn-sm btn-outline-success"
-          title="Toggle Active"
-          (click)="onToggleTodo()"
-        >
-          <!-- {*ngIf="todo.active" ? <lucide-icon [name] = "icons.Check" size="18"></lucide-icon> : <lucide-icon [name] = "icons.Repeat" size="18"></lucide-icon>} -->
-           <lucide-icon [name] = "icons.Check" size="18" *ngIf="todo.active"></lucide-icon>
-           <lucide-icon [name] = "icons.Repeat" size="18" *ngIf="!todo.active"></lucide-icon>
-        </button>
-
-        <button
-          class="btn btn-sm btn-outline-danger"
-          title="Delete"
-          (click) = "onDelete()";
-        >
-          Delete <lucide-icon [name] = "icons.Trash" size="18"></lucide-icon>
-        </button>
-      </div>
+      <h6 class="mb-0 todo-title">
+        {{ todo.title }}
+      </h6>
     </div>
+
+    <p class="mb-0 todo-desc">
+      {{ todo.desc }}
+    </p>
+  </div>
+
+  <!-- Right: actions -->
+  <div class="todo-actions d-flex gap-2">
+    <button
+      class="btn btn-sm btn-outline-success"
+      title="Toggle Active"
+      (click)="onToggleTodo()"
+    >
+      <!-- {*ngIf="todo.active" ? <lucide-icon [name] = "icons.Check" size="18"></lucide-icon> : <lucide-icon [name] = "icons.Repeat" size="18"></lucide-icon>} -->
+      <lucide-icon
+        [name]="icons.Check"
+        size="18"
+        *ngIf="todo.active"
+      ></lucide-icon>
+      <lucide-icon
+        [name]="icons.Repeat"
+        size="18"
+        *ngIf="!todo.active"
+      ></lucide-icon>
+    </button>
+
+    <button
+      class="btn btn-sm btn-outline-danger"
+      title="Delete"
+      (click)="onDelete()"
+      ;
+    >
+      Delete <lucide-icon [name]="icons.Trash" size="18"></lucide-icon>
+    </button>
+  </div>
+</div>

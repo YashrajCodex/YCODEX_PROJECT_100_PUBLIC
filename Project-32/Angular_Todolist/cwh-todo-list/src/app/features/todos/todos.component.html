@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-2px">
   <div>
     <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
+      <label for="title" class="form-label fw-bold">Title</label>
       <input
         type="text"
         [(ngModel)]="title"
@@ -11,34 +11,38 @@
       />
     </div>
     <div class="mb-3">
-      <label for="desc" class="form-label">Description</label>
+      <label for="desc" class="form-label fw-bold">Description</label>
       <input
         type="text"
         [(ngModel)]="description"
-        class="form-control"
+        class="form-control "
         id="desc"
       />
     </div>
-    <button type="submit" class="btn btn-primary" (click)="handleAddTodo()">Add Todo</button>
+    <button type="submit" class="btn btn-primary" (click)="handleAddTodo()">
+      Add Todo
+    </button>
   </div>
 
-  <ul class="list-group todo-list shadow-sm select-none" *ngFor="let todo of todos">
-    <app-todo-item
-      [todo]="todo"
-      (todoDelete)="handleDelete($event)"
-      (toggleTodo)="handleToggle($event)"
-    ></app-todo-item>
+  <ul class="list-group todo-list shadow-sm select-none">
     <!-- Empty state -->
-    <li
-    *ngIf="todos.length === 0"
-    class="sN list-group-item text-center text-muted py-4"
-  >
-    No todos yet. Go build something legendary 🚀
-  </li>
-    <li
-      class="list-group-item todo-item"
-      [class.todo-inactive]="!todo.active"
-    ></li>
-
+    <ng-container *ngIf="todos.length === 0">
+      <li class="sN list-group-item text-center text-muted py-4">
+        No todos yet. Go build something legendary 🚀
+      </li>
+    </ng-container>
+    <ng-container *ngIf="todos.length > 0;">
+      <li
+      *ngFor="let todo of todos"
+        class="list-group-item todo-item"
+        [class.todo-inactive]="!todo?.active"
+      >
+        <app-todo-item
+          [todo]="todo"
+          (todoDelete)="handleDelete($event)"
+          (toggleTodo)="handleToggle($event)"
+        ></app-todo-item>
+      </li>
+    </ng-container>
   </ul>
 </div>
