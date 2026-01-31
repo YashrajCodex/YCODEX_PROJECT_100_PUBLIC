@@ -1,0 +1,26 @@
+<div class="note-editor">
+  <div class="edit-features">
+    <button class="save-note" (click)="onSave()">
+      Save
+    </button>
+    <h3>Date: {{formatDateLocale(date)}}</h3>
+  </div>
+  <div class="editor">
+    <!-- Title input -->
+    <input 
+      type="text" 
+      class="title-input" 
+      placeholder="Note title..."
+      [value]="title"
+      (input)="onTitleInput($event)"
+    />
+    
+    <!-- Content textarea -->
+    <textarea 
+      class="content-textarea" 
+      placeholder="Start writing..."
+      [value]="content"
+      (input)="onContentInput($event)"
+    ></textarea>
+  </div>
+</div>

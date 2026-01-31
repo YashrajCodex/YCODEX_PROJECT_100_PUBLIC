@@ -1,0 +1,15 @@
+<div class="notes-shell">
+  <!-- Left sidebar: contains search and notes list -->
+  <aside class="sidebar user-select-none">
+    <ng-content select="[sidebar]">
+      <app-notes-list [notes]="notes" (createNoteEvent)="handleCreateNote()" (noteSelectedEvent)="handleSelectedNote($event)"></app-notes-list>
+    </ng-content>
+  </aside>
+  
+  <!-- Right panel: contains note editor -->
+  <main class="editor-panel user-select-none">
+    <ng-content select="[editor]" *ngIf="note !== null;">
+      <app-note-editor [title]="note.title" [content]="note.content" [currentSelected]="selected" [date] = "note.date" (saveEventFired)="handleSaveNotesEmitter($event)"></app-note-editor>
+    </ng-content>
+  </main>
+</div>

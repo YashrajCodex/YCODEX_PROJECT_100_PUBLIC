@@ -1,0 +1,10 @@
+<nav>
+    <div>
+        <h1>Simple notes</h1>
+    </div>
+    <app-search-bar></app-search-bar>
+</nav>
+
+<main>
+    <app-notes-shell [notes]="notes" [selected]="selected" (addNewNoteEvent)="handleCreateNote($event)" (updateSelectedEvent)="handleUpdateSelected($event)" (updatedNoteEvent)="handleUpdateNotes($event)"></app-notes-shell>
+</main>

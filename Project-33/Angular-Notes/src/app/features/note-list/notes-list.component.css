@@ -1,0 +1,51 @@
+.notes-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.notes-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-state {
+  padding: 24px 16px;
+  text-align: center;
+  color: #999999;
+  font-size: 14px;
+}
+
+.note-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
+
+  &.selected {
+    background-color: #e3f2fd;
+    border-left: 3px solid #4a90e2;
+  }
+}
+
+.note-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-date {
+  font-size: 12px;
+  color: #888888;
+}
+
+.selectNone{
+  user-select: none;
+}
