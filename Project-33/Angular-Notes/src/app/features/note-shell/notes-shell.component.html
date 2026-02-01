@@ -9,7 +9,7 @@
   <!-- Right panel: contains note editor -->
   <main class="editor-panel user-select-none">
     <ng-content select="[editor]" *ngIf="note !== null;">
-      <app-note-editor [title]="note.title" [content]="note.content" [currentSelected]="selected" [date] = "note.date" (saveEventFired)="handleSaveNotesEmitter($event)"></app-note-editor>
+      <app-note-editor [title]="note?.title" [content]="note?.content" [currentSelected]="selected" [date] = "note?.date" (saveEventFired)="handleSaveNotesEmitter($event)" (delEventFired)="handleDeleteNoteseEmitter($event)"></app-note-editor>
     </ng-content>
   </main>
 </div>

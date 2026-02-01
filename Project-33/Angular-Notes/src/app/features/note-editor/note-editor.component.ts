@@ -4,7 +4,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { formatDate } from '../../../helper/helper';
 import { notes } from '../../../helper/type';
@@ -30,22 +31,25 @@ export class NoteEditorComponent implements OnChanges {
   @Input() currentSelected = '';
 
   // local variables for easy value updating
-  public localTitle = "";
-  public localContent = "";
+  localTitle = '';
+  localContent = '';
 
-  ngOnChanges() {
-    this.localTitle = this.title ?? '';
-    this.localContent = this.content ?? '';
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['titile'] || changes['content']) {
+      this.localTitle = changes['title'].currentValue ?? '';
+      this.localContent = changes['content'].currentValue ?? '';
+    }
   }
   //emiting signal for updating notes
   @Output() saveEventFired = new EventEmitter<notes>();
+  @Output() delEventFired = new EventEmitter<string>();
 
   /**
    * Formats timestamp to readable date string
    * Parent provides the timestamp, this just formats it for display
    */
   formatDateLocale = (date?: string) => formatDate(date);
-  
+
   /**
    Called when title input changes
    */
@@ -68,8 +72,11 @@ export class NoteEditorComponent implements OnChanges {
       title: this.localTitle,
       content: this.localContent,
       date: new Date().toLocaleString(),
-    }
+    };
 
     this.saveEventFired.emit(val);
+  }
+  onDelete() {
+    this.delEventFired.emit(this.currentSelected);
   }
 }

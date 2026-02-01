@@ -6,5 +6,5 @@
 </nav>
 
 <main>
-    <app-notes-shell [notes]="notes" [selected]="selected" (addNewNoteEvent)="handleCreateNote($event)" (updateSelectedEvent)="handleUpdateSelected($event)" (updatedNoteEvent)="handleUpdateNotes($event)"></app-notes-shell>
+    <app-notes-shell [notes]="notes" [selected]="selected" (addNewNoteEvent)="handleCreateNote($event)" (updateSelectedEvent)="handleUpdateSelected($event)" (updatedNoteEvent)="handleUpdateNotes($event)" (DeleteNote)="handleDeletNotes($event)"></app-notes-shell>
 </main>

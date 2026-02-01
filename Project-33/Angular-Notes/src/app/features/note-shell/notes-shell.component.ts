@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { NotesListComponent } from "../note-list/notes-list.component";
 import { NoteEditorComponent } from "../note-editor/note-editor.component";
 import { createNoteEvent, notes } from '../../../helper/type';
@@ -25,8 +25,10 @@ export class NotesShellComponent {
   @Output() addNewNoteEvent = new EventEmitter<notes>();
   @Output() updateSelectedEvent = new EventEmitter<string>();
 
-  ngOnChanges(changes: string) {
-    if (changes && this.notes.length > 0) {
+  @Output() DeleteNote = new EventEmitter<string>();
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes["selected"] && this.notes.length > 0) {
       this.updateNote();
     }
   }
@@ -55,5 +57,8 @@ export class NotesShellComponent {
 
   handleSaveNotesEmitter(val: notes) {
     this.updatedNoteEvent.emit(val);
+  }
+  handleDeleteNoteseEmitter(val: string) {
+    this.DeleteNote.emit(val);
   }
 }
