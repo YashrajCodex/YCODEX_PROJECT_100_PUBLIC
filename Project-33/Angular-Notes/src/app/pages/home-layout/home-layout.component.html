@@ -2,9 +2,9 @@
     <div>
         <h1>Simple notes</h1>
     </div>
-    <app-search-bar></app-search-bar>
+    <app-search-bar (searchChanged)="handleSearchChange($event)"></app-search-bar>
 </nav>
 
 <main>
-    <app-notes-shell [notes]="notes" [selected]="selected" (addNewNoteEvent)="handleCreateNote($event)" (updateSelectedEvent)="handleUpdateSelected($event)" (updatedNoteEvent)="handleUpdateNotes($event)" (DeleteNote)="handleDeletNotes($event)"></app-notes-shell>
+    <app-notes-shell [notes]="filteredNotes" [selected]="selected" (addNewNoteEvent)="handleCreateNote($event)" (updateSelectedEvent)="handleUpdateSelected($event)" (updatedNoteEvent)="handleUpdateNotes($event)" (DeleteNote)="handleDeletNotes($event)"></app-notes-shell>
 </main>

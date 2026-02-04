@@ -1,6 +1,6 @@
 <div class="notes-list">
   <div class="notes-container selectNone">
-    <div><button (click)="fireCreateNote()" class="">Create new✍</button></div>
+    <div><button (click)="fireCreateNote()" class="">Create new<lucide-icon [name]=""/></button></div>
     <!-- Show message if no notes available -->
     <div *ngIf="notes.length === 0" class="empty-state">
       No notes found
@@ -15,6 +15,9 @@
     >
       <div class="note-title">{{ note.title || 'Untitled' }}</div>
       <div class="note-date">{{ formatDateLocale(note.date) }}</div>
+      <button class="del-note" (click)="onDelete(note.id)">
+      <lucide-icon [name] = "icons.DeleteIcon" [size] = "18"/>
+    </button>
     </div>
   </div>
 </div>

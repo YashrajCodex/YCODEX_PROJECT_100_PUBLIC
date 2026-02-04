@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, NotesListComponent, NoteEditorComponent]
 })
-export class NotesShellComponent {
+export class NotesShellComponent implements OnChanges {
   @Input() notes: notes[] = [];
   @Input() selected: string = "";
 
@@ -28,9 +28,12 @@ export class NotesShellComponent {
   @Output() DeleteNote = new EventEmitter<string>();
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes["selected"] && this.notes.length > 0) {
+    if (changes["selected"]) {
       this.updateNote();
     }
+    // if (changes["notes"]) {
+    //   this.updateNote();
+    // }
   }
 
   //update note when selected is changed

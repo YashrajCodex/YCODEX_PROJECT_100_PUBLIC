@@ -2,16 +2,19 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 import { CommonModule } from '@angular/common';
 import { notes } from '../../../helper/type';
 import { formatDate } from '../../../helper/helper';
+import { LucideAngularModule, DeleteIcon } from 'lucide-angular';
+
 
 @Component({
   selector: 'app-notes-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './notes-list.component.html',
   styleUrls: ['./notes-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotesListComponent {
+  readonly icons = { DeleteIcon };
   /** Array of notes to display */
   @Input() notes: notes[] = [];
   
@@ -21,6 +24,7 @@ export class NotesListComponent {
   /** Emits note ID when user clicks on a note */
   @Output() noteSelectedEvent = new EventEmitter<string>();
   @Output() createNoteEvent = new EventEmitter<string>();
+  @Output() delEventFired = new EventEmitter<string>();
  
   /**
    * Called when user clicks on a note item
@@ -32,6 +36,10 @@ export class NotesListComponent {
 
   fireCreateNote() {
     this.createNoteEvent.emit();
+  }
+
+   onDelete(id: string) {
+    this.delEventFired.emit(id);
   }
 
   /**

@@ -9,15 +9,19 @@ import {
 } from '@angular/core';
 import { formatDate } from '../../../helper/helper';
 import { notes } from '../../../helper/type';
+import {  LucideAngularModule, SaveIcon, DeleteIcon} from 'lucide-angular';
 
 @Component({
   selector: 'app-note-editor',
+  imports: [LucideAngularModule],
   standalone: true,
   templateUrl: './note-editor.component.html',
   styleUrls: ['./note-editor.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteEditorComponent implements OnChanges {
+
+  readonly icons = { SaveIcon, DeleteIcon };
   /** Current note title to display in the input */
   @Input() title?: string = '';
 
@@ -33,7 +37,7 @@ export class NoteEditorComponent implements OnChanges {
   // local variables for easy value updating
   localTitle = '';
   localContent = '';
-
+  
   ngOnChanges(changes: SimpleChanges) {
     if (changes['titile'] || changes['content']) {
       this.localTitle = changes['title'].currentValue ?? '';
@@ -42,7 +46,6 @@ export class NoteEditorComponent implements OnChanges {
   }
   //emiting signal for updating notes
   @Output() saveEventFired = new EventEmitter<notes>();
-  @Output() delEventFired = new EventEmitter<string>();
 
   /**
    * Formats timestamp to readable date string
@@ -75,8 +78,5 @@ export class NoteEditorComponent implements OnChanges {
     };
 
     this.saveEventFired.emit(val);
-  }
-  onDelete() {
-    this.delEventFired.emit(this.currentSelected);
   }
 }

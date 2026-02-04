@@ -1,10 +1,7 @@
 <div class="note-editor">
   <div class="edit-features">
     <button class="save-note" (click)="onSave()">
-      Save
-    </button>
-    <button class="del-note" (click)="onDelete()">
-      Delete
+      <lucide-icon [name] = "icons.SaveIcon" [size] = "18"/>
     </button>
     <h3>Date: {{formatDateLocale(date)}}</h3>
   </div>

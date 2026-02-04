@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {  LucideAngularModule, SearchIcon} from 'lucide-angular';
 
 /**
  * SearchBarComponent
@@ -19,12 +20,14 @@ import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angul
  */
 @Component({
   selector: 'app-search-bar',
+  imports: [LucideAngularModule],
   standalone: true,
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchBarComponent {
+  readonly icons = {SearchIcon}
   /** Emits search query when user types in the search input */
   @Output() searchChanged = new EventEmitter<string>();
 
