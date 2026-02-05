@@ -38,12 +38,16 @@ export class HomeLayoutComponent implements OnInit {
 
   handleDeletNotes(selectedId: string) {
     // console.log(selectedId);
-    const len = this.notes.length
-    this.selected = this.notes[len - 1].id;
     this.notes = this.notes.filter((note) => note.id !== selectedId);
     this.filteredNotes = this.notes;
     this.persistNotes();
-    // console.log("deletenotesfired");
+
+    const len = this.notes.length - 1;
+    if (len >= 0) {
+      this.selected = this.notes[len].id;
+    }else{
+      this.selected = "";
+    }
   }
 
   handleCreateNote(val: notes) {
@@ -53,7 +57,6 @@ export class HomeLayoutComponent implements OnInit {
   }
 
   handleUpdateSelected(val: string) {
-    // console.log("select event fired");
     this.selected = val;
   }
 
@@ -62,6 +65,15 @@ export class HomeLayoutComponent implements OnInit {
       this.filteredNotes = this.notes.slice();
     } else {
       this.filteredNotes = this.notes.slice().filter(note => note.title.toLocaleLowerCase().split(" ").join().slice(0, val.length) === val.toLocaleLowerCase().split(" ").join());
+    }
+  }
+
+  handleRemoveLocalKey() {
+    const confirmVal = confirm("This will remove all the notes permanently.");
+    if (confirmVal) {
+      localStorage.removeItem(STORAGE_KEY_NOTES);
+      this.notes = [];
+      this.filteredNotes = this.notes.slice();
     }
   }
 }

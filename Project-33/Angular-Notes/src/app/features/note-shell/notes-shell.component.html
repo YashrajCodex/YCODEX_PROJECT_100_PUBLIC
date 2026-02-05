@@ -13,14 +13,17 @@
 
   <!-- Right panel: contains note editor -->
   <main class="editor-panel user-select-none">
-    <ng-content select="[editor]" *ngIf="note !== null || note !== undefined">
+    <ng-content select="[editor]" *ngIf="note !== undefined; else NoNotes">
       <app-note-editor
-        [title]="note?.title"
-        [content]="note?.content"
+        [title]="note.title"
+        [content]="note.content"
         [currentSelected]="selected"
-        [date]="note?.date"
+        [date]="note.date"
         (saveEventFired)="handleSaveNotesEmitter($event)"
       ></app-note-editor>
     </ng-content>
+    <ng-template #NoNotes>
+      <div><h1>No notes to display</h1></div>
+    </ng-template>
   </main>
 </div>

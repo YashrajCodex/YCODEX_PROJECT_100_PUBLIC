@@ -1,23 +1,26 @@
 <div class="notes-list">
   <div class="notes-container selectNone">
-    <div><button (click)="fireCreateNote()" class="">Create new<lucide-icon [name]=""/></button></div>
-    <!-- Show message if no notes available -->
-    <div *ngIf="notes.length === 0" class="empty-state">
-      No notes found
+    <div>
+      <button (click)="fireCreateNote()" class="">
+        Create new<lucide-icon [name]="" />
+      </button>
     </div>
+    <!-- Show message if no notes available -->
+    <div *ngIf="notes.length === 0" class="empty-state">No notes found</div>
 
     <!-- Render each note as a clickable item -->
-    <div 
+    <div
       *ngFor="let note of notes"
       class="note-item"
       [class.selected]="isSelected(note.id)"
-      (click)="onNoteClick(note.id)"
     >
-      <div class="note-title">{{ note.title || 'Untitled' }}</div>
-      <div class="note-date">{{ formatDateLocale(note.date) }}</div>
+      <div (click)="onNoteClick(note.id)">
+        <h2 class="note-title">{{ note.title || "Untitled" }}</h2>
+        <h3 class="note-date">{{ formatDateLocale(note.date) }}</h3>
+      </div>
       <button class="del-note" (click)="onDelete(note.id)">
-      <lucide-icon [name] = "icons.DeleteIcon" [size] = "18"/>
-    </button>
+        <lucide-icon [name]="icons.DeleteIcon" [size]="18" />
+      </button>
     </div>
   </div>
 </div>

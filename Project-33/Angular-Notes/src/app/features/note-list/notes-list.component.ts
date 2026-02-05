@@ -4,7 +4,6 @@ import { notes } from '../../../helper/type';
 import { formatDate } from '../../../helper/helper';
 import { LucideAngularModule, DeleteIcon } from 'lucide-angular';
 
-
 @Component({
   selector: 'app-notes-list',
   standalone: true,
@@ -27,7 +26,7 @@ export class NotesListComponent {
   @Output() delEventFired = new EventEmitter<string>();
  
   /**
-   * Called when user clicks on a note item
+   * Called when user clicks on a note itemn
    * Simply emits the note ID - parent handles the selection logic
    */
   onNoteClick(noteId: string): void {
@@ -38,7 +37,7 @@ export class NotesListComponent {
     this.createNoteEvent.emit();
   }
 
-   onDelete(id: string) {
+  onDelete(id: string) {
     this.delEventFired.emit(id);
   }
 

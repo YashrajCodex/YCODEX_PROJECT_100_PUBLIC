@@ -1,21 +1,32 @@
 .search-bar {
   padding: 16px;
   border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  gap: 4px;
+}
+
+.search-bar-container{
+  width: 100%;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
 }
 
 .search-input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #d0d0d0;
-  border-radius: 4px;
+  width: 95%;
+  padding: 14px 16px;
   font-size: 14px;
   outline: none;
+  border: none;
   transition: border-color 0.2s;
-
+  border-bottom: 2px solid transparent;
+  
   &:focus {
     border-color: #4a90e2;
   }
-
+  
   &::placeholder {
     color: #999999;
   }

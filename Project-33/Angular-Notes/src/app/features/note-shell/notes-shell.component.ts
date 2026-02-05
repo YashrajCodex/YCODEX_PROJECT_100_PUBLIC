@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { NotesListComponent } from "../note-list/notes-list.component";
 import { NoteEditorComponent } from "../note-editor/note-editor.component";
-import { createNoteEvent, notes } from '../../../helper/type';
+import { notes } from '../../../helper/type';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -19,7 +19,7 @@ export class NotesShellComponent implements OnChanges {
   titleLocal:string = "";
   contentLocale: string = "";
 
-  public note: notes | null = null;
+  public note: notes | undefined = undefined;
 
   @Output() updatedNoteEvent = new EventEmitter<notes>();
   @Output() addNewNoteEvent = new EventEmitter<notes>();

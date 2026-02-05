@@ -6,5 +6,10 @@
 </nav>
 
 <main>
+    <div class="remove-everything">
+        <button class="remove-notes" (click)="handleRemoveLocalKey()">
+            Remove
+        </button>
+    </div>
     <app-notes-shell [notes]="filteredNotes" [selected]="selected" (addNewNoteEvent)="handleCreateNote($event)" (updateSelectedEvent)="handleUpdateSelected($event)" (updatedNoteEvent)="handleUpdateNotes($event)" (DeleteNote)="handleDeletNotes($event)"></app-notes-shell>
 </main>
