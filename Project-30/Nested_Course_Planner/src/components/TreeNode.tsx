@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { StudyNode } from "@/types/StudyNode";
 import { calculateProgress } from "@/lib/progress";
-
 interface TreeNodeProps {
   node: StudyNode;
   isRoot?: boolean;
@@ -67,8 +66,8 @@ export function TreeNode({ node, isRoot = false, onUpdate, onDelete, onMove }: T
 
   return (
     <div className="ml-4 border-l-2 border-primary/20 pl-4 animate-fade-in">
-      <div className="p-4 mb-2 shadow-md hover:shadow-lg transition-all duration-300 border-border/50 bg-gradient-to-br from-card to-card/95">
-        <div className="space-y-3">
+      <Card className="p-6 mb-2 shadow-md hover:shadow-lg transition-all duration-300 border-border/50 bg-gradient-to-br from-card to-card/95">
+        <div className="">
           {/* Header Row */}
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 flex-1">
@@ -83,7 +82,7 @@ export function TreeNode({ node, isRoot = false, onUpdate, onDelete, onMove }: T
                 </button>
               )}
               {isEditing ? (
-                <input
+                <Input
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
                   className="flex-1"
@@ -98,67 +97,44 @@ export function TreeNode({ node, isRoot = false, onUpdate, onDelete, onMove }: T
 
             {/* Action Buttons */}
             <div className="flex items-center gap-1">
-              <button
-                // size="sm"
-                // variant="outline"
-                onClick={handleAddChild} className="hover:scale-105 transition-transform">
+              <Button size="sm" variant="outline" onClick={handleAddChild} className="hover:scale-105 transition-transform">
                 ➕
-              </button>
+              </Button>
               {isEditing ? (
                 <>
-                  <button
-                    // size="sm"
-                    // variant="default"
-                    onClick={handleSaveEdit} className="hover:scale-105 transition-transform">
+                  <Button size="sm" variant="default" onClick={handleSaveEdit} className="hover:scale-105 transition-transform">
                     💾
-                  </button>
-                  <button
-                    // size="sm"
-                    // variant="outline"
-                    onClick={() => setIsEditing(false)} className="hover:scale-105 transition-transform">
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={() => setIsEditing(false)} className="hover:scale-105 transition-transform">
                     ✖
-                  </button>
+                  </Button>
                 </>
               ) : (
                 <>
-                    <button
-                      // size="sm"
-                      // variant="outline"
-                      onClick={() => setIsEditing(true)} className="hover:scale-105 transition-transform">
+                  <Button size="sm" variant="outline" onClick={() => setIsEditing(true)} className="hover:scale-105 transition-transform">
                     ✏️
-                  </button>
-                    <button
-                      // size="sm"
-                      // variant="outline"
-                      onClick={handleToggleDone} className="hover:scale-105 transition-transform">
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={handleToggleDone} className="hover:scale-105 transition-transform">
                     {node.isDone ? "↩️" : "✅"}
-                  </button>
-                    <button
-                      // size="sm"
-                      // variant="outline"
-                      onClick={handleRevision} className="hover:scale-105 transition-transform">
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={handleRevision} className="hover:scale-105 transition-transform">
                     🔁 {node.revisions}
-                  </button>
-                    <button
-                      // size="sm"
-                      // variant="outline"
-                      onClick={() => onMove(node.id, "up")} className="hover:scale-105 transition-transform">
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={() => onMove(node.id, "up")} className="hover:scale-105 transition-transform">
                     ⬆️
-                  </button>
-                    <button
-                      // size="sm"
-                      // variant="outline"
-                      onClick={() => onMove(node.id, "down")} className="hover:scale-105 transition-transform">
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={() => onMove(node.id, "down")} className="hover:scale-105 transition-transform">
                     ⬇️
-                  </button>
+                  </Button>
                   {!isRoot && (
-                    <button 
-                      // variant="destructive" 
+                    <Button 
+                      size="sm" 
+                      variant="destructive" 
                       onClick={() => onDelete(node.id)}
                       className="hover:scale-105 transition-transform"
                     >
                       🗑
-                    </button>
+                    </Button>
                   )}
                 </>
               )}
@@ -170,7 +146,7 @@ export function TreeNode({ node, isRoot = false, onUpdate, onDelete, onMove }: T
             <div className="grid grid-cols-3 gap-2">
               <div>
                 <label className="text-xs text-muted-foreground">Deadline</label>
-                <input
+                <Input
                   type="date"
                   value={editDeadline}
                   onChange={(e) => setEditDeadline(e.target.value)}
@@ -191,7 +167,7 @@ export function TreeNode({ node, isRoot = false, onUpdate, onDelete, onMove }: T
               </div>
               <div>
                 <label className="text-xs text-muted-foreground">Notes Link</label>
-                <input
+                <Input
                   type="url"
                   value={editNotes}
                   onChange={(e) => setEditNotes(e.target.value)}
@@ -258,7 +234,7 @@ export function TreeNode({ node, isRoot = false, onUpdate, onDelete, onMove }: T
             </div>
           )}
         </div>
-      </div>
+      </Card>
 
       {/* Children */}
       {isExpanded && node.children.length > 0 && (
