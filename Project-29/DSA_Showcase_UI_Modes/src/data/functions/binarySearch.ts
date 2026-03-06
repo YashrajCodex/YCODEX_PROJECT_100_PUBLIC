@@ -1,4 +1,3 @@
-import { validators } from "tailwind-merge";
 
 export function FirstBadVersion(n: number, badVersion: number) {
   //here instead of dedicated function for bad version testing, the parameter just accepts a number that can be considered the expected bad version before hand. just a function to express the logic
@@ -450,7 +449,44 @@ export function MBouque(a: number[], m: number, k: number) {
   return low;
 }
 
+export function AllocateBooks(books: number[], st: number) {
+  if (st > books.length) return -1;
 
+  const n = books.length;
+  let high = books.reduce((acc, num) => {
+    return acc + num;
+  }, 0);
+
+  let low = books.slice().sort()[n - 1];
+
+  //to calculate total number of students can acquire book when maxNumber of pages are given
+  function numberOfStudent(arr: number[], maxPages: number) {
+    let students = 1; let pagesPerStudent = 0;
+
+    for (let i = 0; i < n - 1; i++){
+      if (pagesPerStudent + arr[i] <= maxPages) {
+        pagesPerStudent += arr[i];
+      } else {
+        students++;
+        pagesPerStudent = arr[i];
+      }
+    }
+    return students;
+  }
+
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    const gotStudents = numberOfStudent(books, mid);
+
+    if (gotStudents <= st) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+
+  return low;
+}
 
 export const FirstBadVersionCpp = `
 class Solution{

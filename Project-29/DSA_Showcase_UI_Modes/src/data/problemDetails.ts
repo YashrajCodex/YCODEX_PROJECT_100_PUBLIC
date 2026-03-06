@@ -1791,6 +1791,38 @@ const problemDetails: problemDetailsType[] = [
       },
   ]
   },
+  {
+    id: 61,
+    title: "Book Allocation",
+    difficulty: "Hard",
+    category: "Binary_Search",
+    links: "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2",
+    functions: async (books: number[], st: number) =>
+      (await BinarySearchData()).AllocateBooks(books, st),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: (await BinarySearchData()).AllocateBooks.toString(),
+    },
+    description: "Given an array of number of pages of books. Allocate the books to students such that every student gets atleast one book and the maximum number of pages each student gets is the minimum. If all the students cannot get atleast 1 book then retrun -1 or return the max pages.",
+    timeComplexity: "",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter Array:",
+        name: "AB_BOOKS",
+        placeholder: "_________________",
+      },
+      {
+        type: "number",
+        label: "Enter No Students:",
+        name: "AB_STUDENTS",
+        placeholder: "_________________",
+      },
+  ]
+  },
 ];                                  
 export default problemDetails;
 // not-yet-parsed
