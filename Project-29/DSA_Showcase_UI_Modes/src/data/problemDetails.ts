@@ -1823,8 +1823,35 @@ const problemDetails: problemDetailsType[] = [
       },
   ]
   },
+  {
+    id: 62,
+    title: "Sort Colors",
+    difficulty: "Medium",
+    category: "Array",
+    links: "https://leetcode.com/problem-list/array/",
+    functions: async (nums: number[]) =>
+      (await ArraysData()).SortArray012(nums),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: (await ArraysData()).SortArray012.toString(),
+    },
+    description: "Given an array of nums with n objecs colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue. We will use the integers 0, 1 and 2 to represent the color red, white and blue respectively.",
+    timeComplexity: "",
+    spaceComplexity: "O(1)",
+    tags: ["array", "binary-search"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter Array:",
+        name: "SC_NUMS",
+        placeholder: "_________________",
+      },
+  ]
+  },
 ];                                  
 export default problemDetails;
 // not-yet-parsed
 // Enter the array(comma-separated)
 //https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2
+//https://leetcode.com/problem-list/array/

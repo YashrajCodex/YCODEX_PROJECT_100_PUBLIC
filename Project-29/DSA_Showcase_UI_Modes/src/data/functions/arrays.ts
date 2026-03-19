@@ -753,6 +753,35 @@ export function SortArray012(nums: number[]) {
 
 export function LongestSubArrayWithSumK(a: number[], k: number) {}
 
+
+export function sortColors012(nums: number[]) {
+  if (nums.length == 0) return null;
+
+  //Dutch National Flag
+  const n = nums.length;
+  let low = 0; let high = n - 1; let mid = 0;
+
+  while (mid <= high) {
+    if (nums[mid] === 0) {
+      const temp = nums[low];
+      nums[low] = nums[mid];
+      nums[mid] = temp;
+
+      low++;
+      high++;
+    }
+    else if (nums[mid] === 1) {
+      mid++;
+    } else {
+      const temp = nums[mid];
+      nums[mid] = nums[high];
+      nums[high] = temp;
+
+      high--;
+    }
+  }
+  return nums;
+}
 export const findTwoNumIndexCPP = `
 #include <iostream>
 #include <vector>
