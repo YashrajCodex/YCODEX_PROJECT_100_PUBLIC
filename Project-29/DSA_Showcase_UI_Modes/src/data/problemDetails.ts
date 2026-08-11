@@ -1849,6 +1849,32 @@ const problemDetails: problemDetailsType[] = [
       },
   ]
   },
+  {
+    id: 63,
+    title: "First Missing Positive",
+    difficulty: "Hard",
+    category: "Array",
+    links: "https://leetcode.com/problems/first-missing-positive/description",
+    functions: async (arr: number[]) =>
+      (await ArraysData()).firstMissingPositive(arr),
+    type: "return",
+    sourceCode: {
+      cpp: "not-yet-parsed",
+      js: (await ArraysData()).firstMissingPositive.toString(),
+    },
+    description: "Given an unsorted integer array nums. Return the smallest positive integer that is not present in nums. You must implement an algorithm that runs in O(n) time and uses O(1) auxiliary space.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    tags: ["array"],
+    inputs: [
+      {
+        type: "number",
+        label: "Enter Array:",
+        name: "FMP_Nums",
+        placeholder: "_________________",
+      },
+  ]
+  },
 ];                                  
 export default problemDetails;
 // not-yet-parsed
