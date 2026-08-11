@@ -782,7 +782,7 @@ export function sortColors012(nums: number[]) {
   return nums;
 }
 
-var firstMissingPositive = function(nums) {
+var firstMissingPositive = function(nums: arr[]) {
     const n = nums.length;
 
     // Put every number x at index x - 1
