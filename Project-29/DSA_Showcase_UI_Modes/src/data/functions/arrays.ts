@@ -753,7 +753,6 @@ export function SortArray012(nums: number[]) {
 
 export function LongestSubArrayWithSumK(a: number[], k: number) {}
 
-
 export function sortColors012(nums: number[]) {
   if (nums.length == 0) return null;
 
@@ -782,6 +781,34 @@ export function sortColors012(nums: number[]) {
   }
   return nums;
 }
+
+var firstMissingPositive = function(nums) {
+    const n = nums.length;
+
+    // Put every number x at index x - 1
+    for (let i = 0; i < n; i++) {
+        while (
+            nums[i] > 0 &&
+            nums[i] <= n &&
+            nums[nums[i] - 1] !== nums[i]
+        ) {
+            const correctIndex = nums[i] - 1;
+
+            // Swap
+            [nums[i], nums[correctIndex]] =
+            [nums[correctIndex], nums[i]];
+        }
+    }
+
+    // Find the first missing positive
+    for (let i = 0; i < n; i++) {
+        if (nums[i] !== i + 1) {
+            return i + 1;
+        }
+    }
+
+    return n + 1;
+};
 export const findTwoNumIndexCPP = `
 #include <iostream>
 #include <vector>
